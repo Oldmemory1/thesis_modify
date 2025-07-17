@@ -508,7 +508,7 @@ $\lambda_1= 0.4, \lambda_2 = 0.4, \lambda_3=0.2$
 
 %In summary, Tencent Harbo dynamic detection experiment further validates the concealment and validity of multi-disturbance strategies issued in this research, proving that this framework is practically potential and exhibits high research value. 
 
-\section{不同扰动组合对于实验结果的影响}
+\section{不同扰动组合对于攻击效果和生成效率的影响}
 
 为了评估本文提出的多架构对抗性样本生成的必要性，计划实验测试结构扰动、指令扰动和行为扰动在逃避恶意软件检测中的独立效果，本文设计了消融实验，逐一去除不同的扰动方法，并分析其对检测系统逃避能力的影响。
 
@@ -555,7 +555,7 @@ $\lambda_1= 0.4, \lambda_2 = 0.4, \lambda_3=0.2$
 
 实验结果如表\ref{tab:5.11}所示。
 
-Experimental results are descirbed in Table \ref{tab:5.11}.
+%Experimental results are descirbed in Table \ref{tab:5.11}.
 
 \begin{table}[htbp]
 	\centering
@@ -593,51 +593,55 @@ Experimental results are descirbed in Table \ref{tab:5.11}.
 
 %The ablation study confirms both independent and synergistic value of each perturbation strategy in MPLO. Individual strategies show partial evasion capabilities but cannot keep stable while facing multiple detection models.Integrating perturbation strategies in a unified framework significantly enhances overall evasion performance, practical applicability, and robustness against diverse detection models.  
 
-\section{功能保留研究 Research on Functional Retention}
+\section{不同扰动组合对于功能保留性的影响}
 
 在对抗性恶意样本生成任务中，保持扰动后的样本依然具备原始功能，是衡量样本有效性和实用价值的重要标准。若样本虽能逃避检测，却失去了原本的恶意行为功能，则其在真实攻击模拟、安全评估及系统对抗训练中的价值将大打折扣。因此，本文对提出的三类扰动方法——结构扰动、指令扰动与行为扰动——分别开展功能保留性研究，系统评估每类扰动对恶意功能完整性的影响。
 
-In adversarial malware sample generation tasks, preserving the original functionality of perturbed samples serves as a critical criterion for evaluating their effectiveness and practical values. Samples that evade detection but lose their malicious functionality diminish their value in real attack scenario simulations, security assessments, and system defense training. Therefore, this study systematically conducts the research on the malicious functionality impact of the three proposed perturbation methods—structural, instructional and behavioral.
+%In adversarial malware sample generation tasks, preserving the original functionality of perturbed samples serves as a critical criterion for evaluating their effectiveness and practical values. Samples that evade detection but lose their malicious functionality diminish their value in real attack scenario simulations, security assessments, and system defense training. Therefore, this study systematically conducts the research on the malicious functionality impact of the three proposed perturbation methods—structural, instructional and behavioral.
 
-（1）结构扰动的功能保留性分析
+\begin{enumerate}
 
-(1) Functional Preservation Analysis of Structural Perturbation
+\item 结构扰动的功能保留性分析
+
+%(1) Functional Preservation Analysis of Structural Perturbation
 
 结构扰动主要作用于程序的元数据与文件结构层面，如段表重排、符号表修改、节区添加与重命名等。这类扰动并不改变程序的指令逻辑或运行流程，因此在理论上不会影响样本的实际执行功能。
 
-Structural perturbation primarily modifies metadata and file structures of programs, such as section table rearrangement, symbol table modification, section addition and section renaming. Such disturbances do not alter the program's instruction logic or execution flow, theoretically maintaining its functional behavior.
+%Structural perturbation primarily modifies metadata and file structures of programs, such as section table rearrangement, symbol table modification, section addition and section renaming. Such disturbances do not alter the program's instruction logic or execution flow, theoretically maintaining its functional behavior.
 
 在实验中，本文对数百个经过结构扰动处理的恶意样本在受控沙箱中进行自动执行，观测其关键行为特征（如反连行为、键盘监听、文件篡改等）。结果表明，绝大多数结构扰动样本在执行过程中表现出与原样本高度一致的行为特征，功能保留率（Functionality Retention Rate, FRR）达到92.4\%。个别失效样本主要由于过度扰动了加载器相关节区或破坏了符号重定位信息所致，可通过更精细的扰动控制予以修复。
 
-Hundreds of structurally perturbed malware samples were executed in the controlled sandbox to observe their crucial behavioral characteristics (e.g., reverse connections, keystroke logging, and file tampering). The results show that most structurally perturbated samples represent highly identical to the original samples. The functionality retention rate reached 92.4\%. The failure samples are mainly caused by disturbing excessively on sections of the loader or disrupting symbol relocation information. These conditions can be fixed by adopting more intricate disturbance controls.
+%Hundreds of structurally perturbed malware samples were executed in the controlled sandbox to observe their crucial behavioral characteristics (e.g., reverse connections, keystroke logging, and file tampering). The results show that most structurally perturbated samples represent highly identical to the original samples. The functionality retention rate reached 92.4\%. The failure samples are mainly caused by disturbing excessively on sections of the loader or disrupting symbol relocation information. These conditions can be fixed by adopting more intricate disturbance controls.
 
-（2）指令扰动的功能保留性分析
+\item 指令扰动的功能保留性分析
 
-(2) Functional Preservation Analysis of Instructional Perturbation
+%(2) Functional Preservation Analysis of Instructional Perturbation
 
 指令扰动旨在修改程序代码本体，包括等价指令替换、指令重排、插入无操作指令（NOP）、使用跳转替换顺序结构等。该类扰动技术高度依赖语义保持（semantic-preserving）原则，其核心在于不改变程序逻辑的同时最大限度混淆静态指令序列。
 
-Instructional perturbations aim to modify program code, including equivalent replacement of sequential structures with jumps. These techniques highly depend on following semantic-preserving principles to obfuscate static instruction sequences without altering program logic.
+%Instructional perturbations aim to modify program code, including equivalent replacement of sequential structures with jumps. These techniques highly depend on following semantic-preserving principles to obfuscate static instruction sequences without altering program logic.
 
 利用控制流完整性（CFI）检查、执行路径比对等方式评估指令扰动的功能影响。实验结果显示，96\%以上的样本在扰动后依旧可以正常运行，并实现原始恶意行为，如建立远程通信、窃取数据等。功能保留率达到93.7\%。少数失败样本主要源于对跳转逻辑、栈平衡或调用约定的破坏，提示未来在扰动生成过程中应引入更严格的约束机制，以确保扰动的语义一致性。
 
-Utilizing Control Flow Integrity (CFI) checks and execution path comparison methods, experimental results demonstrate that more than 96\% of samples maintained original malicious behaviors (e.g., establishing remote communication, data exfiltration) after perturbations and the FRR reached 93.7\%. Minor failure samples occurred due to disrupted jump logic, stack imbalance, or calling convention violations, which suggests that future implementations should incorporate stricter constraints for semantic consistency.
+%Utilizing Control Flow Integrity (CFI) checks and execution path comparison methods, experimental results demonstrate that more than 96\% of samples maintained original malicious behaviors (e.g., establishing remote communication, data exfiltration) after perturbations and the FRR reached 93.7\%. Minor failure samples occurred due to disrupted jump logic, stack imbalance, or calling convention violations, which suggests that future implementations should incorporate stricter constraints for semantic consistency.
 
-（3）行为扰动的功能保留性分析
+\item 行为扰动的功能保留性分析
 
-(3) Functional Preservation Analysis of Behavioral Perturbation
+%(3) Functional Preservation Analysis of Behavioral Perturbation
 
 行为扰动通过延迟恶意行为的触发、插入混淆控制流、依赖特定条件执行等方式干扰行为分析工具的检测窗口。这种策略改变的是恶意行为的触发机制而非其具体逻辑，因此其功能保留性具有一定的条件性。
 
-Behavioral perturbations interfere with behavioral analysis tools by delaying malicious behavior triggers, inserting obfuscated control flows, and introducing conditional execution dependencies. This strategy alters the triggering mechanism rather than the core malicious logic, resulting in conditional functionality preservation.
+%Behavioral perturbations interfere with behavioral analysis tools by delaying malicious behavior triggers, inserting obfuscated control flows, and introducing conditional execution dependencies. This strategy alters the triggering mechanism rather than the core malicious logic, resulting in conditional functionality preservation.
+
+\end{enumerate}
 
 在实验中，本文对扰动后的样本进行加长执行时间操作，验证其是否仍能触发原始恶意行为。结果显示，98\%的行为扰动样本能够在设置合理触发条件后完全复现原始恶意行为。
 
-In this research, prolonging disturbed samples' execution time verifies whether the original malicious behaviors can be triggered. The results show that 98\% of behaviorally perturbed samples fully replicated original malicious behaviors under appropriately configured trigger conditions.
+%In this research, prolonging disturbed samples' execution time verifies whether the original malicious behaviors can be triggered. The results show that 98\% of behaviorally perturbed samples fully replicated original malicious behaviors under appropriately configured trigger conditions.
 
 为全面对比三类扰动的功能保留效果，本文统计了每类扰动样本的成功执行率及功能保留率，结果如下表\ref{tab:5.12}所示。
 
-To comprehensively compare functional retention results of three perturbation strategies, this research compile statistics on each sample's success execution rate and functional retention rate. The results are provided in Table \ref{tab:5.12}.
+%To comprehensively compare functional retention results of three perturbation strategies, this research compile statistics on each sample's success execution rate and functional retention rate. The results are provided in Table \ref{tab:5.12}.
 
 \begin{table}[htb]
 	\centering
@@ -656,17 +660,17 @@ To comprehensively compare functional retention results of three perturbation st
 
 从结果可以看出，结构扰动在不破坏程序逻辑的前提下具有很好的功能保留性；指令扰动在合理控制下也能维持较高功能一致性；行为扰动由于引入了复杂触发机制，成功率有所下降，但功能保留性最高。
 
-All in all, structural perturbation maintains high functionality retention without disrupting program logic. Instructional perturbation achieves strong consistency under controlled constraints. Behavioral perturbation, despite lower execution success rates due to complex triggering mechanisms, exhibits the highest functionality retention capability.
+%All in all, structural perturbation maintains high functionality retention without disrupting program logic. Instructional perturbation achieves strong consistency under controlled constraints. Behavioral perturbation, despite lower execution success rates due to complex triggering mechanisms, exhibits the highest functionality retention capability.
 
-\section{样本迁移性研究 Research on Sample Transferability}
+\section{样本迁移性}
 
-为了进一步验证本文所提出的多架构对抗样本生成方法在真实检测环境中的有效性，本文开展了样本迁移性研究，将生成的对抗样本上传至公共在线恶意软件检测平台VirusTotal，评估其在不同商用反病毒引擎下的实际逃避能力。该实验旨在考察对抗样本从本地检测系统向多引擎平台的迁移能力，即：在本地检测模型中成功逃避的样本是否同样能够在第三方检测平台中保持对抗性。
+%为了进一步验证本文所提出的多架构对抗样本生成方法在真实检测环境中的有效性，本文开展了样本迁移性研究，将生成的对抗样本上传至公共在线恶意软件检测平台VirusTotal，评估其在不同商用反病毒引擎下的实际逃避能力。该实验旨在考察对抗样本从本地检测系统向多引擎平台的迁移能力，即：在本地检测模型中成功逃避的样本是否同样能够在第三方检测平台中保持对抗性。
 
-To further validate the effectiveness of the proposed multi-architecture adversarial sample generation method in real detection environments, this research evaluates sample transferability. Adversarial samples were submitted to the public online malware detection platform VirusTotal to analyze their practical evasion capabilities among different commercial antivirus engines. This experiment examines whether samples that successfully evade the local detection model can retain adversarial properties on the third-party detection platforms.
+%To further validate the effectiveness of the proposed multi-architecture adversarial sample generation method in real detection environments, this research evaluates sample transferability. Adversarial samples were submitted to the public online malware detection platform VirusTotal to analyze their practical evasion capabilities among different commercial antivirus engines. This experiment examines whether samples that successfully evade the local detection model can retain adversarial properties on the third-party detection platforms.
 
 本实验从经过结构扰动、指令扰动和行为扰动处理的对抗样本中，分别选取代表性样本进行测试，并与未扰动的原始恶意样本进行对比。所有样本均上传至 VirusTotal 平台进行静态和动态联合扫描，记录各引擎的检测结果，统计每个样本的被检测引擎数量（即“命中率”），作为衡量迁移逃避能力的标准。
 
-This research selects representative samples from adversarial samples modified by structural perturbations, instructional perturbations, and behavioral perturbations, and compares them with original malicious samples without modification. All samples were uploaded to VirusTotal for static and dynamic scanning. Detection results from each engine were recorded. The number of engines detecting each sample (i.e., "hit rate") was collected as the metric for evasion capability.
+%This research selects representative samples from adversarial samples modified by structural perturbations, instructional perturbations, and behavioral perturbations, and compares them with original malicious samples without modification. All samples were uploaded to VirusTotal for static and dynamic scanning. Detection results from each engine were recorded. The number of engines detecting each sample (i.e., "hit rate") was collected as the metric for evasion capability.
 
 \begin{figure}[htbp]
 	\centering
@@ -678,7 +682,7 @@ This research selects representative samples from adversarial samples modified b
 
 为更好地展示免杀效果，此处定义Virustotal检测率$v_t$为可检测到样本恶意性的杀毒引擎数占总杀毒引擎数之比，如下计算： 
 
-To better illustrate the evasion effect, the VirusTotal detection rate $v_t$ is defined as the ratio of antivirus engines detecting maliciousness to the total number of engines, calculated as the formulation below:
+%To better illustrate the evasion effect, the VirusTotal detection rate $v_t$ is defined as the ratio of antivirus engines detecting maliciousness to the total number of engines, calculated as the formulation below:
 \begin{equation}
 v_t = \frac{D_e}{A_e}
 \tag{5.9}
@@ -686,11 +690,11 @@ v_t = \frac{D_e}{A_e}
 
 其中$D_e$为可检测到样本恶意性的杀毒引擎数，$A_e$为总杀毒引擎数。
 
-$D_e$ is the number of antivirus engines detecting maliciousness, while $A_e$ presents the total number of antivirus engines.
+%$D_e$ is the number of antivirus engines detecting maliciousness, while $A_e$ presents the total number of antivirus engines.
 
 表\ref{tab:5.13}列举了20个样本在VirusToal网站上免杀前检测率$v_{t1}$、免杀后检测率$v_{t2}$以及下降率$vt_{down}$。
 
-Table \ref{tab:5.13} lists the detection rates $v_{t1}$ before evasion, $v_{t2}$ after evasion, and the decline rate $vt_{down}$ of20 samples on VirusTotal.
+%Table \ref{tab:5.13} lists the detection rates $v_{t1}$ before evasion, $v_{t2}$ after evasion, and the decline rate $vt_{down}$ of20 samples on VirusTotal.
 
 \begin{table}[htbp]
 	\centering
@@ -744,15 +748,17 @@ Table \ref{tab:5.13} lists the detection rates $v_{t1}$ before evasion, $v_{t2}$
 
 实验结果表明，经过扰动处理的对抗样本在 VirusTotal 平台上的总体检测率相比原始样本显著降低，表现出较强的迁移性。其中，结构扰动样本的逃避能力最为稳定，多个依赖静态分析特征的引擎未能识别其恶意特征；指令扰动样本在部分引擎中表现出一定逃避效果，但整体变异幅度相对较小；行为扰动样本在动态检测能力较弱的引擎中效果较好，但在支持沙箱分析的引擎中仍存在部分命中情况，说明其对动态特征的干扰存在一定的平台依赖性。
 
-Experimental results indicate that adversarial samples processed by perturbation exhibit extremely lower overall detection rates on VirusTotal than original samples, exhibiting strong transferability. Structural perturbations achieved the most stable evasion, with multiple static analysis-dependent engines failing to identify malicious features. Instructional perturbations showed limited evasion across engines, yielding relatively overall smaller variations. Behavioral perturbations effectively evaded engines with weaker dynamic detection capabilities, but there still exist partial detections in engines supporting sandbox analysis. The limitation shows platform-specific dependencies in dynamic feature interference.
+%Experimental results indicate that adversarial samples processed by perturbation exhibit extremely lower overall detection rates on VirusTotal than original samples, exhibiting strong transferability. Structural perturbations achieved the most stable evasion, with multiple static analysis-dependent engines failing to identify malicious features. Instructional perturbations showed limited evasion across engines, yielding relatively overall smaller variations. Behavioral perturbations effectively evaded engines with weaker dynamic detection capabilities, but there still exist partial detections in engines supporting sandbox analysis. The limitation shows platform-specific dependencies in dynamic feature interference.
 
 此外，不同扰动方式对引擎类型的影响也存在差异。结构扰动主要干扰依赖程序结构解析和静态特征提取的引擎，指令扰动则影响基于指令签名和机器学习模型的检测器，行为扰动更容易绕过基于沙箱执行路径和行为模式的动态检测机制。该实验结果进一步验证了对抗扰动在多引擎、跨平台检测环境下的适应性与实际应用价值。
 
-Furthermore, different perturbation methods affected engine types distinctly. Structural perturbation primarily disrupted engines relying on static structure parsing and feature extraction. Instructional perturbation impacted detectors based on instructional signatures or machine learning models. Behavioral perturbation more readily evaded dynamic mechanisms based on sandbox execution paths and behavioral patterns. These results further validate the adaptability and practical utility of adversarial perturbations in multi-engine, cross-platform detection environments.
+%Furthermore, different perturbation methods affected engine types distinctly. Structural perturbation primarily disrupted engines relying on static structure parsing and feature extraction. Instructional perturbation impacted detectors based on instructional signatures or machine learning models. Behavioral perturbation more readily evaded dynamic mechanisms based on sandbox execution paths and behavioral patterns. These results further validate the adaptability and practical utility of adversarial perturbations in multi-engine, cross-platform detection environments.
 
-本文生成的对抗样本不仅能够在本地检测模型中实现有效规避，同时也能在真实检测平台中表现出良好的迁移能力，具备较强的跨平台逃逸效果，为对抗性恶意软件研究和实战应用提供了有力支撑。
+%本文生成的对抗样本不仅能够在本地检测模型中实现有效规避，同时也能在真实检测平台中表现出良好的迁移能力，具备较强的跨平台逃逸效果，为对抗性恶意软件研究和实战应用提供了有力支撑。
 
-The adversarial samples generated in this research not only achieve effective evasion in local detection models but also demonstrate strong transferability in real detection platforms, exhibiting robust cross-platform escape effects. This provides solid support for adversarial malware research and practical applications.
+%The adversarial samples generated in this research not only achieve effective evasion in local detection models but also demonstrate strong transferability in real detection platforms, exhibiting robust cross-platform escape effects. This provides solid support for adversarial malware research and practical applications.
+
+\section{结果分析}
 
 为了更系统地分析本文方法与现有研究之间的差异与优势，表\ref{tab:5.14}从多个角度对比了当前典型对抗性恶意样本生成工作与本研究的技术特征和实验效果，涵盖了病毒类型、攻击方式、检测模型数量以及平均免杀率四个关键维度，定性与定量地展示了本文工作的综合性能。
 
