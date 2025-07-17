@@ -430,168 +430,167 @@ This research batch processes binary executable samples using the LIEF library a
 
 \section{动态奖励函数策略优化（DRFOS）Dynamic Reward Function Optimization Strategy (DRFOS)}
 
-传统对抗样本生成方法多采用固定或静态的奖励函数，往往仅考虑单一的检测规避结果，例如是否成功逃避分类器或沙箱分析系统\cite{anderson2018learning}。然而，在实际应用场景中，恶意样本的行为表征、检测机制、资源限制（如沙箱分析时长）等因素均具备高度动态性。因此，本文设计一种自适应、阶段感知和行为敏感的动态奖励函数策略，对于提升对抗样本生成质量和鲁棒性具有重要意义。
+%传统对抗样本生成方法多采用固定或静态的奖励函数，往往仅考虑单一的检测规避结果，例如是否成功逃避分类器或沙箱分析系统\cite{anderson2018learning}。然而，在实际应用场景中，恶意样本的行为表征、检测机制、资源限制（如沙箱分析时长）等因素均具备高度动态性。因此，本文设计一种自适应、阶段感知和行为敏感的动态奖励函数策略，对于提升对抗样本生成质量和鲁棒性具有重要意义。
 
-Traditional adversarial sample generation methods mostly adopt fixed or static reward functions, often considering only a single evasion detection result, such as whether the sample successfully evades a classifier or a sandbox analysis system\cite{anderson2018learning}. However, in real application scenarios, factors such as malware behavioral characteristics, detection mechanisms, and resource constraints, such as sandbox analysis duration, exhibit high dynamism. Therefore, this research designs an adaptive, stage-aware, and behaviorally sensitive dynamic reward function strategy that is significant for improving the quality and robustness of adversarial sample generation.
+%Traditional adversarial sample generation methods mostly adopt fixed or static reward functions, often considering only a single evasion detection result, such as whether the sample successfully evades a classifier or a sandbox analysis system\cite{anderson2018learning}. However, in real application scenarios, factors such as malware behavioral characteristics, detection mechanisms, and resource constraints, such as sandbox analysis duration, exhibit high dynamism. Therefore, this research designs an adaptive, stage-aware, and behaviorally sensitive dynamic reward function strategy that is significant for improving the quality and robustness of adversarial sample generation.
 
-本文提出一种动态奖励函数优化策略，结合多个维度的行为表现动态调整奖励函数，以提升样本的逃避能力、生成效率与混淆性。
+%本文提出一种动态奖励函数优化策略，结合多个维度的行为表现动态调整奖励函数，以提升样本的逃避能力、生成效率与混淆性。
 
-This research proposes a dynamic reward function optimization strategy that dynamically adjusts the reward function based on multi-dimensional behavioral performance to enhance evasion capability, generation efficiency, and obfuscation of samples.
+%This research proposes a dynamic reward function optimization strategy that dynamically adjusts the reward function based on multi-dimensional behavioral performance to enhance evasion capability, generation efficiency, and obfuscation of samples.
 
-在基于强化学习的对抗恶意样本生成框架中，奖励函数设计是智能体学习策略的核心驱动力。传统对抗样本生成方法多采用固定或静态的奖励函数，往往仅考虑单一的检测规避结果，例如是否成功逃避分类器或沙箱分析系统。然而，在实际应用场景中，恶意样本的行为表征、检测机制、资源限制（如沙箱分析时长）等因素均具备高度动态性。因此，设计一种自适应、阶段感知和行为敏感的动态奖励函数策略，对于提升对抗样本生成质量和鲁棒性具有重要意义。
+%在基于强化学习的对抗恶意样本生成框架中，奖励函数设计是智能体学习策略的核心驱动力。传统对抗样本生成方法多采用固定或静态的奖励函数，往往仅考虑单一的检测规避结果，例如是否成功逃避分类器或沙箱分析系统。然而，在实际应用场景中，恶意样本的行为表征、检测机制、资源限制（如沙箱分析时长）等因素均具备高度动态性。因此，设计一种自适应、阶段感知和行为敏感的动态奖励函数策略，对于提升对抗样本生成质量和鲁棒性具有重要意义。
 
-In an adversarial malware sample generation framework based on RL, reward function design serves as the core driving force for agent policy learning. Traditional adversarial sample generation methods mostly adopt fixed or static reward functions, often considering only a single evasion detection result, such as whether the sample successfully evades a classifier or a sandbox analysis system. However, in real application scenarios, factors such as malware behavioral characteristics, detection mechanisms, and resource constraints, such as sandbox analysis duration, exhibit high dynamism. Therefore, designing a dynamic reward function strategy that is adaptive and behaviorally sensitive, and has high stage awareness, is crucial for improving the quality and robustness of adversarial sample generation.
+%In an adversarial malware sample generation framework based on RL, reward function design serves as the core driving force for agent policy learning. Traditional adversarial sample generation methods mostly adopt fixed or static reward functions, often considering only a single evasion detection result, such as whether the sample successfully evades a classifier or a sandbox analysis system. However, in real application scenarios, factors such as malware behavioral characteristics, detection mechanisms, and resource constraints, such as sandbox analysis duration, exhibit high dynamism. Therefore, designing a dynamic reward function strategy that is adaptive and behaviorally sensitive, and has high stage awareness, is crucial for improving the quality and robustness of adversarial sample generation.
 
-\subsection{奖励函数设计动机 Motivation for Reward Function Design}
+%\subsection{奖励函数设计动机 Motivation for Reward Function Design}
 
-强化学习智能体的行为策略直接受其奖励信号驱动。若奖励仅依据“是否逃避成功”这一单一信号，则智能体可能在初始训练阶段陷入稀疏奖励困境，导致训练效率低下，策略不稳定，甚至难以收敛。为解决该问题，本方法引入多源奖励信号融合机制，综合以下三类指标：
+%强化学习智能体的行为策略直接受其奖励信号驱动。若奖励仅依据“是否逃避成功”这一单一信号，则智能体可能在初始训练阶段陷入稀疏奖励困境，导致训练效率低下，策略不稳定，甚至难以收敛。为解决该问题，本方法引入多源奖励信号融合机制，综合以下三类指标：
 
-The behavioral policy of a reinforcement learning agent is directly driven by its reward signals. If rewards are solely based on the singular signal of "whether evasion is successful," the agent may face sparse reward dilemmas during initial training phases, resulting in inefficient training, unstable strategies, or even failure to converge. To address this issue, this research proposes a method that introduces a multi-source reward signal fusion mechanism, integrating the following three metrics:
+%The behavioral policy of a reinforcement learning agent is directly driven by its reward signals. If rewards are solely based on the singular signal of "whether evasion is successful," the agent may face sparse reward dilemmas during initial training phases, resulting in inefficient training, unstable strategies, or even failure to converge. To address this issue, this research proposes a method that introduces a multi-source reward signal fusion mechanism, integrating the following three metrics:
 
-规避性得分（Evasion Score）：反映样本是否成功规避沙箱或机器学习检测模型，是核心奖励来源；
+%规避性得分（Evasion Score）：反映样本是否成功规避沙箱或机器学习检测模型，是核心奖励来源；
 
-Evasion Score: It reflects whether the sample successfully evades sandbox or machine learning detection models, serving as the primary reward source.
+%Evasion Score: It reflects whether the sample successfully evades sandbox or machine learning detection models, serving as the primary reward source.
 
-扰动成本（Perturbation Cost）：衡量修改对原始样本的干扰程度，用于抑制过度修改，保持样本可执行性与语义一致性；
+%扰动成本（Perturbation Cost）：衡量修改对原始样本的干扰程度，用于抑制过度修改，保持样本可执行性与语义一致性；
 
-Perturbation Cost: It measures the perturbation degree of modifications to the original sample, suppressing excessive alterations to maintain executability and semantic consistency.
+%Perturbation Cost: It measures the perturbation degree of modifications to the original sample, suppressing excessive alterations to maintain executability and semantic consistency.
 
-行为混淆度（Behavior Confusion Degree）：衡量样本行为与正常软件的相似度，鼓励智能体生成更具隐蔽性的扰动策略。
+%行为混淆度（Behavior Confusion Degree）：衡量样本行为与正常软件的相似度，鼓励智能体生成更具隐蔽性的扰动策略。
 
-Behavior Confusion Degree: It measures the similarity between sample behavior and benign software, encouraging the agent to generate more stealthy disturbance strategies.
+%Behavior Confusion Degree: It measures the similarity between sample behavior and benign software, encouraging the agent to generate more stealthy disturbance strategies.
 
-\subsection{奖励函数表达形式 Reward Function Formulation}
+%\subsection{奖励函数表达形式 Reward Function Formulation}
  
-定义智能体在时刻 $t$ 执行扰动动作 $a_t$ 后的奖励 $R_t$ 为多项加权组合：
+%定义智能体在时刻 $t$ 执行扰动动作 $a_t$ 后的奖励 $R_t$ 为多项加权组合：
 
-The reward $R_t$ for the agent after executing disturbance action $a_t$ at time $t$ is defined as a weighted combination:
-\begin{equation}
-	R_t = \lambda_1 \cdot R_{\text{evasion}} + \lambda_2 \cdot R_{\text{confusion}} - \lambda_3 \cdot R_{\text{cost}}
-\end{equation}
+%The reward $R_t$ for the agent after executing disturbance action $a_t$ at time $t$ is defined as a weighted combination:
+%\begin{equation}
+%	R_t = \lambda_1 \cdot R_{\text{evasion}} + \lambda_2 \cdot R_{\text{confusion}} %- \lambda_3 \cdot R_{\text{cost}}
+%\end{equation}
 
-其中，$R_{\text{evasion}}$ 表示若样本成功绕过沙箱或分类器则给予正奖励，否则为 0；$R_{\text{confusion}}$ 表示根据行为序列（如系统调用图）与良性样本的相似度计算得分，例如使用 Jaccard 相似度或结构相似性；$R_{\text{cost}}$ 表示扰动的代价，可以根据扰动次数、修改字节数以及修改位置的敏感度等进行计算；$\lambda_1$、$\lambda_2$ 和 $\lambda_3$ 为动态可调的权重参数。
+%其中，$R_{\text{evasion}}$ 表示若样本成功绕过沙箱或分类器则给予正奖励，否则为 0；$R_{\text{confusion}}$ 表示根据行为序列（如系统调用图）与良性样本的相似度计算得分，例如使用 Jaccard 相似度或结构相似性；$R_{\text{cost}}$ 表示扰动的代价，可以根据扰动次数、修改字节数以及修改位置的敏感度等进行计算；$\lambda_1$、$\lambda_2$ 和 $\lambda_3$ 为动态可调的权重参数。
 
-In this formulation, $R_{\text{evasion}}$ represents that if the sample evade the sandbox or classifier, positive reward should be given, otherwise, the reward is zero; $R_{\text{confusion}}$ represents a score calculated from the similarity between behavioral sequence, such as system call graphs, and benign samples, such as using Jaccard similarity or structural similarity; $R_{\text{cost}}$ denotes the disturbance cost that is calculated based on number of disturbances, modified bytes, and sensitivity of modified locations; $\lambda_1$, $\lambda_2$, and $\lambda_3$ are dynamically adjustable weighting parameters.
+%In this formulation, $R_{\text{evasion}}$ represents that if the sample evade the sandbox or classifier, positive reward should be given, otherwise, the reward is zero; $R_{\text{confusion}}$ represents a score calculated from the similarity between behavioral sequence, such as system call graphs, and benign samples, such as using Jaccard similarity or structural similarity; $R_{\text{cost}}$ denotes the disturbance cost that is calculated based on number of disturbances, modified bytes, and sensitivity of modified locations; $\lambda_1$, $\lambda_2$, and $\lambda_3$ are dynamically adjustable weighting parameters.
 
 \section{基于LSTM的PPO时序模型结构 PPO Sequential Model Structure Based on LSTM}
 
-本章提出的基于PPO（Proximal Policy Optimization）与 LSTM（Long Short-Term Memory）结合的强化学习模型主要由四个部分组成：LSTM时间特征编码层、策略网络（Actor）、价值网络（Critic）以及PPO优化器。训练过程中，首先由策略网络根据当前环境状态生成动作概率分布，同时价值网络对当前状态进行价值评估。为了能够有效建模动作序列中的时间依赖性，引入了LSTM模块，使得模型能够记忆过去的历史状态信息，捕获长期依赖特征，从而提升策略的稳定性与鲁棒性。最后，通过PPO优化器对策略进行迭代更新，保证训练过程中策略更新的稳定性与高效性。
+%本章提出的基于PPO（Proximal Policy Optimization）与 LSTM（Long Short-Term Memory）结合的强化学习模型主要由四个部分组成：LSTM时间特征编码层、策略网络（Actor）、价值网络（Critic）以及PPO优化器。训练过程中，首先由策略网络根据当前环境状态生成动作概率分布，同时价值网络对当前状态进行价值评估。为了能够有效建模动作序列中的时间依赖性，引入了LSTM模块，使得模型能够记忆过去的历史状态信息，捕获长期依赖特征，从而提升策略的稳定性与鲁棒性。最后，通过PPO优化器对策略进行迭代更新，保证训练过程中策略更新的稳定性与高效性。
 
-The reinforcement learning model combining PPO and LSTM, proposed in this chapter, consists of four main components: an LSTM temporal feature encoding layer, a policy network (Actor), a value network (Critic), and a PPO optimizer. During the training process, first, the policy network generates an action probability distribution based on the current environment state. Concurrently, the value network evaluates the value of the current state. To effectively model temporal dependencies in action sequences, the LSTM module is introduced, which enables the model to record historical state information and capture long-term dependency features, enhancing policy stability and robustness. Finally, the PPO optimizer iteratively updates the policy, ensuring stable and efficient policy updates throughout the training process.
+%The reinforcement learning model combining PPO and LSTM, proposed in this chapter, consists of four main components: an LSTM temporal feature encoding layer, a policy network (Actor), a value network (Critic), and a PPO optimizer. During the training process, first, the policy network generates an action probability distribution based on the current environment state. Concurrently, the value network evaluates the value of the current state. To effectively model temporal dependencies in action sequences, the LSTM module is introduced, which enables the model to record historical state information and capture long-term dependency features, enhancing policy stability and robustness. Finally, the PPO optimizer iteratively updates the policy, ensuring stable and efficient policy updates throughout the training process.
 
-\begin{algorithm}[htbp]
-	\caption{基于强化学习的 ELF 对抗样本生成算法}
-	\KwIn{原始 ELF 恶意样本集 $S$，最大迭代次数 $I$，预训练模型 $M$（PPO+LSTM），免杀行为表 \texttt{Action\_table}，检测结果记录表 \texttt{Re}}
-	\KwOut{免杀后的样本集 $S$}
-	初始化智能体 agent 与环境 env\;
-	agent $\leftarrow$ PPO\_LSTM.load($M$)\;
-	$R_d \leftarrow 0$\;
-	\ForEach{$s \in S$}{
-		env.reset()\;
-		tag $\leftarrow$ env.detect($s$)\;
-		$S_t \leftarrow [\ ]$\;
-		\For{$i \leftarrow 1$ \KwTo $9$}{
-			$S_t \leftarrow S_t + \texttt{env.extractor}(s, i)$\;
-		}
-		\For{$j \leftarrow 1$ \KwTo $I$}{
-			act $\leftarrow$ agent.predict($S_t$, $R_d$)\;
-			\If{tag == benign}{
-				\textbf{break}\;
-			}
-			$s \leftarrow \texttt{env.step}(s, \texttt{Action\_table}[act])$\;
-			$S_t \leftarrow [\ ]$\;
-			\For{$i \leftarrow 1$ \KwTo $9$}{
-				$S_t \leftarrow S_t + \texttt{env.extractor}(s, i)$\;
-			}
-			tag $\leftarrow$ env.detect($s$)\;
+%\begin{algorithm}[htbp]
+%	\caption{基于强化学习的 ELF 对抗样本生成算法}
+%	\KwIn{原始 ELF 恶意样本集 $S$，最大迭代次数 $I$，预训练模型 $M$（PPO+LSTM），免杀行为表 \texttt{Action\_table}，检测结果记录表 \texttt{Re}}
+%	\KwOut{免杀后的样本集 $S$}
+%	初始化智能体 agent 与环境 env\;
+%	agent $\leftarrow$ PPO\_LSTM.load($M$)\;
+%	$R_d \leftarrow 0$\;
+%	\ForEach{$s \in S$}{
+%		env.reset()\;
+%		tag $\leftarrow$ env.detect($s$)\;
+%		$S_t \leftarrow [\ ]$\;
+%		\For{$i \leftarrow 1$ \KwTo $9$}{
+%			$S_t \leftarrow S_t + \texttt{env.extractor}(s, i)$\;
+%		}
+%		\For{$j \leftarrow 1$ \KwTo $I$}{
+%			act $\leftarrow$ agent.predict($S_t$, $R_d$)\;
+%			\If{tag == benign}{
+%				\textbf{break}\;
+%			}
+%			$s \leftarrow \texttt{env.step}(s, \texttt{Action\_table}[act])$\;
+%			$S_t \leftarrow [\ ]$\;
+%			\For{$i \leftarrow 1$ \KwTo $9$}{
+%				$S_t \leftarrow S_t + \texttt{env.extractor}(s, i)$\;
+%			}
+%			tag $\leftarrow$ env.detect($s$)\;
+%			
+%			计算规避性得分：\texttt{Evasion\_Score} $\leftarrow$ score\_function($s$)\;
 			
-			计算规避性得分：\texttt{Evasion\_Score} $\leftarrow$ score\_function($s$)\;
+%			计算行为混淆度：\texttt{Behavior\_Confusion\_Degree} $\leftarrow$ calculate\_confusion\_degree($s$)\;
 			
-			计算行为混淆度：\texttt{Behavior\_Confusion\_Degree} $\leftarrow$ calculate\_confusion\_degree($s$)\;
+%			计算扰动成本：\texttt{Perturbation\_Cost} $\leftarrow$ calculate\_perturbation\_cost($s$, \texttt{Action\_table}[act])\;
 			
-			计算扰动成本：\texttt{Perturbation\_Cost} $\leftarrow$ calculate\_perturbation\_cost($s$, \texttt{Action\_table}[act])\;
-			
-			\If{tag == benign}{
-				$R_d \leftarrow 10 \cdot \texttt{coefficient1} + \texttt{Behavior\_Confusion\_Degree} - \texttt{Perturbation\_Cost}$\;
-				\textbf{break}\;
-			}
-			\Else{
-				$R_d \leftarrow \texttt{Behavior\_Confusion\_Degree} - \texttt{Perturbation\_Cost}$\;
-			}
-		}
-		\texttt{Re[$s$]} $\leftarrow$ tag\;
-	}
-\end{algorithm}
+%			\If{tag == benign}{
+%				$R_d \leftarrow 10 \cdot \texttt{coefficient1} + \texttt{Behavior\_Confusion\_Degree} - \texttt{Perturbation\_Cost}$\;
+%				\textbf{break}\;
+%			}
+%			\Else{
+%				$R_d \leftarrow \texttt{Behavior\_Confusion\_Degree} - \texttt{Perturbation\_Cost}$\;
+%			}
+%		}
+%		\texttt{Re[$s$]} $\leftarrow$ tag\;
+%	}
+%\end{algorithm}
 
-算法2描述了通过强化学习（PPO+LSTM）模型生成ELF格式恶意样本的免杀对抗样本。第1至2行初始化智能体和环境，加载预训练的PPO+LSTM模型。第3行初始化奖励信号$R_d$为0。第4至6行遍历原始恶意样本集$S$并重置环境，检测样本的标签。第7至9行提取环境中的特征，并存储在状态$S_t$中。第10至26行是主要的扰动步骤：智能体根据当前状态和奖励预测执行动作。第11至12行通过智能体的预测生成扰动动作，并根据样本标签（恶意或良性）决定是否继续执行。第13至15行，执行动作后更新样本并提取新的环境特征。第16至18行，计算新的奖励值，综合考虑规避性得分、行为混淆度和扰动成本。第19至24行根据检测结果和扰动成本动态计算奖励值，如果样本成功规避检测则给予较高的奖励，否则计算扰动成本并适当降低奖励。第27行更新样本的标签并记录在检测结果表Re中。整个流程通过多源奖励信号的融合与动态调整，逐步优化智能体的策略，以生成能够有效绕过检测并保持样本可执行性的对抗样本。
+%算法2描述了通过强化学习（PPO+LSTM）模型生成ELF格式恶意样本的免杀对抗样本。第1至2行初始化智能体和环境，加载预训练的PPO+LSTM模型。第3行初始化奖励信号$R_d$为0。第4至6行遍历原始恶意样本集$S$并重置环境，检测样本的标签。第7至9行提取环境中的特征，并存储在状态$S_t$中。第10至26行是主要的扰动步骤：智能体根据当前状态和奖励预测执行动作。第11至12行通过智能体的预测生成扰动动作，并根据样本标签（恶意或良性）决定是否继续执行。第13至15行，执行动作后更新样本并提取新的环境特征。第16至18行，计算新的奖励值，综合考虑规避性得分、行为混淆度和扰动成本。第19至24行根据检测结果和扰动成本动态计算奖励值，如果样本成功规避检测则给予较高的奖励，否则计算扰动成本并适当降低奖励。第27行更新样本的标签并记录在检测结果表Re中。整个流程通过多源奖励信号的融合与动态调整，逐步优化智能体的策略，以生成能够有效绕过检测并保持样本可执行性的对抗样本。
 
-Algorithm 2 describes the ELF-format malware adversarial sample generation process that uses a reinforcement learning model based on PPO and LSTM. Lines 1 to 2 initialize the agent and environment, loading the pre-trained PPO+LSTM model. Line 3 initializes the reward signal $R_d$ to 0. Lines 4 to 6 iterate through the original malicious sample set $S$, reset the environment, and detect the sample's label. Lines 7 to 9 extract features from the environment and store them in state $S_t$. Lines 10 to 26 are the core disturbance steps: the agent predicts an action based on the current state and reward signal. Lines 11 to 12 generate disturbance actions based on the agent's prediction and decide whether to continue according to whether the sample's label is benign or malicious. After executing actions, lines 13 to 15 update samples and extract novel environmental characteristics. Line 16 to 18 calculate novel reward value comprehensively based on evasion score, behavior confusion degree, and disturbance cost. Line 19 to 24 dynamically calculates reward values according to the detection result and disturbance cost. If the sample evades detection successfully, higher rewards will be granted. Otherwise, the disturbance cost is calculated, and rewards are penalized. Line 27 updates the sample's label and records it in the result table Re. The whole process gradually optimizes the agent's strategies through merging multi-source signals and adjusting dynamically, generating adversarial samples that evade detection effectively while maintaining executability.
+%Algorithm 2 describes the ELF-format malware adversarial sample generation process that uses a reinforcement learning model based on PPO and LSTM. Lines 1 to 2 initialize the agent and environment, loading the pre-trained PPO+LSTM model. Line 3 initializes the reward signal $R_d$ to 0. Lines 4 to 6 iterate through the original malicious sample set $S$, reset the environment, and detect the sample's label. Lines 7 to 9 extract features from the environment and store them in state $S_t$. Lines 10 to 26 are the core disturbance steps: the agent predicts an action based on the current state and reward signal. Lines 11 to 12 generate disturbance actions based on the agent's prediction and decide whether to continue according to whether the sample's label is benign or malicious. After executing actions, lines 13 to 15 update samples and extract novel environmental characteristics. Line 16 to 18 calculate novel reward value comprehensively based on evasion score, behavior confusion degree, and disturbance cost. Line 19 to 24 dynamically calculates reward values according to the detection result and disturbance cost. If the sample evades detection successfully, higher rewards will be granted. Otherwise, the disturbance cost is calculated, and rewards are penalized. Line 27 updates the sample's label and records it in the result table Re. The whole process gradually optimizes the agent's strategies through merging multi-source signals and adjusting dynamically, generating adversarial samples that evade detection effectively while maintaining executability.
 
-\subsection{LSTM时间特征编码层 LSTM Temporal Feature Encoding Layer}
+%\subsection{LSTM时间特征编码层 LSTM Temporal Feature Encoding Layer}
 
-在传统强化学习中，策略与价值估计往往只基于当前状态单步决策，忽略了历史决策之间的时间关联性，容易导致短视行为。
+%在传统强化学习中，策略与价值估计往往只基于当前状态单步决策，忽略了历史决策之间的时间关联性，容易导致短视行为。
 
-In traditional RL, policy and value estimation usually rely solely on single-step decisions based on the current state, neglecting temporal correlations among historical decisions. This can lead to short-sighted behavior.
+%In traditional RL, policy and value estimation usually rely solely on single-step decisions based on the current state, neglecting temporal correlations among historical decisions. This can lead to short-sighted behavior.
 
-为此，本模型在输入端引入了LSTM（长短期记忆网络），通过门控机制捕获长期依赖，增强决策的时序连贯性。
+%为此，本模型在输入端引入了LSTM（长短期记忆网络），通过门控机制捕获长期依赖，增强决策的时序连贯性。
 
-To address this issue, the model introduces an LSTM layer at the input stage. Through gating mechanisms, LSTM captures long-term dependencies, enhancing the temporal coherence of decision-making.
+%To address this issue, the model introduces an LSTM layer at the input stage. Through gating mechanisms, LSTM captures long-term dependencies, enhancing the temporal coherence of decision-making.
 
-LSTM单元内部操作公式如下：
+%LSTM单元内部操作公式如下：
 
-Internal operation formulations of the LSTM unit are defined as follows:
+%Internal operation formulations of the LSTM unit are defined as follows:
 
-输入门（控制当前输入信息的流入）：
+%输入门（控制当前输入信息的流入）：
 
-Input Gate (controlling the flow of current input information):
-\begin{equation}
-i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i)
-\end{equation}
+%Input Gate (controlling the flow of current input information):
+%\begin{equation}
+%i_t = \sigma(W_i x_t + U_i h_{t-1} + b_i)
+%\end{equation}
 
-遗忘门（控制上一个记忆单元的保留程度）：
+%遗忘门（控制上一个记忆单元的保留程度）：
 
-Forget Gate (controlling retention level of the previous memory cell):
-\begin{equation}
-f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f)
-\end{equation}
+%Forget Gate (controlling retention level of the previous memory cell):
+%\begin{equation}
+%f_t = \sigma(W_f x_t + U_f h_{t-1} + b_f)
+%\end{equation}
 
-单元状态更新（生成新的记忆内容）：
+%单元状态更新（生成新的记忆内容）：
 
-Cell State Update (Generating new memory content):
-\begin{equation}
-\tilde{c}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c)
-\end{equation}
+%Cell State Update (Generating new memory content):
+%\begin{equation}
+%\tilde{c}_t = \tanh(W_c x_t + U_c h_{t-1} + b_c)
+%\end{equation}
 
-单元状态（记忆细胞）更新：
+%单元状态（记忆细胞）更新：
 
-Cell State Update (memory cell):
-\begin{equation}
-c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
-\end{equation}
+%Cell State Update (memory cell):
+%\begin{equation}
+%c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
+%\end{equation}
 
-输出门（控制隐藏状态输出）：
+%输出门（控制隐藏状态输出）：
 
-Output Gate (controlling hidden state output):
-\begin{equation}
-o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o)
-\end{equation}
+%Output Gate (controlling hidden state output):
+%\begin{equation}
+%o_t = \sigma(W_o x_t + U_o h_{t-1} + b_o)
+%\end{equation}
 
-隐藏状态更新（作为下一步输出）：
+%隐藏状态更新（作为下一步输出）：
 
-Hidden State Update (output for the next step):
-\begin{equation}
-h_t = o_t \odot \tanh(c_t)
-\end{equation}
+%Hidden State Update (output for the next step):
+%\begin{equation}
+%h_t = o_t \odot \tanh(c_t)
+%\end{equation}
 
-其中，$\sigma$ 为 Sigmoid 激活函数，$\odot$ 表示 Hadamard 乘积（元素乘），
-$x_t$ 是当前时刻的输入状态，$h_{t-1}$ 和 $c_{t-1}$ 分别是上一时刻的隐藏状态与单元状态。
+%其中，$\sigma$ 为 Sigmoid 激活函数，$\odot$ 表示 Hadamard 乘积（元素乘），
+%$x_t$ 是当前时刻的输入状态，$h_{t-1}$ 和 $c_{t-1}$ 分别是上一时刻的隐藏状态与单元状态。
 
-In the formulations, $\sigma$ is the Sigmoid activation function. $\odot$ represents the Hadamard product in element multiplication. $x_t$ is the input state of current time. $h_{t-1}$ and $c_{t-1}$ are the hidden state and cell state of the previous time step.
+%In the formulations, $\sigma$ is the Sigmoid activation function. $\odot$ represents the Hadamard product in element multiplication. $x_t$ is the input state of current time. $h_{t-1}$ and $c_{t-1}$ are the hidden state and cell state of the previous time step.
 
-通过以上机制，LSTM 能有效捕捉输入状态序列中的长期依赖特征，使策略网络与价值网络
-具有更强的历史建模能力。
+%通过以上机制，LSTM 能有效捕捉输入状态序列中的长期依赖特征，使策略网络与价值网络具有更强的历史建模能力。
 
-This mechanism enables the LSTM to effectively capture long-term dependencies in input state sequences, enhancing the historical modeling capability of the policy and value networks.
+%This mechanism enables the LSTM to effectively capture long-term dependencies in input state sequences, enhancing the historical modeling capability of the policy and value networks.
 
 \subsection{策略网络（Actor） Policy Network (Actor)}
 
