@@ -893,6 +893,67 @@ V_{\phi}(s_t) = W_v h_t + b_v
 
 %In this formulation, $W_v$ and $b_v$ are the weight and bias parameters of the value network, and $\phi$ denotes its parameter set.
 
+\subsection{策略优化器}
+
+PPO 引入了剪切（Clipped）目标函数，在更新策略时，限制新旧策略之间的变动范围，从而提高训练的稳定性。
+
+%PPO introduces a clipped objective function that limits the divergence between old and new policies during updates, enhancing training stability.
+
+首先定义概率比率 \(r_t(\theta)\)：
+
+%First,the probability ratio $r_t(\theta)$ is defined as:
+\begin{equation}
+	r_t(\theta) = \frac{\pi_{\theta}(a_t | s_t)}{\pi_{\theta_{\text{old}}}(a_t | s_t)} \tag{4.11}
+\end{equation}
+
+其中，\(\pi_{\theta_{\text{old}}}\) 表示上一次更新前的策略参数。
+
+%$\pi_{\theta_{\text{old}}}$ represents the pre-update policy parameters.
+
+优势函数（Advantage）定义为：
+
+%The advantage function $A_t$ is defined as:
+\begin{equation}
+	A_t = \delta_t = r_t + \gamma V(s_{t+1}) - V(s_t) \tag{4.12}
+\end{equation}
+
+其中，\(r_t\) 为即时奖励，\(\gamma\) 为折扣因子。
+
+%$r_t$ is the immediate reward and $\gamma$ is the discount factor.
+
+PPO 的最终优化目标为：
+
+%PPO's ultimate optimization target is:
+\begin{equation}
+	L^{\text{CLIP}}(\theta) = \mathbb{E}_t \left[ \min \left( r_t(\theta) A_t, \ \text{clip}\big(r_t(\theta), 1-\epsilon, 1+\epsilon\big) A_t \right) \right] \tag{4.13}
+\end{equation}
+
+当 \(r_t(\theta)\) 处于 \((1-\epsilon, 1+\epsilon)\) 区间内时，直接使用真实比率乘以优势函数；当超出该区间时，使用裁剪后的比率，防止策略更新幅度过大。
+
+%When \(r_t(\theta)\) lies in the range \((1-\epsilon, 1+\epsilon)\), the true ratio multiplied by the advantage function is used. Outside this range, the clipped ratio is used to prevent excessive policy updates.
+
+价值函数损失（均方误差）为：
+
+%The value function loss (squared error) is:
+\begin{equation}
+	L^{\text{VF}}(\varphi) = \mathbb{E}_t \left[ \left(V_{\varphi}(s_t) - R_t\right)^2 \right] \tag{4.14}
+\end{equation}
+
+其中，\(R_t\) 是累积回报（真实价值目标）。
+
+%In this formulation, $R_t$ is the cumulative return (real value target).
+
+最终的整体损失函数（综合考虑策略损失、价值损失和熵正则化）为：
+
+%The ultimate overall loss function combining policy loss, value loss, and entropy regularization is:
+\begin{equation}
+	L(\theta, \varphi) = L^{\text{CLIP}}(\theta) - c_1 L^{\text{VF}}(\varphi) + c_2 S[\pi_{\theta}] \tag{4.15}
+\end{equation}
+
+其中，\(S[\pi_{\theta}]\) 为策略熵，用以鼓励探索；\(c_1\) 和 \(c_2\) 为损失权重系数。
+
+%Where \(S[\pi_{\theta}]\) is the policy entropy to encourage exploration. \(c_1\) and \(c_2\) are weighting coefficients.
+
 %\section{本章小结 Chapter Summary}
 
 %本章首先介绍了当前恶意软件检测领域中面临的挑战，特别是在应对新型对抗性样本时，传统的检测方法往往无法有效识别。通过分析现有技术的不足之处，发现许多传统方法所存在的问题。针对这些问题，本章提出了对应的解决方案。接下来，本章详细介绍了这一解决方案的设计思路。通过强化学习算法，代理能够在训练环境中与检测模型互动，学习如何生成绕过检测的恶意样本。这一过程通过奖励机制引导代理生成具有高隐蔽性和变异性的样本，从而提升恶意软件的复杂度和变化性，使得现有的检测方法更难识别。最后，本章描述了整个系统的整体架构设计。该架构包括数据收集与处理、扰动策略构建、奖励函数策略优化与强化学习模型构建与训练四个部分以实现本文的研究目标，完成对抗样本的生成。
