@@ -592,43 +592,43 @@ This research batch processes binary executable samples using the LIEF library a
 
 %This mechanism enables the LSTM to effectively capture long-term dependencies in input state sequences, enhancing the historical modeling capability of the policy and value networks.
 
-\subsection{策略网络（Actor） Policy Network (Actor)}
+%\subsection{策略网络（Actor） Policy Network (Actor)}
 
-策略网络负责从环境中接收到的状态信息中，输出当前动作的概率分布。为了增强策略对于历史信息的感知能力，策略网络在输入端接入了LSTM层，LSTM能够在一定程度上记忆先前状态的隐藏信息，从而使得输出的策略不仅依赖当前时刻的观测，还综合考虑了历史观测序列的特征。
-策略网络的目标是根据当前的隐藏状态$h_{t}$，输出每个动作的概率分布$\pi_{\theta}(a_{t}|s_{t})$ 。
-具体过程如下：
+%策略网络负责从环境中接收到的状态信息中，输出当前动作的概率分布。为了增强策略对于历史信息的感知能力，策略网络在输入端接入了LSTM层，LSTM能够在一定程度上记忆先前状态的隐藏信息，从而使得输出的策略不仅依赖当前时刻的观测，还综合考虑了历史观测序列的特征。
+%策略网络的目标是根据当前的隐藏状态$h_{t}$，输出每个动作的概率分布$\pi_{\theta}(a_{t}|s_{t})$ 。
+%具体过程如下：
 
-The policy network receives environmental state information and outputs the probability distribution of current actions. To enhance its awareness of historical information, the policy network introduces an LSTM layer at the input stage. The LSTM records hidden information from previous states, enabling the output policy to rely on not only the current observation but also features from historical observation sequences. The policy network's goal is to output each action's probability distribution $\pi_{\theta}(a_{t}|s_{t})$ based on the current hidden state $h_{t}$. The concrete processes are listed below:
+%The policy network receives environmental state information and outputs the probability distribution of current actions. To enhance its awareness of historical information, the policy network introduces an LSTM layer at the input stage. The LSTM records hidden information from previous states, enabling the output policy to rely on not only the current observation but also features from historical observation sequences. The policy network's goal is to output each action's probability distribution $\pi_{\theta}(a_{t}|s_{t})$ based on the current hidden state $h_{t}$. The concrete processes are listed below:
 
-\begin{enumerate} [label=\arabic*)] 
+%\begin{enumerate} [label=\arabic*)] 
 
-\item LSTM编码后的隐藏状态$h_{t}$作为输入;
+%\item LSTM编码后的隐藏状态$h_{t}$作为输入;
 
-The LSTM-encoded hidden state $h_{t}$ serves as input.
+%The LSTM-encoded hidden state $h_{t}$ serves as input.
 
-\item 经过多层感知机（MLP）映射至动作空间;
+%\item 经过多层感知机（MLP）映射至动作空间;
 
-A multilayer perceptron (MLP) maps this to the action space.
+%A multilayer perceptron (MLP) maps this to the action space.
 
-\item 通过 Softmax 函数输出动作分布：
+%\item 通过 Softmax 函数输出动作分布：
 
-The Softmax function outputs the action distribution:
-\begin{equation}
-\pi_{\theta}(a_t | s_t) = Softmax(W_p h_t + b_p)
-\tag{4.8}
-\end{equation}
-其中，$W_p$、$b_p$ 为策略网络的权重与偏置参数，$\theta$ 表示策略网络的参数集合;
+%The Softmax function outputs the action distribution:
+%\begin{equation}
+%\pi_{\theta}(a_t | s_t) = Softmax(W_p h_t + b_p)
+%\tag{4.8}
+%\end{equation}
+%其中，$W_p$、$b_p$ 为策略网络的权重与偏置参数，$\theta$ 表示策略网络的参数集合;
 
-In this formulation, $W_p$ and $b_p$ are the policy network's weight and bias parameters, and $\theta$ represents the policy network's parameter set.
+%In this formulation, $W_p$ and $b_p$ are the policy network's weight and bias parameters, and $\theta$ represents the policy network's parameter set.
 
-\item 依据动作概率分布进行采样，生成动作 $a_t$：
+%\item 依据动作概率分布进行采样，生成动作 $a_t$：
 
-Actions $a_t$ are generated according to the sampling from the probability distribution.
-\begin{equation}
-a_t \sim \pi_\theta(a_t | s_t)
-\end{equation}
+%Actions $a_t$ are generated according to the sampling from the probability distribution.
+%\begin{equation}
+%a_t \sim \pi_\theta(a_t | s_t)
+%\end{equation}
 
-\end{enumerate}
+%\end{enumerate}
 
 \subsection{价值网络（Critic） Value Network (Critic)}
 
