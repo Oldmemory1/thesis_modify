@@ -832,6 +832,8 @@ $x_t$ 是当前时刻的输入状态，$h_{t-1}$ 和 $c_{t-1}$ 分别是上一�
 通过以上机制，LSTM 能有效捕捉输入状态序列中的长期依赖特征，使策略网络与价值网络
 具有更强的历史建模能力。
 
+%This mechanism enables the LSTM to effectively capture long-term dependencies in input state sequences, enhancing the historical modeling capability of the policy and value networks.
+
 \subsection{策略网络（Actor）}
 
 策略网络负责从环境中接收到的状态信息中，输出当前动作的概率分布。为了增强策略对于历史信息的感知能力，策略网络在输入端接入了LSTM层，LSTM能够在一定程度上记忆先前状态的隐藏信息，从而使得输出的策略不仅依赖当前时刻的观测，还综合考虑了历史观测序列的特征。
@@ -869,7 +871,27 @@ a_t \sim \pi_\theta(a_t | s_t)
 \end{equation}
 
 \end{enumerate}
-%This mechanism enables the LSTM to effectively capture long-term dependencies in input state sequences, enhancing the historical modeling capability of the policy and value networks.
+
+\subsection{价值网络（Critic）}
+
+价值网络负责对当前状态的价值进行估计，即预测从当前状态出发，在未来遵循当前策略所能获得的期望回报。与策略网络类似，价值网络同样引入了LSTM编码层，以捕获状态序列中的时间关联性，提升价值估计的准确性和稳定性。
+
+%The value network estimates the value of the current state and predicts the expected cumulative reward obtained by following the current policy starting from the current state. Like the policy network, the value network introduces an LSTM encoding layer to capture temporal correlations in state sequences, enhancing estimation accuracy and stability.
+
+价值网络旨在估计当前状态$s_{t}$的状态价值函数$V^{\pi}(s_{t})$，即从状态$s_{t}$出发，在未来遵循当前策略$\pi$所能获得的期望总回报。与策略网络结构类似，价值网络也基于LSTM编码后的隐藏状态$h_{t}$，经MLP输出一个实数值：
+
+%The value network aims to estimate the state-value function $V^{\pi}(s_{t})$ in current state $s_{t}$, the expected total reward from state $s_t$ following current strategy $\pi$. Like the structure of strategy networks, value networks are also based on the LSTM-encoded hidden state $h_{t}$ and output a scalar value through MLP.
+
+状态价值估计：
+
+%State value estimation:
+\begin{equation}
+V_{\phi}(s_t) = W_v h_t + b_v
+\end{equation}
+
+其中，$W_v$ 和 $b_v$ 分别为价值网络的权重与偏置参数，${\phi}$为价值网络参数集合。
+
+%In this formulation, $W_v$ and $b_v$ are the weight and bias parameters of the value network, and $\phi$ denotes its parameter set.
 
 %\section{本章小结 Chapter Summary}
 
