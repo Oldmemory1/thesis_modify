@@ -258,26 +258,26 @@ Using the training set illustrated in Table 5-2 and the feature extraction metho
     %In this formulation, $T_i$ denotes the generation time for Sample $i$, and $N$ represents the total sample count. Shorter generation times indicate greater suitability for practical deployment or large-scale generation scenarios.
 \end{enumerate}
 
-\section{恶意软件对抗性生成模型表现 Performance of Adversarial Malware Generation Model}
+\section{恶意软件对抗性生成模型表现}
 
 在本实验中，训练和测试样本的选择过程是基于Virustotal报告中的“first-seen”字段进行排序的。该字段记录了每个恶意软件样本第一次被Virustotal平台发现的时间，代表了该样本首次出现的日期和时间。通过利用这一时间戳，能够对样本进行时间上的排序，从而模拟恶意软件的进化过程。
 
-In this experiment, the selection process of training and testing samples was sorted based on the "first-seen" field from VirusTotal reports. This field records the date and time when each malware sample was first scanned by the VirusTotal platform, representing its initial appearance. Utilizing these timestamps allows that malware revolution can be simulated by sorting samples in time ordering.
+%In this experiment, the selection process of training and testing samples was sorted based on the "first-seen" field from VirusTotal reports. This field records the date and time when each malware sample was first scanned by the VirusTotal platform, representing its initial appearance. Utilizing these timestamps allows that malware revolution can be simulated by sorting samples in time ordering.
 
-具体来说，本文首先从Virustotal平台获取了大量恶意软件样本的检测报告，并依据“first-seen”字段对这些样本进行了升序排序。检测模型和对抗样本生成模型使用不同的数据，检测模型使用位于时间序列前端的数据训练，对抗样本生成模型则使用位于后端的数据。这一排序策略的优势在于，它能够帮助本文训练模型识别早期和新兴的恶意软件样本，进而提升模型在面对新型、未被广泛识别的恶意软件时的适应能力。通过选择“first-seen”较早的样本作为训练集，能够确保模型能够处理那些相对较早出现的恶意软件，并从这些样本中学习到潜在的攻击模式。
+%具体来说，本文首先从Virustotal平台获取了大量恶意软件样本的检测报告，并依据“first-seen”字段对这些样本进行了升序排序。检测模型和对抗样本生成模型使用不同的数据，检测模型使用位于时间序列前端的数据训练，对抗样本生成模型则使用位于后端的数据。这一排序策略的优势在于，它能够帮助本文训练模型识别早期和新兴的恶意软件样本，进而提升模型在面对新型、未被广泛识别的恶意软件时的适应能力。通过选择“first-seen”较早的样本作为训练集，能够确保模型能够处理那些相对较早出现的恶意软件，并从这些样本中学习到潜在的攻击模式。
 
-Specifically, this research gathered numerous malware sample detection reports and sorted them in ascending order according to the "first-seen" field. The detection model and adversarial sample generation model utilize different datasets. The detection model used data situated at the front of time sequence for training while the adversarial sample generation model used data located at the end of time sequence. This sorting strategy exhibits advantages in promoting the training model in this research to identify historical and newly emerging malware samples, thus enhancing the model's adaptivity for novel malware that are not detected widely. Selecting earlier "first-seen" samples ensures that models can address malware that earlier presented, learning potential attack approaches from these samples.
+%Specifically, this research gathered numerous malware sample detection reports and sorted them in ascending order according to the "first-seen" field. The detection model and adversarial sample generation model utilize different datasets. The detection model used data situated at the front of time sequence for training while the adversarial sample generation model used data located at the end of time sequence. This sorting strategy exhibits advantages in promoting the training model in this research to identify historical and newly emerging malware samples, thus enhancing the model's adaptivity for novel malware that are not detected widely. Selecting earlier "first-seen" samples ensures that models can address malware that earlier presented, learning potential attack approaches from these samples.
 
 在测试集的选择上，本文同样使用了“first-seen”字段对样本进行排序，确保测试集包含来自不同时间段的恶意软件样本。这种方法使得模型不仅能够评估其在新样本上的表现，还能够检测其在历史样本上的有效性。通过这种方式，研究者能够全面地考察模型在多种恶意软件类型和攻击模式下的泛化能力。
 
-For test set selections, this research also utilizes the "first-seen" field to sort samples to ensure that test dataset includes malware from diverse time periods. This method stimulates models not only to evaluate their performance on different novel samples but also to examine the validity of historical samples. Researchers can comprehensively examine generalization capabilities across multiple malware types and attack patterns.
+%For test set selections, this research also utilizes the "first-seen" field to sort samples to ensure that test dataset includes malware from diverse time periods. This method stimulates models not only to evaluate their performance on different novel samples but also to examine the validity of historical samples. Researchers can comprehensively examine generalization capabilities across multiple malware types and attack patterns.
 
-\subsection{参数选择 Parameter Selection}
+\section{不同参数对实验结果的影响}
 
 在本实验中，本文对强化学习模型的参数进行了精心设置，以确保训练过程的有效性和稳定性。以下是关键参数的设置和说明：
 首先，训练的步骤数（rounds）设定为5000至10000步，目的是确保智能体通过足够的交互时间学到有效的策略。每个步骤代表智能体与环境的一次交互，智能体根据当前的策略选择动作并根据奖励更新其策略。训练的过程中，本文使用了两种不同的环境：malware-v0和malware-score-v0。malware-v0是一个没有评分机制的环境，而malware-score-v0则包含了评分系统，用于模拟黑盒攻击和白盒攻击两个环境，常见具体的参数如表\ref{tab:5.5}所示。
 
-In this experiment, the parameters of RL model were meticulously configured to ensure effective and stable training. Critical parameter settings and descriptions are introduced as follows: The number of training rounds was set between 5,000 and 10,000 to ensure sufficient interaction time for the agent to learn effective strategies. Each step represents an interaction between the agent and the environment. The agent selects an action based on its current policy and updates the policy according to the reward. During training, two distinct environments were used: malware-v0 and malware-score-v0. malware-v0 is an environment lacking a scoring mechanism, while malware-score-v0 incorporates a scoring system to simulate black-box and white-box attack environments. Common specific parameters are listed in Table \ref{tab:5.5}.
+%In this experiment, the parameters of RL model were meticulously configured to ensure effective and stable training. Critical parameter settings and descriptions are introduced as follows: The number of training rounds was set between 5,000 and 10,000 to ensure sufficient interaction time for the agent to learn effective strategies. Each step represents an interaction between the agent and the environment. The agent selects an action based on its current policy and updates the policy according to the reward. During training, two distinct environments were used: malware-v0 and malware-score-v0. malware-v0 is an environment lacking a scoring mechanism, while malware-score-v0 incorporates a scoring system to simulate black-box and white-box attack environments. Common specific parameters are listed in Table \ref{tab:5.5}.
 
 \begin{table}[htbp]
 	\centering
@@ -300,15 +300,17 @@ In this experiment, the parameters of RL model were meticulously configured to e
 
 在模型架构方面，PPO模型使用了带LSTM（长短期记忆）层的架构，以便于处理带有时间相关性的任务。模型的输入是来自环境的状态信息，经过全连接层后输入到LSTM层，LSTM层帮助智能体记住长期的信息，并且输出动作的概率分布（pi）和状态价值估计（v）。该模型的隐藏层大小为128，LSTM层的输出维度与隐藏层大小相同。
 
-In the model architecture aspect, the PPO model employed a structure with LSTM layers to handle temporally correlated tasks. The model input consists of state information from the environment, processed through a fully connected layer before entering the LSTM layer. The LSTM layer enables the agent to retain long-term information and outputs a probability distribution pi of actions and the state value estimate v. The hidden layer size of this model is 128, which is equivalent to the output dimension of the LSTM layer.
+%In the model architecture aspect, the PPO model employed a structure with LSTM layers to handle temporally correlated tasks. The model input consists of state information from the environment, processed through a fully connected layer before entering the LSTM layer. The LSTM layer enables the agent to retain long-term information and outputs a probability distribution pi of actions and the state value estimate v. The hidden layer size of this model is 128, which is equivalent to the output dimension of the LSTM layer.
+
+\subsection{LSTM层数对实验结果的影响}
 
 确认好超参数，将LSTM层数分别设置为1、2、3、4，训练10个epoch，记录每组模型在同一检测器下的平均逃逸率、标准差（衡量模型稳定性）和平均训练步数。实验使用1500个恶意样本作为训练集，训练目标是通过最小化被检测器发现的概率生成对抗样本，实验结果如表\ref{tab:5.6}所示。
 
-After confirming the hyperparameters, the number of LSTM layers was set to 1, 2, 3, and 4, respectively. Each configuration was trained for 10 epochs, with the average evasion rate, standard deviation that indicates model stability, and average training steps recorded by the same detector. The experiment utilized 1500 malicious samples as the training set, with the target of generating adversarial samples by minimizing their detection probability. Experimental results are presented in Table \ref{tab:5.6}.  
+%After confirming the hyperparameters, the number of LSTM layers was set to 1, 2, 3, and 4, respectively. Each configuration was trained for 10 epochs, with the average evasion rate, standard deviation that indicates model stability, and average training steps recorded by the same detector. The experiment utilized 1500 malicious samples as the training set, with the target of generating adversarial samples by minimizing their detection probability. Experimental results are presented in Table \ref{tab:5.6}.  
 
 从实验结果可见，随着LSTM层数的增加，模型的表达能力逐渐增强，在一定程度上有助于提升逃逸率。从表\ref{tab:5.6}可以看出，随着 LSTM 层数从1层增加到3层，平均逃逸率从85.4\%上升到89.1\%，平均扰动数也从 3.1 次增至 4.2 次，说明更深的时序模型能够捕捉更丰富的策略特征，提高对抗样本的生成效果。与此同时，收敛速度在 2 层时达到最快（4500步），而在 3 层和 4 层时分别回升至4600步和5200步，表现出过深网络带来的训练效率下降。
 
-From the experimental results, it is evident that as the number of LSTM layers increases, the model's representational capacity gradually strengthens, which contributes to improving the evasion rate to a certain extent. As shown in Table \ref{tab:5.6}, when the number of LSTM layers increases from 1 to 3, the average evasion rate rises from 85.4\% to 89.1\%, and the average number of perturbations increases from 3.1 to 4.2, demonstrating that deeper temporal models capture more abundant strategic features, enhancing adversarial sample generation efficiency. Meanwhile, convergence speed is fastest at 2 layers (4500 steps) but increases to 4600 and 5200 steps at 3 and 4 layers, respectively, indicating reduced training efficiency due to excessive network depth.
+%From the experimental results, it is evident that as the number of LSTM layers increases, the model's representational capacity gradually strengthens, which contributes to improving the evasion rate to a certain extent. As shown in Table \ref{tab:5.6}, when the number of LSTM layers increases from 1 to 3, the average evasion rate rises from 85.4\% to 89.1\%, and the average number of perturbations increases from 3.1 to 4.2, demonstrating that deeper temporal models capture more abundant strategic features, enhancing adversarial sample generation efficiency. Meanwhile, convergence speed is fastest at 2 layers (4500 steps) but increases to 4600 and 5200 steps at 3 and 4 layers, respectively, indicating reduced training efficiency due to excessive network depth.
 
 \begin{table}[htbp]
 	\centering
@@ -328,20 +330,21 @@ From the experimental results, it is evident that as the number of LSTM layers i
 
 综合来看，2层LSTM不仅实现了较高的逃逸率（88.7\%）和适中的扰动成本（3.8 次），还在收敛速度上表现最优，因此在攻击效果和训练效率之间取得了最佳平衡。基于此，本文最终采用2层LSTM作为策略网络的核心结构，用于高效生成对抗样本。
 
-Overall, the 2-layer LSTM achieves a high evasion rate (88.7\%) and moderate perturbation cost (3.8 times) while exhibiting optimal convergence speed. This configuration strikes the best balance between attack effectiveness and training efficiency. Based on this result, this study adopts the 2-layer LSTM as the core architecture of the policy network for efficient adversarial sample generation.
+%Overall, the 2-layer LSTM achieves a high evasion rate (88.7\%) and moderate perturbation cost (3.8 times) while exhibiting optimal convergence speed. This configuration strikes the best balance between attack effectiveness and training efficiency. Based on this result, this study adopts the 2-layer LSTM as the core architecture of the policy network for efficient adversarial sample generation.
+
+\subsection{隐藏层大小对实验结果的影响}
 
 确认好 LSTM 层数后，隐藏层的大小对模型的对抗样本生成性能也有显著影响。实验分别设置了隐藏层大小为 64、128、256、512，并在相同条件下对比了攻击成功率、平均扰动数和收敛速度等指标，结果如表\ref{tab:5.7} 所示。随着隐藏层规模从 64 增大到 256，攻击成功率从 85.4\% 提升至 89.1\%，平均扰动数也由 2.9 次增加到 4.1 次，说明更大的隐藏层能够捕捉更丰富的特征信息，从而提高对抗样本的生成效果。但当隐藏层大小进一步增至512时，攻击成功率出现回落（87.5\%），且收敛速度由最佳的4500步增至5200步，表明过大的网络容量容易导致训练效率下降。
 
-After confirming the LSTM layer count, the hidden layer size significantly affects adversarial sample generation performance. Experiments compared hidden layer sizes of 64, 128, 256, and 512 under the same conditions, evaluating attack success rate, average perturbation frequency, and convergence speed. The results are shown in Table 5-7. As the hidden layer size increased from 64 to 256, attack success rate improved from 85.4\% to 89.1\%, and average perturbation times rose from 2.9 to 4.1, indicating that larger hidden layers capture more abundant feature information to enhance adversarial sample quality. However, when the size increased to 512, attack success rate dropped to 87.5\%, and convergence slowed from the optimal 4500 steps to 5200 steps, confirming that excessive network capacity reduces training efficiency.
+%After confirming the LSTM layer count, the hidden layer size significantly affects adversarial sample generation performance. Experiments compared hidden layer sizes of 64, 128, 256, and 512 under the same conditions, evaluating attack success rate, average perturbation frequency, and convergence speed. The results are shown in Table 5-7. As the hidden layer size increased from 64 to 256, attack success rate improved from 85.4\% to 89.1\%, and average perturbation times rose from 2.9 to 4.1, indicating that larger hidden layers capture more abundant feature information to enhance adversarial sample quality. However, when the size increased to 512, attack success rate dropped to 87.5\%, and convergence slowed from the optimal 4500 steps to 5200 steps, confirming that excessive network capacity reduces training efficiency.
 
 综合来看，隐藏层大小为 128 时，模型在攻击成功率（88.7\%）、平均扰动数（3.8次）以及 收敛速度（4500步）三个指标上均取得了最佳平衡，既保证了较高的逃逸效果，又保持了较快的训练收敛。因此，结合前述 LSTM 层数的选择，本文最终采用由两层 LSTM 组成、每层隐藏单元数为 128 的网络结构，作为对抗样本生成策略的核心模型。
 
-In summary, when the hidden layer size is 128, the model achieves optimal balance among the success rate of 88.7\% , average perturbations of 3.8 times, and convergence speed of 4,500 steps, not only maintaining high evasion effectiveness but also converging rapidly during training. Therefore, combining the LSTM layer selection discussed before, this research ultimately adopts a network structure constituted by 2 LSTM layers that each contains 
-128 hidden units as core adversarial sample generation model.
+%In summary, when the hidden layer size is 128, the model achieves optimal balance among the success rate of 88.7\% , average perturbations of 3.8 times, and convergence speed of 4,500 steps, not only maintaining high evasion effectiveness but also converging rapidly during training. Therefore, combining the LSTM layer selection discussed before, this research ultimately adopts a network structure constituted by 2 LSTM layers that each contains 128 hidden units as core adversarial sample generation model.
 
-训练过程中的另一个重要超参数是“标准化优势函数”，这项设置有助于减少由于优势函数估计不准带来的训练不稳定。熵正则化系数（entropy\_coef=0.01）也被设置为0.01，以鼓励策略的多样性，避免智能体过早地陷入局部最优解。
+%训练过程中的另一个重要超参数是“标准化优势函数”，这项设置有助于减少由于优势函数估计不准带来的训练不稳定。熵正则化系数（entropy\_coef=0.01）也被设置为0.01，以鼓励策略的多样性，避免智能体过早地陷入局部最优解。
 
-Another critical hyperparameter during training is the standardized advantage function, which helps reduce training instability caused by inaccurate advantage function estimation. The entropy regularization coefficient (entropy\_coef) was set to 0.01 to encourage policy diversity and prevent premature convergence to local optima.
+%Another critical hyperparameter during training is the standardized advantage function, which helps reduce training instability caused by inaccurate advantage function estimation. The entropy regularization coefficient (entropy\_coef) was set to 0.01 to encourage policy diversity and prevent premature convergence to local optima.
 
 \begin{table}[htbp]
 	\centering
@@ -359,9 +362,11 @@ Another critical hyperparameter during training is the standardized advantage fu
 	\end{tabular*}
 \end{table}
 
+\subsection{动态奖励函数权重选择对实验结果的影响}
+
 为了选取为了适应训练过程中的策略演化与环境变化，本方法引入奖励权重的自适应调整机制，为了确定动态奖励函数的权重选择，本文设计不同的权重值对比实验，从样本中选取100个样本进行逃逸训练的随机森林模型，实验结果如表\ref{tab:5.8}所示。
 
-To adapt to strategy evolution and environmental changes during the training process, this research introduces an adaptive adjustment mechanism for reward weights. To determine weight selections for the dynamic reward function, this research designs comparison experiments with different weight values. A random forest model was trained using 100 samples for evasion testing, with results presented in Table \ref{tab:5.8}.
+%To adapt to strategy evolution and environmental changes during the training process, this research introduces an adaptive adjustment mechanism for reward weights. To determine weight selections for the dynamic reward function, this research designs comparison experiments with different weight values. A random forest model was trained using 100 samples for evasion testing, with results presented in Table \ref{tab:5.8}.
 
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
@@ -384,30 +389,30 @@ To adapt to strategy evolution and environmental changes during the training pro
 
 根据实验数据，设定参数分为三个时期，训练阶段如下：
 
-Based on experimental data, parameters are divided into three phases and listed as follow:
+%Based on experimental data, parameters are divided into three phases and listed as follow:
 
 探索期（Exploration Phase）：前期以提升规避能力为目标，权重配置为：$\lambda_1= 0.75, \lambda_2 = 0.2, \lambda_3=0.05$
 
-Exploration Phase: Initial stage focused on improving evasion capability:$\lambda_1= 0.75, \lambda_2 = 0.2, \lambda_3=0.05$
+%Exploration Phase: Initial stage focused on improving evasion capability:$\lambda_1= 0.75, \lambda_2 = 0.2, \lambda_3=0.05$
 
 收敛期（Exploitation Phase）：中期鼓励智能体学习生成稳定有效的低代价策略：
 
-Exploitation Phase: encouraging agent generating stable efficient low-cost strategies in the middle stage :
+%Exploitation Phase: encouraging agent generating stable efficient low-cost strategies in the middle stage :
 $\lambda_1= 0.6, \lambda_2 = 0.3, \lambda_3=0.1$
 
 混淆优化期（Confusion Enhancement Phase）：后期强化行为混淆性，提高对抗能力隐蔽性：
-Confusion Enhancement Phase:  strengthening behavioral confusion to improve concealment in the final stage:
+%Confusion Enhancement Phase:  strengthening behavioral confusion to improve concealment in the final stage:
 $\lambda_1= 0.4, \lambda_2 = 0.4, \lambda_3=0.2$
 
-\subsection{总体表现 Overall Performance}
+\section{选用不同强化学习模型对于实验的影响}
 
 确认好模型训练相关的参数之后，本文使用自己所创建的数据集从中选取1000个样本进行实验，训练过程如图所示。为了体现对比度，在本实验中，本文对比了两种强化学习算法，分别是PPO（Proximal Policy Optimization）和ACER\cite{wang2016sample}（Actor-Critic with Experience Replay），以评估它们在恶意软件对抗生成中的表现。PPO作为一种基于策略梯度的方法，强调通过调整策略的更新幅度来保证训练的稳定性。而ACER则结合了策略优化和经验回放的优势，通过信任域优化（Trust Region Optimization）来提高策略的稳定性，同时在训练过程中使用了重放缓冲区来加强对经验的学习。
 
-After setting model training parameters, this research conducts experiments using 1,000 samples from the self-constructed dataset. The training process is shown in the figure. To embody the contrast, this research compares the PPO(Proximal Policy Optimization) algorithm and the ACER(Actor-Critic with Experience Replay)\cite{wang2016sample} algorithm to assess their performance in the adversarial sample generation process. As a method based on policy gradient, PPO emphasizes keeping training stable through adjusting strategy update magnitudes while ACER combines advantages in policy optimization and experience replay, improving strategy's stability through trust region optimization. Meanwhile, buffer replay is also adopted to enhance experiential learning.
+%After setting model training parameters, this research conducts experiments using 1,000 samples from the self-constructed dataset. The training process is shown in the figure. To embody the contrast, this research compares the PPO(Proximal Policy Optimization) algorithm and the ACER(Actor-Critic with Experience Replay)\cite{wang2016sample} algorithm to assess their performance in the adversarial sample generation process. As a method based on policy gradient, PPO emphasizes keeping training stable through adjusting strategy update magnitudes while ACER combines advantages in policy optimization and experience replay, improving strategy's stability through trust region optimization. Meanwhile, buffer replay is also adopted to enhance experiential learning.
 
 从表\ref{tab:5.9}可以看出，所提出的多维度策略优化模型（MPLO）在对抗样本生成任务中表现出显著优势。首先，MPLO 的攻击成功率达到了88.7\%，相比于传统的PPO 方法提升了6.4个百分点，也比 ACER 高出了4.2个百分点，说明 MPLO不仅能够更精准地识别出检测器的决策边界，还能针对性地生成更加隐蔽且有效的扰动。
 
-As shown in Table \ref{tab:5.9}, the proposed Multidimensional Policy Optimization (MPLO) model exhibits significant advantages in adversarial sample generation tasks. MPLO's attack success rate reaches 88.7\%, surging 6.4\% higher than traditional PPO methods and 4.2\% than ACER. This result presents that MPLO can not only recognize the decision-making boundaries of detectors more precisely but also target generating perturbations that are more concealed and effective.
+%As shown in Table \ref{tab:5.9}, the proposed Multidimensional Policy Optimization (MPLO) model exhibits significant advantages in adversarial sample generation tasks. MPLO's attack success rate reaches 88.7\%, surging 6.4\% higher than traditional PPO methods and 4.2\% than ACER. This result presents that MPLO can not only recognize the decision-making boundaries of detectors more precisely but also target generating perturbations that are more concealed and effective.
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/5.1}
@@ -417,11 +422,11 @@ As shown in Table \ref{tab:5.9}, the proposed Multidimensional Policy Optimizati
 
 其次，MPLO 在修改代价方面同样具有竞争力。它的平均扰动数为3.8次，仅略高于PPO的3.2次，显著低于ACER的4.1次。这表明，在生成同等数量的对抗样本时，MPLO 能以更少的操作步骤完成目标，减少了对原始文件结构的破坏，提高了生成对抗样本的隐蔽性和功能保留度。
 
-In the modification cost aspect, MPLO are also comparative. Its average perturbation time is 3.8, slightly higher than 3.2 of PPO, extremely lower than 4.1 of ACER, indicating that MPLO can complete the goal with lower operation steps at the premise that different models generate same amount adversarial samples, reducing original file structure disruption, improving the generated samples' concealment and functional retention.
+%In the modification cost aspect, MPLO are also comparative. Its average perturbation time is 3.8, slightly higher than 3.2 of PPO, extremely lower than 4.1 of ACER, indicating that MPLO can complete the goal with lower operation steps at the premise that different models generate same amount adversarial samples, reducing original file structure disruption, improving the generated samples' concealment and functional retention.
 
 最后，从收敛速度来看，MPLO在4500步时就已实现策略稳定，虽然略慢于PPO（4200步），但明显快于ACER（5000步）。这一表现反映了MPLO 在策略更新和经验利用上的高效平衡：通过多维度策略评估机制，它能在探索和利用之间保持良好节奏，快速逼近最优扰动策略，而无需进行过度的样本回放或过长的训练迭代。
 
-Considering the convergence speed, MPLO achieves policy convergence at 4,500 steps, slower than 4,200 steps of PPO but faster than 5,000 steps of ACER, reflecting that MPLO gets an effective balance between exploration and exploitation. Through multi-dimensional strategy evaluation mechanisms, it can maintain the balance between exploration and exploitation, rapidly approaching optimal disturbance strategies without requiring excess sample replay and exceeding training iterations.
+%Considering the convergence speed, MPLO achieves policy convergence at 4,500 steps, slower than 4,200 steps of PPO but faster than 5,000 steps of ACER, reflecting that MPLO gets an effective balance between exploration and exploitation. Through multi-dimensional strategy evaluation mechanisms, it can maintain the balance between exploration and exploitation, rapidly approaching optimal disturbance strategies without requiring excess sample replay and exceeding training iterations.
 
 \begin{table}[htbp]
 	\centering
@@ -440,15 +445,15 @@ Considering the convergence speed, MPLO achieves policy convergence at 4,500 ste
 
 为了更全面地验证本文提出的对抗性样本生成方法（MPLO）方法在对抗样本生成方面的有效性，本文选取MalConv\cite{raff2017malware}作为目标检测模型，在与其他强化学习方法相同的实验环境下，对比分析两者在逃逸攻击场景中的表现。对比实验遵循统一的设置标准，采用相同的1000个恶意ELF文件作为攻击目标，最大修改步数限制为20步，以保证实验的公平性和可比性。
 
-To comprehensively certify MPLO's effectiveness in adversarial sample generation, this research selects MalConv\cite{raff2017malware} as the target detection model, analyzing its evasion attack performance and the other RL model's performance in the same experiment environment. The comparative experiment follows the unified setting standard, adopting 1,000 malicious ELF files as the attack target and restraining the maximum modification step to 20 to ensure the fairness and comparability of the experiments.
+%To comprehensively certify MPLO's effectiveness in adversarial sample generation, this research selects MalConv\cite{raff2017malware} as the target detection model, analyzing its evasion attack performance and the other RL model's performance in the same experiment environment. The comparative experiment follows the unified setting standard, adopting 1,000 malicious ELF files as the attack target and restraining the maximum modification step to 20 to ensure the fairness and comparability of the experiments.
 
-与基于深度强化学习的对抗样本生成方法不同，本文所提出的MPLO方法具有无需大量训练、生成效率更高的特点。在有限修改范围内快速生成高效扰动样本，以提高逃逸成功率的同时尽量减少对原始样本的结构性破坏，保证对抗样本的隐蔽性和实用性。设定baseline为孙贺\cite{孙贺2024基于深度强化学习的恶意}等人提出的基于深度强化学习的对抗样本生成方法，使用结构扰动扰动样本，DP-GAN\cite{zhan2024enhancing}为一种基于强化学习的对抗性恶意软件生成框架，创新性地引入了内在好奇心奖励模块（ICM）来解决黑盒场景下奖励稀疏的问题，并利用生成对抗网络（GAN）生成合成字节作为动作内容。
+%与基于深度强化学习的对抗样本生成方法不同，本文所提出的MPLO方法具有无需大量训练、生成效率更高的特点。在有限修改范围内快速生成高效扰动样本，以提高逃逸成功率的同时尽量减少对原始样本的结构性破坏，保证对抗样本的隐蔽性和实用性。设定baseline为孙贺\cite{孙贺2024基于深度强化学习的恶意}等人提出的基于深度强化学习的对抗样本生成方法，使用结构扰动扰动样本，DP-GAN\cite{zhan2024enhancing}为一种基于强化学习的对抗性恶意软件生成框架，创新性地引入了内在好奇心奖励模块（ICM）来解决黑盒场景下奖励稀疏的问题，并利用生成对抗网络（GAN）生成合成字节作为动作内容。
 
-Unlike adversarial sample generation methods based on deep RL, the MPLO method proposed by this research exhibits no reliance on numerous training and high generating efficiency characteristics, swiftly generating perturbated samples with high efficiency in limited modification area, lessening structural disruption to original samples while improving evasion rate, and maintaining adversarial samples' concealment and practicality. The baseline method uses an adversarial sample generation method based on deep RL, proposed by Sun et al\cite{孙贺2024基于深度强化学习的恶意}. Using samples with structural disturbance, DP-GAN\cite{zhan2024enhancing}, a framework based on RL incorporating an Intrinsic Curiosity Module (ICM) is introduced for solving sparse rewards problems in the black-box scenario and generating synthetic bytes by utilizing generated adversarial network as action contents.
+%Unlike adversarial sample generation methods based on deep RL, the MPLO method proposed by this research exhibits no reliance on numerous training and high generating efficiency characteristics, swiftly generating perturbated samples with high efficiency in limited modification area, lessening structural disruption to original samples while improving evasion rate, and maintaining adversarial samples' concealment and practicality. The baseline method uses an adversarial sample generation method based on deep RL, proposed by Sun et al\cite{孙贺2024基于深度强化学习的恶意}. Using samples with structural disturbance, DP-GAN\cite{zhan2024enhancing}, a framework based on RL incorporating an Intrinsic Curiosity Module (ICM) is introduced for solving sparse rewards problems in the black-box scenario and generating synthetic bytes by utilizing generated adversarial network as action contents.
 
 为全面评估性能，本文分别从逃逸成功率（即生成的对抗样本能够成功绕过目标检测器的比例）、平均修改步数（每个成功样本平均修改字节数）以及平均生成时间（每个样本生成所需时间）三项关键指标进行定量对比分析。实验结果如表\ref{tab:5.10}所示。
 
-To evaluate the performance comprehensively, this research conducts quantitative comparative analysis on evasion success rate (the rate of generated adversarial samples that can successfully evade the detection of the target detector), average modification times (the average bytes modified in each successful sample) and average generating time (the time required for each sample generation) respectively. The results are illustrated in Table \ref{tab:5.10}.
+%To evaluate the performance comprehensively, this research conducts quantitative comparative analysis on evasion success rate (the rate of generated adversarial samples that can successfully evade the detection of the target detector), average modification times (the average bytes modified in each successful sample) and average generating time (the time required for each sample generation) respectively. The results are illustrated in Table \ref{tab:5.10}.
 
 \begin{table}[htbp]
 	\centering
@@ -467,23 +472,23 @@ To evaluate the performance comprehensively, this research conducts quantitative
 
 在对比MPLO与DP-GAN模型时，MPLO展现出了明显的优势。首先，MPLO的平均逃逸率为71.25\%，明显高于DP-GAN的67.70\%，显示出MPLO在生成对抗样本时的更高成功率。
 
-The comparison between MPLO and DP-GAN shows that MPLO exhibits an obvious advantage. The average evasion rate of MPLO is 71.25\%, which is significantly higher than DP-GAN's 67.70\%, represents that MPLO has a higher success rate in adversarial sample generation.
+%The comparison between MPLO and DP-GAN shows that MPLO exhibits an obvious advantage. The average evasion rate of MPLO is 71.25\%, which is significantly higher than DP-GAN's 67.70\%, represents that MPLO has a higher success rate in adversarial sample generation.
 
 与此同时，MPLO 的平均修改步数降至4.7次（Baseline为5.4次，说明其扰动更加紧凑，能够以更少的操作步骤实现逃逸，从而更好地保留原始样本的语义和功能。
 
-Meanwhile, the average modification times of MPLO decreases to 4.7, which is lower than Baseline's 5.4, indicating that its perturbations are more compact, achieving evasion in less operation steps, thus retaining original sample's semantics and functionality more effectively.
+%Meanwhile, the average modification times of MPLO decreases to 4.7, which is lower than Baseline's 5.4, indicating that its perturbations are more compact, achieving evasion in less operation steps, thus retaining original sample's semantics and functionality more effectively.
 
 在生成效率方面，MPLO 方法的平均生成时间为186ms，相比Baseline的212ms 缩短了约12\%。这一性能提升进一步验证了MPLO在大规模样本处理和高频逃逸需求场景下具有更好的实用性与部署优势。
 
-In the evaluation of generation efficiency, the average generation time of MPLO is 186ms, 12\% faster than Baseline's 212ms. This performance development further verifies that MPLO exhibits higher practicality and deployment advantages in scenarios with large-scale samples and high evasion requirements.
+%In the evaluation of generation efficiency, the average generation time of MPLO is 186ms, 12\% faster than Baseline's 212ms. This performance development further verifies that MPLO exhibits higher practicality and deployment advantages in scenarios with large-scale samples and high evasion requirements.
 
 为全面评估所提出对抗样本生成框架在真实运行环境中的动态逃避检测能力，本文进一步将部分生成的对抗样本上传至腾讯哈勃（Tencent Habo）动态分析平台进行行为检测测试。腾讯哈勃是当前广泛应用的沙箱分析平台之一，具备多引擎动态检测能力，能够在模拟的真实系统中运行样本并监测其文件操作、进程调用、注册表修改、网络连接等可疑行为特征。
 
-To evaluate the dynamic evasion capability in real environments of the adversarial sample generation framework proposed in this research, this research uploads parts of generated samples to Tencent Habo dynamic analysis platform to conduct behavioral analysis detection. Tencent Habo is one of the sandbox analysis platforms that is widely used with multiple engines dynamic detection. It can simulate executing samples in real systems and record suspicious behavioral features, such as file operations, process calls, registry modifications and network connections.
+%To evaluate the dynamic evasion capability in real environments of the adversarial sample generation framework proposed in this research, this research uploads parts of generated samples to Tencent Habo dynamic analysis platform to conduct behavioral analysis detection. Tencent Habo is one of the sandbox analysis platforms that is widely used with multiple engines dynamic detection. It can simulate executing samples in real systems and record suspicious behavioral features, such as file operations, process calls, registry modifications and network connections.
 
 在实验中，选取Doss木马典型样本作为代表。样本上传至腾讯哈勃后，平台返回检测评分和行为标签。结果显示，经过本文对抗策略处理后的样本整体检测结果从恶意转变为了未知。
 
-In this research, DDoS Trojan samples are selected as representatives. The platform returns detection scores and behavioral labels after the samples are uploaded to Tencent Habo. The result demonstrates that the results of samples processed by adversarial strategies changes from malicious to unknown.
+%In this research, DDoS Trojan samples are selected as representatives. The platform returns detection scores and behavioral labels after the samples are uploaded to Tencent Habo. The result demonstrates that the results of samples processed by adversarial strategies changes from malicious to unknown.
 
 \begin{figure}[hbt]
 	\centering
@@ -494,12 +499,12 @@ In this research, DDoS Trojan samples are selected as representatives. The platf
 
 此外，动态行为日志也显示，对抗样本在运行时触发的可疑行为数量明显减少，如“远程线程注入”、“可疑网络通信”、“内存Shellcode行为”等关键行为均未被触发或未达检测阈值。这说明所生成样本不仅在静态特征层面成功规避了特征匹配类检测系统，同时在动态行为层面也具备较强的对抗能力。
 
-Besides, suspicious behaviors (e.g., remote thread injections, suspicious network communications, memory shellcode execution) were significantly reduced or undetected.
-This confirms that generated samples evade both static feature matching and dynamic behavioral analysis.
+%Besides, suspicious behaviors (e.g., remote thread injections, suspicious network communications, memory shellcode execution) were significantly reduced or undetected.
+%This confirms that generated samples evade both static feature matching and dynamic behavioral analysis.
 
 综上所述，腾讯哈勃动态检测实验进一步验证了本文所提出的多维扰动策略在真实沙箱环境中的隐蔽性与有效性，从而佐证该框架具备较强的实用潜力与安全研究价值。
 
-In summary, Tencent Harbo dynamic detection experiment further validates the concealment and validity of multi-disturbance strategies issued in this research, proving that this framework is practically potential and exhibits high research value. 
+%In summary, Tencent Harbo dynamic detection experiment further validates the concealment and validity of multi-disturbance strategies issued in this research, proving that this framework is practically potential and exhibits high research value. 
 
 \section{对抗样本生成方法的消融实验 Ablation Experiments on Adversarial Sample Generation Methods}
 
