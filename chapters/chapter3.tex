@@ -238,7 +238,7 @@
 
 本文设计的节区扰动如表\ref{tab:4.1}所示。
 
-The section disturbance design in this paper is listed in Table \ref{tab:4.1}.
+%The section disturbance design in this paper is listed in Table \ref{tab:4.1}.
 
 \begin{table}[htbp]
 	\centering
@@ -356,31 +356,31 @@ Overlay技术通过在文件末尾添加随机数据（通常是无害数据或�
 
 （5）Go语言的go-bindata工具包装ELF文件
 
-(5) go-bindata Toolbox in Go for Packaging ELF Files
+%(5) go-bindata Toolbox in Go for Packaging ELF Files
 
 go-bindata是一个Go工具，旨在将二进制文件（如ELF文件、图片、音频文件等）转化为Go源代码中的字节数组。在恶意软件分析领域，通过将ELF文件嵌入到Go程序中，可以有效隐藏ELF文件的实际内容，并增加静态分析和反向工程的难度。具体而言，go\_bindata\_wrapper方法通过将ELF文件转换为Go代码，实现在Go程序中隐藏ELF文件的功能。这种方式使得恶意文件能够避开常规的静态检测和签名匹配工具。
 
-go-bindata is a Go tool designed to convert binary files, such as ELF files, images, and audio files, into byte arrays within Go source code. In the malware analysis realm, embedding ELF files into Go programs effectively conceals their actual content and increases the difficulty of static analysis and reverse engineering. Specifically, the go\_bindata\_wrapper method converts ELF files into Go code to hide their functionalities in Go programs, which enables malicious files to evade common static detection and signature-matching tools.
+%go-bindata is a Go tool designed to convert binary files, such as ELF files, images, and audio files, into byte arrays within Go source code. In the malware analysis realm, embedding ELF files into Go programs effectively conceals their actual content and increases the difficulty of static analysis and reverse engineering. Specifically, the go\_bindata\_wrapper method converts ELF files into Go code to hide their functionalities in Go programs, which enables malicious files to evade common static detection and signature-matching tools.
 
-go-bindata工具的作用：go-bindata工具将任何二进制文件（如ELF文件）嵌入到Go源代码中，并生成一个包含文件内容的Go文件。在程序运行时，生成的Go文件将包含文件的字节数组，这些字节数据可以被Go程序读取，并用于恢复原始文件内容。此方法使得ELF文件内容隐藏在Go源代码中，从而增加了恶意软件在反向工程过程中的隐蔽性。
+%go-bindata工具的作用：go-bindata工具将任何二进制文件（如ELF文件）嵌入到Go源代码中，并生成一个包含文件内容的Go文件。在程序运行时，生成的Go文件将包含文件的字节数组，这些字节数据可以被Go程序读取，并用于恢复原始文件内容。此方法使得ELF文件内容隐藏在Go源代码中，从而增加了恶意软件在反向工程过程中的隐蔽性。
 
-Function of the go-bindata tool: The go-bindata tool embeds any binary file like ELF files into Go source code, generating a Go file containing the file's content. When the file is executed, this generated Go file includes a byte array that the Go program can read to recover the original file's content. This method hides ELF file content in Go source code, enhancing the concealment of malware during reverse engineering.
+%Function of the go-bindata tool: The go-bindata tool embeds any binary file like ELF files into Go source code, generating a Go file containing the file's content. When the file is executed, this generated Go file includes a byte array that the Go program can read to recover the original file's content. This method hides ELF file content in Go source code, enhancing the concealment of malware during reverse engineering.
 
 通过go-bindata工具将ELF文件转换为Go源代码，并生成一个Go文件，Go文件中包含该ELF文件的字节数据。通过Go编译器将包含ELF文件字节数据的Go代码编译成最终的Go可执行文件。ELF文件在运行时会被读取并恢复，执行原始文件的操作。
 
-First, convert the ELF file into Go source code using the go-bindata tool, generating a Go file containing the ELF file's byte data. Then, compile this Go code that contains the ELF byte data into a final Go executable program using the Go compiler. At runtime, the ELF file is read and recovered to execute its original operations.
+%First, convert the ELF file into Go source code using the go-bindata tool, generating a Go file containing the ELF file's byte data. Then, compile this Go code that contains the ELF byte data into a final Go executable program using the Go compiler. At runtime, the ELF file is read and recovered to execute its original operations.
 
-通过go-bindata工具，go\_bindata\_wrapper方法为恶意文件提供了一种新的隐蔽方式，将ELF文件嵌入到Go程序中，从而有效地规避静态分析工具和签名匹配的检测。
+%通过go-bindata工具，go\_bindata\_wrapper方法为恶意文件提供了一种新的隐蔽方式，将ELF文件嵌入到Go程序中，从而有效地规避静态分析工具和签名匹配的检测。
 
-Through the go-bindata tool, the go\_bindata\_wrapper method provides a novel concealment approach for malicious files by embedding ELF files into Go programs, thus effectively evading static analysis tools detection and signature matching.
+%Through the go-bindata tool, the go\_bindata\_wrapper method provides a novel concealment approach for malicious files by embedding ELF files into Go programs, thus effectively evading static analysis tools detection and signature matching.
 
 （6）节头表修改
 
-(6) Section Header Table Modification
+%(6) Section Header Table Modification
 
 节头表扰动旨在通过修改二进制文件中的特定元数据或表头信息，从而改变其表象特征，扰乱检测工具或逆向分析过程。这种技术常用于恶意软件分析中的对抗样本生成，目的是使恶意程序绕过传统的反病毒软件或沙箱检测系统，增加分析难度。\ref{tab:4.5}介绍了本文使用的两种节头表扰动方法。
 
-The target of section header table disturbances is altering the apparent characteristics of binary files by modifying specific metadata or header information, thereby disrupting detection tools or reverse analysis processes. This technique is commonly used in adversarial sample generation for malware analysis, aiming to help malicious programs evade traditional antivirus software or sandbox detection systems and increase analysis difficulty. Figure \ref{tab:4.5} introduces two section header table disturbance methods adopted in this paper.
+%The target of section header table disturbances is altering the apparent characteristics of binary files by modifying specific metadata or header information, thereby disrupting detection tools or reverse analysis processes. This technique is commonly used in adversarial sample generation for malware analysis, aiming to help malicious programs evade traditional antivirus software or sandbox detection systems and increase analysis difficulty. Figure \ref{tab:4.5} introduces two section header table disturbance methods adopted in this paper.
 
 \begin{table}[htbp]
 	\centering
@@ -397,11 +397,11 @@ The target of section header table disturbances is altering the apparent charact
 
 
 
-\subsection{指令扰动方法 Instruction Disturbance Methods}
+\subsection{指令扰动方法}
 
 在本研究中，本文使用强大的反汇编工具 IDA Pro 对 ELF 格式的恶意软件样本进行静态分析与代码提取，为后续的语义保持扰动操作奠定基础。尽管对于剥离符号信息（如符号表、调试信息）的 x86 架构 ELF 可执行文件，难以做到完全精确的反汇编，但现有的高级反汇编器（如 IDA Pro）已可通过多种技术手段对主流编译器生成的代码实现较高覆盖率。这些手段包括：多种反汇编算法的结合使用、对特定代码结构的识别、以及简单的数据流分析等。在处理 ELF 文件时，IDA Pro 通过识别符号信息和程序头表中的节区（如 .text、.plt、.rela.plt 等），能够较准确地定位函数边界，识别控制流，并生成基本块图和函数调用图，帮助提取语义稳定的指令区域进行变换。
 
-In this research, powerful disassembly tools like IDA Pro are adopted to perform static analysis and code extraction on ELF-format malware samples, establishing a foundation for subsequent disturbance operations that ensure semantics. Although achieving fully precise disassembly remains challenging for stripped symbols like missing symbol tables and debugging information ELF executables on x86 architecture, advanced current disassemblers like IDA Pro can achieve high coverage for code generated from prevalent compilers through combined disassembly algorithms, recognition of specific code structures, and basic data-flow analysis. When processing ELF files, IDA Pro identifies symbol information and sections in the Program Header Table, such as .text, .plt, .rela, and .plt, enabling locating function boundaries accurately, recognizing control flow, and generating basic block graphs and function call graphs. This facilitates the extraction of semantically stable instruction regions for transformation.
+%In this research, powerful disassembly tools like IDA Pro are adopted to perform static analysis and code extraction on ELF-format malware samples, establishing a foundation for subsequent disturbance operations that ensure semantics. Although achieving fully precise disassembly remains challenging for stripped symbols like missing symbol tables and debugging information ELF executables on x86 architecture, advanced current disassemblers like IDA Pro can achieve high coverage for code generated from prevalent compilers through combined disassembly algorithms, recognition of specific code structures, and basic data-flow analysis. When processing ELF files, IDA Pro identifies symbol information and sections in the Program Header Table, such as .text, .plt, .rela, and .plt, enabling locating function boundaries accurately, recognizing control flow, and generating basic block graphs and function call graphs. This facilitates the extraction of semantically stable instruction regions for transformation.
 
 \begin{figure}[hbt]
 	\centering
@@ -413,103 +413,108 @@ In this research, powerful disassembly tools like IDA Pro are adopted to perform
 
 为确保扰动操作不影响原始程序逻辑，本文首先将反汇编得到的指令转换为一种自定义的中间表示（IR），该表示能记录每条指令的操作码、显式与隐式操作数、寄存器读写关系、以及影响到的标志位等静态语义信息。这种增强表示形式可有效辅助分析控制依赖与数据依赖关系，识别出可安全修改的指令区域。随后，本文实施三种语义保持的扰动技术：指令替换（Instruction Substitution）、指令重排序（Instruction Reordering） 和 寄存器重分配（Register Reallocation）。这三类方法分别从指令级别、顺序层级和寄存器使用层面引入扰动，旨在保持语义不变的前提下实现样本多样性和模型鲁棒性提升。
 
-To ensure disturbances do not disrupt the original program logic, the disassembled instructions are first transformed into a custom Intermediate Representation (IR). This IR records each instruction's static semantic information, such as opcode, explicit and implicit operands, register read and write relationships, and impacted flag bits, which effectively aids in analyzing control and data dependencies to identify safely modifiable instruction regions. Subsequently, three disturbance techniques—Instruction Substitution, Instruction Reordering, and Register Reallocation—ensure semantics are implemented. These methods respectively introduce disturbances at the instruction level, sequential layer, and register usage level, aiming to enhance sample diversity and model robustness while preserving semantics.
+%To ensure disturbances do not disrupt the original program logic, the disassembled instructions are first transformed into a custom Intermediate Representation (IR). This IR records each instruction's static semantic information, such as opcode, explicit and implicit operands, register read and write relationships, and impacted flag bits, which effectively aids in analyzing control and data dependencies to identify safely modifiable instruction regions. Subsequently, three disturbance techniques—Instruction Substitution, Instruction Reordering, and Register Reallocation—ensure semantics are implemented. These methods respectively introduce disturbances at the instruction level, sequential layer, and register usage level, aiming to enhance sample diversity and model robustness while preserving semantics.
 
 在变换过程中，所有修改操作均限制在已识别的、无控制依赖冲突的基本块内部，确保程序控制流图（CFG）保持稳定。如果某些变换操作（如指令顺序调整）导致代码地址偏移，本文会同步更新 ELF 文件中的相关重定位信息（如 .rela.text 段），以避免函数调用或跳转地址错误。整个扰动流程针对每个 ELF 文件独立执行，可自动生成多个等价但具有不同语法表现的扰动样本，用于训练或测试阶段的多样化增强，从而有效提升基于静态分析的恶意代码检测系统的鲁棒性。
 
-During transformation, all modifications are limited to identified basic blocks free of control dependency conflicts, ensuring Program Control Flow Graph (CFG) stability. If transformations like instruction resequencing cause code address shifts, relevant relocation information, such as .rela section and .text section, in the ELF file is synchronously updated to prevent faulty function call and jump address. This process executes per ELF file independently, automatically generating multiple syntactically distinct yet semantically equivalent adversarial samples. These enhance diversity in training and testing phases, effectively improving the robustness of malware detection systems based on static analysis.
+%During transformation, all modifications are limited to identified basic blocks free of control dependency conflicts, ensuring Program Control Flow Graph (CFG) stability. If transformations like instruction resequencing cause code address shifts, relevant relocation information, such as .rela section and .text section, in the ELF file is synchronously updated to prevent faulty function call and jump address. This process executes per ELF file independently, automatically generating multiple syntactically distinct yet semantically equivalent adversarial samples. These enhance diversity in training and testing phases, effectively improving the robustness of malware detection systems based on static analysis.
 
 （1） 指令替换（Instruction Substitution）
 
-(1) Instruction Substitution
+%(1) Instruction Substitution
 
 指令替换作为一种二进制代码扰动方法，旨在通过将原始指令替换为等效的指令来扰乱程序的结构，同时保持程序的功能不变。该方法不仅能改变代码的外观，还能增加静态分析和逆向工程的难度。以下是指令替换的具体细节：
 
-Instruction substitution serves as a binary code disturbance method that alters program structure by replacing original instructions with equivalent ones while preserving program functionality. It not only disrupts code appearance but also increases the difficulty for static analysis and reverse engineering. Details are described as follows:
+%Instruction substitution serves as a binary code disturbance method that alters program structure by replacing original instructions with equivalent ones while preserving program functionality. It not only disrupts code appearance but also increases the difficulty for static analysis and reverse engineering. Details are described as follows:
+\begin{enumerate}
 
-等效指令替换：
+\item 等效指令替换：
 
-Equivalent Instruction Replacement:
+%Equivalent Instruction Replacement:
 
 在x86架构中，许多指令有多个等效形式，可以用不同的操作数或指令格式来实现相同的功能。例如：
 add r/m32, r32 可以替换为 add r32, r/m32，这两者在操作数为寄存器时是等效的。
 
-On x86 architecture, many instructions have multiple equivalent forms, same functionality can be achieved by different operands and instruction forms.For example, “add r/m32, r32” can be replaced with “add r32, r/m32”, these two instructions are equivalent while operands are registers.
+%On x86 architecture, many instructions have multiple equivalent forms, same functionality can be achieved by different operands and instruction forms.For example, “add r/m32, r32” can be replaced with “add r32, r/m32”, these two instructions are equivalent while operands are registers.
 
 对于逻辑操作，test r/m8, r8 可以与 test r/m8, r/m8 等价。
 
-For logic operations, “test r/m8, r8” is equivalent to “test r/m8, r/m8”.
+%For logic operations, “test r/m8, r8” is equivalent to “test r/m8, r/m8”.
 
 一些算术指令也有多个等效形式，比如 sub r/m32, r32 可以用 neg r/m32 替换（减法可以通过取负来实现）。
 
-Some arithmetic instructions also have multiple equivalent forms, such as “sub r/m32, r32” can be replaced with “neg r/m32”.
+%Some arithmetic instructions also have multiple equivalent forms, such as “sub r/m32, r32” can be replaced with “neg r/m32”.
 
 操作数形式替换指令时，可以改变操作数的形式，而不影响最终的计算结果。例如，mov r32, r/m32 和 mov r/m32, r32 都是等效的操作，但通过改变源和目标操作数的顺序，能够改变指令的字节表示。
 
-Operand forms can be altered when instructions are replaced, and do not affect ultimate calculation result. For example, “mov r32, r/m32” and “mov r/m32, r32” are equivalent operations, but the instruction byte expression can be altered by changing the sequence of source and target operands.
+%Operand forms can be altered when instructions are replaced, and do not affect ultimate calculation result. For example, “mov r32, r/m32” and “mov r/m32, r32” are equivalent operations, but the instruction byte expression can be altered by changing the sequence of source and target operands.
 
 不同长度指令某些情况下，可以用长度相同但操作不同的指令替换原始指令，例如：
 inc r32可以替换为 add r32, 1，二者功能相同，但指令长度和编码不同。
 
-In some circumstances, replacing original instructions with instructions that are the same length but different in operations are permitted.
-For example, “inc r32” can be replaced with “add r32, 1”, these two instructions have same functionality, different instruction length and coding.
+%In some circumstances, replacing original instructions with instructions that are the same length but different in operations are permitted.
+%For example, “inc r32” can be replaced with “add r32, 1”, these two instructions have same functionality, different instruction length and coding.
 
 dec r32可以替换为 sub r32, 1，实现同样的效果，增加了代码的复杂性。
 
-“dec r32” can be replaced with “sub r32, 1”, these two instructions have same effect, but increase code's complexity.
+%“dec r32” can be replaced with “sub r32, 1”, these two instructions have same effect, but increase code's complexity.
 
-替换控制流指令：
+\item 替换控制流指令：
 
-Control Flow Instruction Replacement:
+%Control Flow Instruction Replacement:
 
 控制流指令（如跳转、条件跳转、调用等）也可以用等效的指令替换。例如：
 jmp label 可以用 call label; pop 来替换，虽然实现了相同的跳转效果，但操作数和指令形式不同。
 
-Control flow instructions, such as jump, conditional jump, and call, can be replaced with equivalent instructions. For example, “jmp label” can be replaced with “call label; pop”, although two instructions achieve same jump result, but their operands and instruction forms are different.
+%Control flow instructions, such as jump, conditional jump, and call, can be replaced with equivalent instructions. For example, “jmp label” can be replaced with “call label; pop”, although two instructions achieve same jump result, but their operands and instruction forms are different.
 
 je（等于跳转）可以替换为 jne（不等于跳转），并通过适当调整标志位来维持功能一致性。
 
-“je” can be replaced with “jne” by adjusting the flags properly to maintain functional consistency.
+%“je” can be replaced with “jne” by adjusting the flags properly to maintain functional consistency.
 
-确保指令长度一致：
+\item 确保指令长度一致：
 
-Maintain instruction length consistency:
+%Maintain instruction length consistency:
 
 由于对于许多stripped二进制文件，增加指令长度可能会导致代码结构破坏，因此在替换过程中要保证每条替换的指令与原指令长度相同。可以通过选择长度一致的等效指令来实现这一点，避免扰乱程序的整体布局。
 
-Increasing instruction length may cause code structure to be broken in many stripped binary files; thus, it is vital to ensure that each replaced instruction's length should be the same as the original. This can be achieved by selecting equivalent instructions that have the same length, avoiding disrupting the program's overall layout.
+%Increasing instruction length may cause code structure to be broken in many stripped binary files; thus, it is vital to ensure that each replaced instruction's length should be the same as the original. This can be achieved by selecting equivalent instructions that have the same length, avoiding disrupting the program's overall layout.
 
-随机化替换的应用方式：
+\item 随机化替换的应用方式：
 
-The application method of randomized replacement:
+%The application method of randomized replacement:
 
 在替换指令时，可以根据一定的规则或随机选择等效指令来应用这些替换。替换不一定是对每条指令都应用，而是根据程序的特性和分析结果，选择性地对特定代码块进行替换。这种方法可以确保替换不会影响程序的控制流和逻辑结构，但同时会改变程序的外观，增加静态分析的难度。
 
-Replacements can be applied according to certain rules or randomized equivalent instruction selection. Replacements may not be applied to each instruction but are selectively applied to specific code blocks relying on program characteristics and analysis results. This method can ensure that replacements do not affect the program's control flow and logic structure but alter the program's appearance, increasing static analysis difficulty.
+%Replacements can be applied according to certain rules or randomized equivalent instruction selection. Replacements may not be applied to each instruction but are selectively applied to specific code blocks relying on program characteristics and analysis results. This method can ensure that replacements do not affect the program's control flow and logic structure but alter the program's appearance, increasing static analysis difficulty.
+
+\end{enumerate}
 
 通过以上方法，指令替换不仅保持程序功能的完整性，还有效增加了程序的混淆性，使得静态分析工具更难识别程序的真实意图，增加了逆向工程的复杂性。
 
-Through the methods above, instruction replacements not only maintain the program's complete functionalities but also increase the program's obfuscation, making it harder for static analysis tools to recognize the program's real intention and increasing the complexity of reverse engineering.
+%Through the methods above, instruction replacements not only maintain the program's complete functionalities but also increase the program's obfuscation, making it harder for static analysis tools to recognize the program's real intention and increasing the complexity of reverse engineering.
 
 （2）指令重排序（Instruction Reordering）
 
-(2) Instruction Reordering
+%(2) Instruction Reordering
+\begin{enumerate}
 
-基本块内部指令重排（Intra Basic Block Reordering）：
 
-Intra Basic Block Reordering:
+\item 基本块内部指令重排（Intra Basic Block Reordering）：
+
+%Intra Basic Block Reordering:
 
 在一个基本块（Basic Block）中，若两条或多条指令之间没有数据或控制依赖关系，那么它们的执行顺序就是可以互换的。由于基本块是线性执行的中间代码区域，并且编译器在生成机器码时只是选择了若干等效顺序之一，因此只要保证依赖关系不变，修改指令顺序不会影响程序的功能。
 
-In a basic block, instructions without data and control dependencies can be reordered without affecting functionality. Since basic blocks are intermediate code areas for linear execution, and the compiler only selects one of equivalent sequences during machine code generation, thus instruction sequence modification does not affect the program's functionality if the dependency relationship remains unchanged.
+%In a basic block, instructions without data and control dependencies can be reordered without affecting functionality. Since basic blocks are intermediate code areas for linear execution, and the compiler only selects one of equivalent sequences during machine code generation, thus instruction sequence modification does not affect the program's functionality if the dependency relationship remains unchanged.
 
 本文对目标二进制程序进行反汇编，提取所有基本块。对每个基本块进行依赖分析，识别每条指令的读（use）和写（def）寄存器集。通过检测读后写（RAW）、写后读（WAR）、写后写（WAW）等依赖类型，构建出指令间的有向无环图（DAG）。
 
-This research disassembles target binaries to extract all basic blocks, then perform dependency analysis on each block, identifying each instruction's use and def register sets, constructing a Directed Acyclic Graph (DAG) among instructions by detecting RAW (Read-After-Write), WAR (Write-After-Read), and WAW (Write-After-Write) dependencies.
+%This research disassembles target binaries to extract all basic blocks, then perform dependency analysis on each block, identifying each instruction's use and def register sets, constructing a Directed Acyclic Graph (DAG) among instructions by detecting RAW (Read-After-Write), WAR (Write-After-Read), and WAW (Write-After-Write) dependencies.
 
 之后，使用拓扑排序枚举该图的合法指令顺序，并从中随机选取一种新的顺序，替代原始顺序。这一方法不会引入新的指令或修改指令操作数，因此保持程序的功能完全不变。它可以扰乱基于指令顺序或特征码的静态分析和检测机制，有效提升样本的多样性。
 
-Subsequently, this research enumerates legal instruction orders via topological sorting and randomly selects a new order to replace the original. This method can maintain the program's functionality because it does not introduce any new instructions or modify instruction operands. It disrupts static analysis mechanisms relying on instruction order or signatures, enhancing sample diversity.
+%Subsequently, this research enumerates legal instruction orders via topological sorting and randomly selects a new order to replace the original. This method can maintain the program's functionality because it does not introduce any new instructions or modify instruction operands. It disrupts static analysis mechanisms relying on instruction order or signatures, enhancing sample diversity.
 
 \begin{figure}[hbt]
 	\centering
@@ -518,17 +523,17 @@ Subsequently, this research enumerates legal instruction orders via topological 
 	\caption{指令替换示例图}\label{fig:4.2}
 \end{figure}
 
-寄存器保护代码重排（Reordering of Register Preservation Code）：
+\item 寄存器保护代码重排（Reordering of Register Preservation Code）：
 
-Reordering of Register Preservation Code:
+%Reordering of Register Preservation Code:
 
 该方法基于函数调用时保存非易失性寄存器（callee-saved registers）所使用的push和pop指令的顺序是可变的，只要遵循“先进后出”的栈规则即可。即，函数在开头会使用若干push指令保存寄存器，函数结尾使用对应的pop恢复值。因为栈是倒序恢复的，所以只要保持pop顺序与push顺序相反，整个过程的语义就是等效的。
 
-This method is based on the theory that the sequence of push and pop instructions from callee-saved registers is alterable during function calls, which only need to follow the last-in-first-out (LIFO) stack rule. During function calls, the order of push (callee-saved registers) and corresponding pop instructions can vary if adhering to the last-in-first-out (LIFO) stack rule. Several push instructions are used by the function header to save data in registers, while corresponding pop instructions are used at the end of the function to restore values. Since the stack restores in reverse order, semantics during the entire process will be equivalent to the original if pop sequences are the opposite of push sequences.
+%This method is based on the theory that the sequence of push and pop instructions from callee-saved registers is alterable during function calls, which only need to follow the last-in-first-out (LIFO) stack rule. During function calls, the order of push (callee-saved registers) and corresponding pop instructions can vary if adhering to the last-in-first-out (LIFO) stack rule. Several push instructions are used by the function header to save data in registers, while corresponding pop instructions are used at the end of the function to restore values. Since the stack restores in reverse order, semantics during the entire process will be equivalent to the original if pop sequences are the opposite of push sequences.
 
-本文在函数的入口和出口识别出完整的寄存器保存/恢复代码段。对这些push和pop指令进行配对，确认其保护的是相同的寄存器，并追踪栈指针（ESP）的变化确保没有中间干扰。然后，对push序列进行重排，并将pop序列同步做相反的重排，确保恢复顺序正确。若push序列中夹杂有其他非保存性指令，也需进行依赖分析，保证重排不会打乱依赖顺序。这种方法对程序语义无影响，但能干扰基于特定pop序列模式的分析方法，提高静态分析、指令特征提取和样本分类的复杂度。
+%本文在函数的入口和出口识别出完整的寄存器保存/恢复代码段。对这些push和pop指令进行配对，确认其保护的是相同的寄存器，并追踪栈指针（ESP）的变化确保没有中间干扰。然后，对push序列进行重排，并将pop序列同步做相反的重排，确保恢复顺序正确。若push序列中夹杂有其他非保存性指令，也需进行依赖分析，保证重排不会打乱依赖顺序。这种方法对程序语义无影响，但能干扰基于特定pop序列模式的分析方法，提高静态分析、指令特征提取和样本分类的复杂度。
 
-This research identifies complete register save and restore code segments at the function entry and exit. Then pair push and pop instructions, ensuring that they operate on the same registers and track ESP changes to avoid other interference. Subsequently, reordering the push sequence and applying inverse reordering to pop sequence ensures restore proper sequence. If the push sequence contains other non-preservation instructions, dependency analysis is also essential to ensure that reordering does not disrupt dependency sequence. This method has no impact on the program's semantics but disturbs analysis methods based on specific pop sequence patterns, improving resistance to static analysis, instruction feature extraction, and classification.
+%This research identifies complete register save and restore code segments at the function entry and exit. Then pair push and pop instructions, ensuring that they operate on the same registers and track ESP changes to avoid other interference. Subsequently, reordering the push sequence and applying inverse reordering to pop sequence ensures restore proper sequence. If the push sequence contains other non-preservation instructions, dependency analysis is also essential to ensure that reordering does not disrupt dependency sequence. This method has no impact on the program's semantics but disturbs analysis methods based on specific pop sequence patterns, improving resistance to static analysis, instruction feature extraction, and classification.
 
 \begin{figure}[hbt]
 	\centering
@@ -553,11 +558,14 @@ This research identifies complete register save and restore code segments at the
 
 本文首先对二进制程序构建控制流图（CFG），并对每个基本块进行寄存器活跃性分析，获取每条指令的寄存器use（使用）与def（定义）集合。接着迭代计算每条指令的活跃输入集（in）与输出集（out），识别每个寄存器的活跃区域。在确保无冲突的前提下，随机选择两个不重叠活跃区的寄存器对，将其在汇编中的使用位置进行替换。指令修改时，通过变更ModR/M字节（必要时SIB字节）实现重映射，避免使用esp等特殊寄存器，并对隐式使用寄存器的指令进行过滤。为保证调用一致性，还需结合调用约定信息约束某些寄存器的使用。
 
-First, this method constructs the CFG for the binary program and performs register liveness analysis on each basic block to determine each instruction's register use and def sets. Second, this method iteratively computes each instruction's active in and out sets to identify live ranges in each register. On the premise that there is no conflict, two register pairs with non-overlapping live ranges are randomly selected, and then their usage positions are swapped in assembly. During instruction modification, modifying via ModR/M bytes (and SIB bytes if necessary) achieve remapping, avoiding special registers like ESP, filtering instructions with implicit register usage. To ensure call consistency, calling convention information is combined to constrain certain registers.
+%First, this method constructs the CFG for the binary program and performs register liveness analysis on each basic block to determine each instruction's register use and def sets. Second, this method iteratively computes each instruction's active in and out sets to identify live ranges in each register. On the premise that there is no conflict, two register pairs with non-overlapping live ranges are randomly selected, and then their usage positions are swapped in assembly. During instruction modification, modifying via ModR/M bytes (and SIB bytes if necessary) achieve remapping, avoiding special registers like ESP, filtering instructions with implicit register usage. To ensure call consistency, calling convention information is combined to constrain certain registers.
 
 这一方法不会引入新指令或修改操作数值，仅在机器码层面更换寄存器编号，因此程序行为保持完全一致。该技术能有效打乱静态分析工具基于寄存器使用模式或特征序列的识别策略，从而提升样本的对抗性与多样性。
 
-This technique does not introduce any new instructions or change operand values, modifying only register encodings at the machine-code level. It disrupts static analysis tools based on register usage patterns or feature sequences recognition strategies, enhancing sample adversariality and diversity.
+%This technique does not introduce any new instructions or change operand values, modifying only register encodings at the machine-code level. It disrupts static analysis tools based on register usage patterns or feature sequences recognition strategies, enhancing sample adversariality and diversity.
+\end{enumerate}
+
+
 
 \begin{figure}[hbt]
 	\centering
@@ -566,7 +574,64 @@ This technique does not introduce any new instructions or change operand values,
 	\caption{寄存器重分配示例图}\label{fig:4.6}
 \end{figure}
 
-\subsection{动态行为扰动方法 Dynamic Behavior Disturbance Methods}
+\subsection{动态行为扰动方法}
+
+%在恶意软件检测领域，动态分析技术是当前主流手段之一，尤其在处理未知样本或多态变种时具有明显优势。其基本原理是通过在受控执行环境（如沙箱、虚拟机、内存监控器）中运行目标程序，记录其在运行过程中所触发的系统调用、行为路径、内存修改、网络通信等信息，以此识别潜在的恶意行为。然而，这一技术在实际部署中往往存在时间资源受限的问题。
+
+为了兼顾效率与成本，动态分析系统通常仅为每个样本分配数秒到几十秒的执行时间窗口。对于某些攻击行为触发依赖于条件判断、用户交互的恶意样本而言，这一固定的分析时间窗显然存在被规避的可能性。
+
+%In the malware detection realm, dynamic analysis technology is one of the currently prevalent approaches, demonstrating clear advantages when handling unknown or polymorphic variants. Its fundamental principle involves running target programs in controlled execution environments, such as sandboxes, virtual machines, and memory monitors, recording triggered system calls, behavioral paths, memory modifications, network communications, and other runtime information to identify potential malicious behaviors. However, this technology often faces time and resource constraints during deployment. To balance efficiency and cost, dynamic analysis systems commonly allocate only a few seconds to dozens of seconds of execution time to each sample. For malware whose attack behaviors depend on conditional triggers or user interaction, this fixed analysis window presents a probability of being evaded.
+
+基于此观察，本文设计了一种动态扰动方法，核心思想是引入“时间延迟”机制，使恶意代码在样本启动后故意等待一段时间再执行核心逻辑，从而躲避沙箱的行为分析窗口。其主要实现方式是通过在程序入口点或关键路径中插入延迟逻辑（如 nanosleep系统调用），使恶意样本在运行初期不表现任何异常行为，从而骗过基于行为特征的检测系统。
+
+%Based on this observation, this research designs a dynamic disturbance method whose central mechanism is introducing "time-delay", deliberately waiting for a period after startup before executing core logic, making the malicious code evade the behavioral analysis window of sandboxes. This is primarily implemented by inserting delay logic like the nanosleep system call at program entry points or critical paths, ensuring that the malware exhibits no abnormal behavior during the initial run phase and thus bypasses detection systems based on behavioral features.
+
+具体而言，该方法在程序入口\_start 中插入一段系统调用延迟逻辑，构造一个 timespec结构体设置延迟时间（如60秒），并通过nanosleep系统调用实现挂起效果。在延迟期间，样本处于休眠状态，不触发任何系统调用，也不进行内存读写、网络通信等可疑操作。由于大多数沙箱系统会在执行时间到达后强制中止进程，此时还未触发的恶意行为链将完全无法被观测到。这样，恶意样本即使具有明显的破坏性，也可能因“未表现行为”而被误判为正常程序。
+
+%Specifically, this method inserts system call delay logic at the \_start entry point. It constructs a timespec structure to set the delay duration and invokes the nanosleep system call to induce suspension. During this delay, the sample remains dormant, triggering no system calls, memory reads and writes, network communications, or other suspicious activities. As most sandbox systems forcibly terminate processes after exceeding the execution time limit, the un-triggered malicious behavioral chain remains entirely unobserved. Consequently, even obviously destructive malware may be misclassified as benign due to "absence of malicious behavior."
+
+%该策略可归类为一种“动态行为隐藏技术”，其本质在于对行为时间的扰动，从时间维度上对抗行为检测系统。这类技术的优势在于实现成本低、兼容性好且对原有逻辑无破坏性，能够与其他扰动策略（如控制流平坦化、代码插桩、系统调用替换）联合使用，从而形成更强的检测对抗能力。
+
+%This strategy can be classified as a "dynamic behavior concealment technique." Its essence is using timing disturbance behavior to counter detection systems temporally. Its advantages include low implementation cost, high compatibility, and non-destructive impact on original logic. It can also be combined with other disturbance strategies, such as control-flow flattening, code instrumentation, and system call replacement to form more robust evasion capabilities.
+
+%值得注意的是，虽然该策略在现实场景中具有较强的隐蔽性，但其也可能被高级动态检测系统检测到。例如某些系统会使用加速执行技术（如时间跳跃模拟）、分析行为间歇性、或启用用户交互模拟等手段来破除延迟机制。因此，未来仍需结合其他对抗策略，共同提升样本的免杀能力和对抗鲁棒性。
+
+%It is notable that this technique may still be detected by advanced dynamic analysis systems while having effective concealment in real scenarios. For example, some systems may employ execution acceleration techniques such as time-jump simulation, behavioral intermittency analysis, and user-interaction simulation, to counter delays. Therefore, future work should integrate other adversarial strategies to jointly enhance evasion and robustness.
+\begin{algorithm}[htbp]
+	\caption{使用可执行段填充空间进行 ELF 动态插入算法}
+    \KwIn{目标 ELF 二进制文件路径 \texttt{input\_elf}，载荷二进制代码路径 \texttt{code\_bin}，输出 ELF 路径 \texttt{output\_elf}}
+	\KwOut{一个已被感染的 ELF 文件，其中插入了载荷代码}
+	Read the input ELF file \texttt{input\_elf} into memory \texttt{hdr}\;
+	Read the payload binary code \texttt{code\_bin} into memory \texttt{code}\;
+	Validate ELF magic number and ensure it is a 64-bit ELF\;
+	Check if the ELF architecture is x86-64\;
+	\ForEach{program header \texttt{phdr} in \texttt{hdr}}{
+		\If{\texttt{phdr} is executable (has \texttt{PF\_X} flag)}{
+			Find the last section \texttt{last\_sec} within \texttt{phdr}\;
+			Compute the available padding size \texttt{pad\_size} after \texttt{last\_sec}\;
+			\If{\texttt{pad\_size} $<$ size of \texttt{code} + size of jump}{
+				Print error message and exit\;
+			}
+			Inject the payload \texttt{code} into the padding space\;
+			Generate a jump instruction \texttt{jmp\_back} to the original entry point\;
+			Inject \texttt{jmp\_back} after the \texttt{code}\;
+			Modify the section header of \texttt{last\_sec} to extend its size\;
+			Update the \texttt{phdr}'s file and memory size to include the injected code\;
+			Update the ELF header's \texttt{e\_entry} to point to the start of the payload \texttt{code}\;
+			\textbf{break}\;
+		}
+	}
+	Write the modified ELF to \texttt{output\_elf}\;
+	Set the file permission of \texttt{output\_elf} to executable\;
+\end{algorithm}
+
+基于时间延迟的动态扰动方法是一种有效的动态对抗技术，具有实现简单、效果明显、通用性强等优点，可作为恶意样本在强化学习训练与对抗生成中的关键扰动操作之一，具体实现如算法1所示。
+
+%The disturbance method based on time delay is an effective dynamic adversarial technique that has advantages in simple implementation, high efficiency, and high versatility. It serves as a key disturbance operation for malware in reinforcement learning training and adversarial generation. Its concrete implementation is described in Algorithm 1 below.
+
+算法1通过逐步操作，实现将载荷二进制代码动态插入到目标ELF可执行文件的可执行段填充空间中，保持原文件结构的同时实现控制流重定向。第1至2行将目标ELF文件与待插入的payload读入内存。第3至4行验证ELF文件的合法性，包括magic、是否为64位及是否为x86-64架构。第5至17行是注入的核心步骤：遍历每个程序头，第6行判断是否为可执行段（具有PF\_X标志），第7至8行定位该段的最后一个节并计算其后的空隙空间大小；若填充不足以插入payload与跳转指令，则退出（第9至10行）。第11至13行将载荷写入空隙并附加一段跳转回原始入口点的代码。随后，第14至15行扩展节和段的大小字段以覆盖新注入区域，确保在运行时被正确加载。第16行更新ELF头中的入口地址e\_entry为payload的起始位置，实现控制流重定向。完成注入后（第17行），退出循环以防止重复操作。最后，第18至19行将修改后的ELF写入输出文件并设置为可执行。整体流程在不破坏原有功能的前提下，实现了高隐蔽性和完整性兼容的动态插入操作。
+
+%Algorithm 1 operates step-by-step, achieving inserting payload binary code into target ELF executable file's executable segment padding, maintaining original file structure while achieving control flow redirection. Lines 1 to 2 read target ELF file and payload into memory. Lines 3 to 4 check the legitimacy of ELF file, including magic number, whether it is 64 bits, and whether its architecture is x86-64. Lines 5 to 17 is the core process of injection, traversing each program header. Line 6 judges whether the segment is an executable segment that contains the PF\_X flag. Lines 7 to 8 locate the last section of this segment and calculate the gap size after it. Lines 9 to 10 terminate the process when the gap size cannot accommodate the payload and jump instructions. Lines 11 to 13 write the payload to the gap and append code block that jumps to the original entry point. Subsequently, lines 14 to 15 expand the size fields of the section and segment to cover newly injected areas to ensure that it can be loaded correctly during execution. Line 16 updates the entry point e\_entry in the ELF header to be the starting point of payload, achieving control flow redirection. Line 17 exits the loop to prevent duplicate operations after the injection is completed. Finally, lines 18 to 19 write the modified ELF file to an output file and set it as an executable file. The overall process achieves dynamic insertion operations that exhibit high concealment and complete compatibility in the condition that the original functionality is not broken.
 
 \section{奖励函数策略优化}
 
