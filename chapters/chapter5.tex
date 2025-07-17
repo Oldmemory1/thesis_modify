@@ -404,7 +404,7 @@ $\lambda_1= 0.6, \lambda_2 = 0.3, \lambda_3=0.1$
 %Confusion Enhancement Phase:  strengthening behavioral confusion to improve concealment in the final stage:
 $\lambda_1= 0.4, \lambda_2 = 0.4, \lambda_3=0.2$
 
-\section{选用不同强化学习算法对于实验的影响}
+\section{选用不同强化学习算法对于实验结果的影响}
 
 确认好模型训练相关的参数之后，本文使用自己所创建的数据集从中选取1000个样本进行实验，训练过程如图所示。为了体现对比度，在本实验中，本文对比了两种强化学习算法，分别是PPO（Proximal Policy Optimization）和ACER\cite{wang2016sample}（Actor-Critic with Experience Replay），以评估它们在恶意软件对抗生成中的表现。PPO作为一种基于策略梯度的方法，强调通过调整策略的更新幅度来保证训练的稳定性。而ACER则结合了策略优化和经验回放的优势，通过信任域优化（Trust Region Optimization）来提高策略的稳定性，同时在训练过程中使用了重放缓冲区来加强对经验的学习。
 
@@ -508,47 +508,50 @@ $\lambda_1= 0.4, \lambda_2 = 0.4, \lambda_3=0.2$
 
 %In summary, Tencent Harbo dynamic detection experiment further validates the concealment and validity of multi-disturbance strategies issued in this research, proving that this framework is practically potential and exhibits high research value. 
 
-\section{对抗样本生成方法的消融实验 Ablation Experiments on Adversarial Sample Generation Methods}
+\section{不同扰动组合对于实验结果的影响}
 
 为了评估本文提出的多架构对抗性样本生成的必要性，计划实验测试结构扰动、指令扰动和行为扰动在逃避恶意软件检测中的独立效果，本文设计了消融实验，逐一去除不同的扰动方法，并分析其对检测系统逃避能力的影响。
 
-To evaluate the necessity of the multi-dimensional adversarial sample generation approach proposed in this research, ablation experiments were designed to test the individual effects of structural, instructional, and behavioral perturbations in the evading malware detection aspect. Each disturbance method was systematically ablated by removing it, allowing analyzing its impact on detection evasion capabilities.
+%To evaluate the necessity of the multi-dimensional adversarial sample generation approach proposed in this research, ablation experiments were designed to test the individual effects of structural, instructional, and behavioral perturbations in the evading malware detection aspect. Each disturbance method was systematically ablated by removing it, allowing analyzing its impact on detection evasion capabilities.
 
 在本实验中，使用了本文收集的恶意软件样本的标准数据集，从中随机挑选1000个样本，并应用以下三种扰动方法对样本进行单独扰动，来查看对本文训练的随机森林检测算法的性能。通过与基准组（本研究方法）进行对比，研究者可以系统地评估每种扰动策略对恶意软件检测逃避能力的影响。
 
-In this experiment, 1,000 randomly selected samples from the malware dataset were perturbed individually using three distinct methods, evaluating performance against the random forest detector trained in this study. Comparison with the baseline group allowed researchers to systematically assess each perturbation's contribution to evasion.
+%In this experiment, 1,000 randomly selected samples from the malware dataset were perturbed individually using three distinct methods, evaluating performance against the random forest detector trained in this study. Comparison with the baseline group allowed researchers to systematically assess each perturbation's contribution to evasion.
 
-实验组1：结构扰动
+\begin{enumerate}
 
-Experimental Group 1: Structural Perturbation
+\item 实验组1：结构扰动
+
+%Experimental Group 1: Structural Perturbation
 
 在这一实验组中，本文采用结构扰动方法，主要通过修改恶意样本的程序结构（如修改段表、修改符号表、重新排列代码段等）来扰乱程序的结构信息。此扰动方法的目标是通过破坏程序的结构信息，使得静态分析工具无法准确地识别恶意行为。
 
-This group adopted structural perturbations by modifying program structures of malware samples (e.g., altering section tables, symbol tables, or rearranging code segments). This method's target is disrupting structural information, preventing static analysis tools from accurately identifying malicious behaviors.
+%This group adopted structural perturbations by modifying program structures of malware samples (e.g., altering section tables, symbol tables, or rearranging code segments). This method's target is disrupting structural information, preventing static analysis tools from accurately identifying malicious behaviors.
 
-实验组2：指令扰动
+\item 实验组2：指令扰动
 
-Experimental Group 2: Instructional Perturbation
+%Experimental Group 2: Instructional Perturbation
 
 该组实验单独应用指令扰动技术，通过对恶意样本中的指令进行修改、重排或替换，从而改变程序的指令序列。例如，使用等价指令替换原有的指令，或者调整指令执行顺序，确保程序逻辑不变的同时有效干扰指令级别的分析。
 
-This group solely employed instructional perturbations by modifying, reordering, or replacing instructions in malware samples. Modification examples include replacing instructions with functional equivalents or rearranging execution sequences while preserving program logic unchanged to evade analysis at the instruction level.
+%This group solely employed instructional perturbations by modifying, reordering, or replacing instructions in malware samples. Modification examples include replacing instructions with functional equivalents or rearranging execution sequences while preserving program logic unchanged to evade analysis at the instruction level.
 
-实验组3：行为扰动
+\item 实验组3：行为扰动
 
-Experimental Group 3: Behavioral Perturbation
+%Experimental Group 3: Behavioral Perturbation
 
 本组实验使用行为扰动，行为扰动方法主要通过修改恶意样本的行为逻辑，使其在特定环境下不表现出原本的恶意行为。常见的行为扰动包括通过引入时间延迟、控制流混淆等手段使恶意行为的触发条件延后或改变，从而规避动态行为分析的检测。
 
-This group exclusively implemented behavioral perturbations through altering malicious behavioral logic. Common techniques included inserting time delays or control-flow obfuscation to delay or modify malicious behavior triggers, thus evading dynamic behavioral analysis.
+%This group exclusively implemented behavioral perturbations through altering malicious behavioral logic. Common techniques included inserting time delays or control-flow obfuscation to delay or modify malicious behavior triggers, thus evading dynamic behavioral analysis.
 
-实验组4：基准组
+\item 实验组4：基准组
 
-Experimental Group 4: Baseline Group
+%Experimental Group 4: Baseline Group
 
 该组实验使用本文所示的多架构扰动方法扰动，联合使用结构扰动、指令扰动、行为扰动三种扰动。
 
-This group applied the proposed multi-dimensional perturbation method, jointly employing structural, instructional, and behavioral perturbations.
+%This group applied the proposed multi-dimensional perturbation method, jointly employing structural, instructional, and behavioral perturbations.
+\end{enumerate}
 
 实验结果如表\ref{tab:5.11}所示。
 
@@ -570,25 +573,25 @@ Experimental results are descirbed in Table \ref{tab:5.11}.
 	\end{tabular*}
 \end{table}
 
-实验结果显示，不同扰动策略在逃避恶意软件检测方面表现出明显差异。结构扰动通过修改段表、符号表等程序结构信息，在静态分析阶段表现出较强的对抗能力，平均逃逸率达到72.5\%。这说明此类扰动能够有效破坏传统静态特征提取过程，提升样本的不可识别性。然而，结构扰动对动态分析影响有限，因为行为逻辑未发生本质变化，样本在实际运行中仍可能被行为分析引擎识别。
+%实验结果显示，不同扰动策略在逃避恶意软件检测方面表现出明显差异。结构扰动通过修改段表、符号表等程序结构信息，在静态分析阶段表现出较强的对抗能力，平均逃逸率达到72.5\%。这说明此类扰动能够有效破坏传统静态特征提取过程，提升样本的不可识别性。然而，结构扰动对动态分析影响有限，因为行为逻辑未发生本质变化，样本在实际运行中仍可能被行为分析引擎识别。
 
-Structural perturbations are achieved by modifying program structures such as section tables and symbol tables, exhibiting strong adversarial capabilities during static analysis. The average evasion rate of structural perturbations is 72.5\%. This indicates effective disruption of traditional static feature extraction processes, enhancing sample obfuscation. However, structural perturbation is limited to affect dynamic analysis since behavioral logic remains fundamentally unchanged. The samples may still be detected by analysis engines during real execution processes.
+%Structural perturbations are achieved by modifying program structures such as section tables and symbol tables, exhibiting strong adversarial capabilities during static analysis. The average evasion rate of structural perturbations is 72.5\%. This indicates effective disruption of traditional static feature extraction processes, enhancing sample obfuscation. However, structural perturbation is limited to affect dynamic analysis since behavioral logic remains fundamentally unchanged. The samples may still be detected by analysis engines during real execution processes.
 
-指令扰动策略以等价指令替换、指令重排等方式改变指令序列，从而混淆基于指令特征的静态检测模型。虽然其逃逸率为52.6\%，显著低于结构扰动，但仍能在一定程度上规避静态签名匹配。值得注意的是，此类扰动并未改变程序行为，故在基于行为分析的检测系统下几乎无额外收益。此外，其生成时间相对较长（218ms），反映出操作粒度较高带来的计算开销。
+%指令扰动策略以等价指令替换、指令重排等方式改变指令序列，从而混淆基于指令特征的静态检测模型。虽然其逃逸率为52.6\%，显著低于结构扰动，但仍能在一定程度上规避静态签名匹配。值得注意的是，此类扰动并未改变程序行为，故在基于行为分析的检测系统下几乎无额外收益。此外，其生成时间相对较长（218ms），反映出操作粒度较高带来的计算开销。
 
-Instructional perturbations are implemented through equivalent instruction substitution and instruction resorting and achieve a 52.6\% evasion rate. Although the evasion rate of instructional perturbations is significantly lower than structural perturbations, instruction perturbations still are effective against static signature matching. What should be paid more attention to is that this approach doesn't alter program behavior, yielding minimal additional benefits against behavioral analysis. Otherwise, its generation time (218ms) reflects higher computational resource consumption in higher granular operations.
+%Instructional perturbations are implemented through equivalent instruction substitution and instruction resorting and achieve a 52.6\% evasion rate. Although the evasion rate of instructional perturbations is significantly lower than structural perturbations, instruction perturbations still are effective against static signature matching. What should be paid more attention to is that this approach doesn't alter program behavior, yielding minimal additional benefits against behavioral analysis. Otherwise, its generation time (218ms) reflects higher computational resource consumption in higher granular operations.
 
-行为扰动则主要通过引入延时逻辑、控制流调整等方式，推迟或隐藏样本的恶意行为触发条件，从而干扰沙箱等动态分析环境的行为提取过程。虽然行为扰动理论上应有助于绕过动态检测，但在本实验中仅取得12.1\%的逃逸率，说明此类扰动在扰动静态分析模型上的性能并不明显。
+%行为扰动则主要通过引入延时逻辑、控制流调整等方式，推迟或隐藏样本的恶意行为触发条件，从而干扰沙箱等动态分析环境的行为提取过程。虽然行为扰动理论上应有助于绕过动态检测，但在本实验中仅取得12.1\%的逃逸率，说明此类扰动在扰动静态分析模型上的性能并不明显。
 
-Behavioral perturbation employs techniques like delayed triggers and control flow adjustments to postpone or hide malicious actions trigger conditions, thus interfering with dynamic analysis environments like sandboxes. Despite theoretical effectiveness against dynamic detection, it achieves only 12.1\% evasion rate. The low evasion rate demonstrates this model's limited impact on static analysis models.
+%Behavioral perturbation employs techniques like delayed triggers and control flow adjustments to postpone or hide malicious actions trigger conditions, thus interfering with dynamic analysis environments like sandboxes. Despite theoretical effectiveness against dynamic detection, it achieves only 12.1\% evasion rate. The low evasion rate demonstrates this model's limited impact on static analysis models.
 
 相比上述三种单一扰动策略，MPLO综合引入结构、指令与行为扰动机制，获得了最高的逃逸率87.2\%，远超所有单一扰动策略，且生成时间控制在183ms，显示出良好的攻击效果与生成效率平衡。这表明，多维度扰动策略间具有显著的互补性：结构扰动提供静态特征级混淆，指令扰动增强细粒度隐藏能力，而行为扰动则补充动态逃逸能力。联合使用可突破各类检测模型的多重防线，实现更具普适性和稳定性的对抗样本生成。
 
-Comparison with three single disturbance strategies, MPLO comprehensively introduces structural, instructional, and behavioral perturbation mechanisms, achieves the highest evasion rate (87.2\%) and limits the generation time in 183ms. This result exhibits complementary advantages: structural perturbation confuses static features, instructional perturbation enhances fine-grained stealth, and behavioral perturbation enables dynamic evasion. Combining these strategies, it bypasses multi-layered detection defenses for more robust adversarial sample generation with higher adaptivity and stability.
+%Comparison with three single disturbance strategies, MPLO comprehensively introduces structural, instructional, and behavioral perturbation mechanisms, achieves the highest evasion rate (87.2\%) and limits the generation time in 183ms. This result exhibits complementary advantages: structural perturbation confuses static features, instructional perturbation enhances fine-grained stealth, and behavioral perturbation enables dynamic evasion. Combining these strategies, it bypasses multi-layered detection defenses for more robust adversarial sample generation with higher adaptivity and stability.
 
 综上所述，消融实验验证了MPLO方法中各扰动策略的独立作用和协同价值。结果表明，单一扰动策略虽具备一定逃逸能力，但难以在面对多类型检测模型时保持稳定表现。而将多种扰动策略集成在统一框架中，不仅能提升整体逃逸率，也有助于在实际攻防场景中实现更强鲁棒性与可操作性。
 
-The ablation study confirms both independent and synergistic value of each perturbation strategy in MPLO. Individual strategies show partial evasion capabilities but cannot keep stable while facing multiple detection models.Integrating perturbation strategies in a unified framework significantly enhances overall evasion performance, practical applicability, and robustness against diverse detection models.  
+%The ablation study confirms both independent and synergistic value of each perturbation strategy in MPLO. Individual strategies show partial evasion capabilities but cannot keep stable while facing multiple detection models.Integrating perturbation strategies in a unified framework significantly enhances overall evasion performance, practical applicability, and robustness against diverse detection models.  
 
 \section{功能保留研究 Research on Functional Retention}
 
