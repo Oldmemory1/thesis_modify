@@ -1,14 +1,14 @@
-\chapter{基于强化学习的对抗性恶意软件生成方法研究方案 Research Solution for Adversarial Malware Generation Technology Based on Reinforcement Learning}
+%\chapter{基于强化学习的对抗性恶意软件生成方法研究方案 Research Solution for Adversarial Malware Generation Technology Based on Reinforcement Learning}
 
-本章将具体地介绍本文提出的对抗样本生成方法的详细设计过程和实现原理，主要包括扰动方法的构建，奖励函数策略的设计，模型的具体结构。
+%本章将具体地介绍本文提出的对抗样本生成方法的详细设计过程和实现原理，主要包括扰动方法的构建，奖励函数策略的设计，模型的具体结构。
 
-This chapter will specifically introduce the detailed design process and implementation principles of the adversarial sample generation method proposed in this research, which mainly includes disturbance methods' construction, the reward function strategies' design, and the model's specific structure.
+%This chapter will specifically introduce the detailed design process and implementation principles of the adversarial sample generation method proposed in this research, which mainly includes disturbance methods' construction, the reward function strategies' design, and the model's specific structure.
 
-\section{多维度扰动方法的构建 Multidimensional Disturbance Methods' Construction}
+%\section{多维度扰动方法的构建 Multidimensional Disturbance Methods' Construction}
 
-本文利用lief库、IDA pro对二进制可执行样本进行批量处理。LIEF（Library to Instrument Executable Formats）是一个开源的库，用于处理ELF、PE和Mach-O格式的可执行文件。它可以解析和修改二进制文件的头部信息、节区、符号和动态链接。LIEF适用于静态分析、重命名符号、插入代码和文件格式转换等任务。LIEF可以提取二进制可执行文件的结构，以及提供各个结构的操作接口。
+%本文利用lief库、IDA pro对二进制可执行样本进行批量处理。LIEF（Library to Instrument Executable Formats）是一个开源的库，用于处理ELF、PE和Mach-O格式的可执行文件。它可以解析和修改二进制文件的头部信息、节区、符号和动态链接。LIEF适用于静态分析、重命名符号、插入代码和文件格式转换等任务。LIEF可以提取二进制可执行文件的结构，以及提供各个结构的操作接口。
 
-This research batch processes binary executable samples using the LIEF library and IDA Pro. LIEF (Library to Instrument Executable Formats) is an open-source library for processing executable files in ELF, PE, and Mach-O formats. It can parse and modify header information, sections, symbols, and dynamic linking in binary files. LIEF is applicable to tasks such as static analysis, symbol renaming, code insertion, and file format conversion. LIEF can extract the structure of binary executable files and provide operation interfaces for various components.
+%This research batch processes binary executable samples using the LIEF library and IDA Pro. LIEF (Library to Instrument Executable Formats) is an open-source library for processing executable files in ELF, PE, and Mach-O formats. It can parse and modify header information, sections, symbols, and dynamic linking in binary files. LIEF is applicable to tasks such as static analysis, symbol renaming, code insertion, and file format conversion. LIEF can extract the structure of binary executable files and provide operation interfaces for various components.
 
 %\subsection{结构化扰动方法 Structural Disturbance Methods}
 
