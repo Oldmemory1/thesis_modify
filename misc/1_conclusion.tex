@@ -1,0 +1,47 @@
+%%
+% The BIThesis Template for Graduate Thesis
+%
+% Copyright 2020-2023 Yang Yating, BITNP
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   https://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Feng Kaiyu.
+
+\begin{conclusion}
+
+本文提出了一种基于强化学习的多维度对抗性恶意软件生成框架，旨在有效应对日益复杂的恶意软件检测挑战。该框架通过在结构层、指令层及行为层对恶意样本进行扰动，并引入良性样本字节作为扰动来源，从多个维度提升了对抗样本的隐蔽性与逃避检测能力。具体而言，本文的主要创新点和工作如下：
+
+This paper proposes a multi-dimensional adversarial malware generation framework based on RL to effectively address increasingly complex malware detection challenges. The framework aims to perturbate malware at the structural later, instruction layer, and behavioral layer, and introduces bytes from benign samples as perturbation sources. This design enhances the stealth and evasion capabilities of adversarial samples across multiple dimensions. The main innovations and contributions are as follows:
+
+（1）多维度扰动策略：本研究创新性地从结构、指令和行为三个层面对恶意样本进行联合扰动，打破了传统方法单一维度的局限，显著增强了样本的复杂性和多样性。实验结果表明，三种扰动策略的协同作用能有效提升对抗样本的逃避能力。
+
+(1) Multidimensional Disturbance Strategy: This research innovatively performs joint perturbations on malware samples at structural, instructional, and behavioral levels. This combination strategy breaks the limitations of single-dimensional approaches in traditional methods and significantly enhances sample complexity and diversity. Experimental results demonstrate that the synergistic effect of three disturbance strategies effectively improves evasion capability.
+
+（2）良性样本驱动的扰动源设计：提出将良性软件中的字节信息作为扰动来源，以提升对抗样本的自然性和伪装能力。该策略不仅增强了扰动的语义合理性，还在多个检测系统中表现出更强的通用性与转移能力。
+
+(2) Perturbation Source Design Driven by Benign Samples: Bytes from benign software serve as perturbation sources to enhance the natural appearance and camouflage capabilities of adversarial samples. This strategy not only improves semantic plausibility but also exhibits robust universality and transferability across different detection systems.
+	
+（3）动态奖励机制：引入动态调整的奖励函数，综合考虑扰动成本与生成效率，优化了强化学习模型的训练过程。该机制通过自适应调节奖励权重，提高了模型在不同环境下的泛化能力与鲁棒性。
+
+(3) Dynamic Reward Mechanism: A dynamically adjusted reward function was adopted to comprehensively balance disturbance cost and generation efficiency. This mechanism optimizes the training process of the RL model and enhances the model's generalization capability and robustness in different environments through automatic adjustment of reward weights.
+	
+（4）基于PPO与LSTM的强化学习模型：结合PPO算法与LSTM网络，有效建模扰动操作之间的时序依赖，提升了对抗样本的语义一致性与隐蔽性。实验表明，该模型能成功绕过多种主流恶意软件检测系统，展现出良好的迁移性能。
+
+(4) RL Model Based on PPO and LSTM: Integrating the PPO algorithm with an LSTM network effectively models temporal dependencies between disturbance operations and enhances the semantic consistency and concealment of adversarial samples. Experiments exhibit that this model successfully evades multiple prevalent malware detection systems, exhibiting strong transfer performance.
+	
+通过在VirusTotal等公共在线恶意软件检测平台以及主流对抗样本生成方案上的实证验证，本文生成的对抗样本在真实检测环境中表现出显著的逃避能力。特别是结构扰动样本，其检测率下降最为稳定，具备良好的实际应用前景。
+
+Through certification on public online malware detection platforms such as VirusTotal and prevalent adversarial sample generation solutions, the adversarial samples generated in this study exhibit significant evasion capability in real detection environments. Especially the structurally perturbed samples show the most stable decline in detection rates, demonstrating practical application prospects.
+	
+未来的研究可进一步探索更加复杂和细粒度的对抗样本生成策略，结合先进的智能算法与高效的数据处理技术，以应对日益演化的网络安全威胁。同时，针对具体应用场景，提升生成效率、降低资源开销，将是推动该技术实用化的关键方向。此外，该框架也有潜力应用于其他类型的恶意软件检测与防御研究中，进一步拓展其实用范围与研究深度。
+
+Future research may explore more complex and fine-grained adversarial sample generation strategies, utilizing advanced intelligent algorithms and efficient data processing techniques to address evolving cybersecurity threats. Concurrently, improving generation efficiency and reducing resource expenditure for specific application scenarios will be the crucial directions for advancing the practical deployment of this technology. This framework holds potential for other malware detection and defense research domains, expanding its applicability and research depth.
+\end{conclusion}

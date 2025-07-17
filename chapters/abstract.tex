@@ -1,0 +1,48 @@
+%%
+% The BIThesis Template for Graduate Thesis
+%
+% Copyright 2020-2023 Yang Yating, BITNP
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   https://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Feng Kaiyu.
+\begin{abstract}
+ 随着互联网技术的迅猛发展及其广泛应用，各类软件如雨后春笋般层出不穷，软件格式也日益多样化。这些软件在为人们的日常生活与工作带来便捷的同时，也带来了新的网络安全隐患。不法分子将恶意代码伪装成正常应用程序，巧妙绕过主机安全防护机制，潜入用户终端，从而窃取隐私信息、敏感数据，甚至控制系统资源，给用户带来严重损失。
+ 
+ 面对日益复杂与隐蔽的恶意软件威胁，研究人员不断探索与创新，提出了多种检测技术。然而，网络安全始终是一个“攻防对抗”的动态博弈过程。为应对日趋频繁的零日攻击和高级持续性威胁（APT），越来越多的研究者开始聚焦于对抗性技术，探索如何生成具备逃避检测能力的恶意样本。
+ 
+ 近年来，基于强化学习的对抗样本生成方法逐渐成为研究热点，尽管已有一些成果，但当前大多数方法仍存在针对单一检测模型、扰动操作粗糙、缺乏对恶意行为语义理解等问题。尤其是在扰动策略上，多采用随机字节插入，导致扰动缺乏语义性和隐蔽性，影响样本的可用性与逃避能力。
+ 
+ 为此，本文提出并设计了一种基于强化学习的多维度对抗性恶意软件生成框架。该框架从结构层、指令层与行为层三个维度对原始恶意样本进行扰动修改，区别于传统方法中插入随机字节的做法，本文创新性地引入良性样本中的字节作为扰动来源，使得生成的对抗样本在语义上更具合理性，扰动更加隐蔽，有效提升逃避检测系统的能力。
+ 
+ 在强化学习环境设计方面，本文构建了支持多维扰动操作的仿真环境，并采用PPO算法结合LSTM网络结构，充分挖掘扰动序列之间的潜在关联，提升扰动的语义一致性与时序依赖建模能力。此外，针对实际应用中对资源的敏感性，本文引入动态奖励函数机制，综合考虑扰动代价与训练效率，优化生成策略以提升样本的实用性与通用性。
+ 
+ 实验结果表明，该方法不仅能够成功绕过多种主流恶意软件检测系统，还展现出较强的迁移能力，能够有效对抗主流检测模型，具有良好的研究价值与实际应用前景。
+\end{abstract}
+
+% 如需手动控制换行连字符位置，可写 aa\-bb，详见
+% https://bithesis.bitnp.net/faq/hyphen.html
+
+\begin{abstractEn}
+  
+  With the rapid development and widespread application of Internet technologies, a wide variety of software programs have emerged like mushrooms after the rain, and software formats have become increasingly diverse. While these applications bring convenience to people’s daily lives and work, they also introduce new cybersecurity risks. Malicious actors disguise harmful code as legitimate applications to cleverly bypass host security mechanisms, infiltrate user terminals, steal private and sensitive data, and even take control of system resources, causing severe damage to users.
+
+  In response to increasingly complex and stealthy malware threats, researchers have continuously explored and proposed a variety of detection technologies. However, cybersecurity remains a dynamic "cat-and-mouse" game between attack and defense. To counter frequent zero-day attacks and advanced persistent threats (APTs), an increasing number of researchers have turned their attention to adversarial techniques, exploring how to generate malicious samples capable of evading detection.
+  
+  In recent years, adversarial malware generation methods based on reinforcement learning have gradually become a research hotspot. Although some achievements have been made, most current approaches still suffer from several limitations, such as targeting only a single detection model, employing coarse-grained perturbations, and lacking an understanding of the semantic behavior of malware. In particular, many methods rely on inserting random bytes as perturbations, which undermines the semantic relevance and stealthiness of the modifications, thereby compromising both usability and evasiveness.
+  
+  To address these issues, this paper proposes and designs a multi-dimensional adversarial malware generation framework based on reinforcement learning. The framework perturbs original malware samples from three dimensions: structural, instruction-level, and behavioral. Unlike traditional methods that insert random bytes, this study innovatively uses bytes from benign samples as the source of perturbation, enhancing the semantic validity and stealthiness of the adversarial samples and significantly improving their ability to evade detection.
+  
+  For the reinforcement learning environment, we construct a simulation environment that supports multi-dimensional perturbation operations and employ the PPO (Proximal Policy Optimization) algorithm combined with an LSTM network to fully capture potential correlations in the perturbation sequences. This enhances semantic consistency and models temporal dependencies more effectively. Additionally, considering the resource constraints in practical applications, a dynamic reward function mechanism is introduced to balance perturbation cost and training efficiency, thereby optimizing the generation strategy to improve the practicality and generalizability of the samples.
+  
+  Experimental results demonstrate that the proposed method not only successfully evades various mainstream malware detection systems but also exhibits strong transferability across detection models, showing significant research value and promising real-world application prospects.
+\end{abstractEn}
+
