@@ -17,31 +17,87 @@
 
 \begin{conclusion}
 
-本文提出了一种基于强化学习的多维度对抗性恶意软件生成框架，旨在有效应对日益复杂的恶意软件检测挑战。该框架通过在结构层、指令层及行为层对恶意样本进行扰动，并引入良性样本字节作为扰动来源，从多个维度提升了对抗样本的隐蔽性与逃避检测能力。具体而言，本文的主要创新点和工作如下：
+%本文提出了一种基于强化学习的多维度对抗性恶意软件生成框架，旨在有效应对日益复杂的恶意软件检测挑战。该框架通过在结构层、指令层及行为层对恶意样本进行扰动，并引入良性样本字节作为扰动来源，从多个维度提升了对抗样本的隐蔽性与逃避检测能力。具体而言，本文的主要创新点和工作如下：
 
-This paper proposes a multi-dimensional adversarial malware generation framework based on RL to effectively address increasingly complex malware detection challenges. The framework aims to perturbate malware at the structural later, instruction layer, and behavioral layer, and introduces bytes from benign samples as perturbation sources. This design enhances the stealth and evasion capabilities of adversarial samples across multiple dimensions. The main innovations and contributions are as follows:
+%This paper proposes a multi-dimensional adversarial malware generation framework based on RL to effectively address increasingly complex malware detection challenges. The framework aims to perturbate malware at the structural later, instruction layer, and behavioral layer, and introduces bytes from benign samples as perturbation sources. This design enhances the stealth and evasion capabilities of adversarial samples across multiple dimensions. The main innovations and contributions are as follows:
 
-（1）多维度扰动策略：本研究创新性地从结构、指令和行为三个层面对恶意样本进行联合扰动，打破了传统方法单一维度的局限，显著增强了样本的复杂性和多样性。实验结果表明，三种扰动策略的协同作用能有效提升对抗样本的逃避能力。
+%（1）多维度扰动策略：本研究创新性地从结构、指令和行为三个层面对恶意样本进行联合扰动，打破了传统方法单一维度的局限，显著增强了样本的复杂性和多样性。实验结果表明，三种扰动策略的协同作用能有效提升对抗样本的逃避能力。
 
-(1) Multidimensional Disturbance Strategy: This research innovatively performs joint perturbations on malware samples at structural, instructional, and behavioral levels. This combination strategy breaks the limitations of single-dimensional approaches in traditional methods and significantly enhances sample complexity and diversity. Experimental results demonstrate that the synergistic effect of three disturbance strategies effectively improves evasion capability.
+%(1) Multidimensional Disturbance Strategy: This research innovatively performs joint perturbations on malware samples at structural, instructional, and behavioral levels. This combination strategy breaks the limitations of single-dimensional approaches in traditional methods and significantly enhances sample complexity and diversity. Experimental results demonstrate that the synergistic effect of three disturbance strategies effectively improves evasion capability.
 
-（2）良性样本驱动的扰动源设计：提出将良性软件中的字节信息作为扰动来源，以提升对抗样本的自然性和伪装能力。该策略不仅增强了扰动的语义合理性，还在多个检测系统中表现出更强的通用性与转移能力。
+%（2）良性样本驱动的扰动源设计：提出将良性软件中的字节信息作为扰动来源，以提升对抗样本的自然性和伪装能力。该策略不仅增强了扰动的语义合理性，还在多个检测系统中表现出更强的通用性与转移能力。
 
-(2) Perturbation Source Design Driven by Benign Samples: Bytes from benign software serve as perturbation sources to enhance the natural appearance and camouflage capabilities of adversarial samples. This strategy not only improves semantic plausibility but also exhibits robust universality and transferability across different detection systems.
+%(2) Perturbation Source Design Driven by Benign Samples: Bytes from benign software serve as perturbation sources to enhance the natural appearance and camouflage capabilities of adversarial samples. This strategy not only improves semantic plausibility but also exhibits robust universality and transferability across different detection systems.
 	
-（3）动态奖励机制：引入动态调整的奖励函数，综合考虑扰动成本与生成效率，优化了强化学习模型的训练过程。该机制通过自适应调节奖励权重，提高了模型在不同环境下的泛化能力与鲁棒性。
+%（3）动态奖励机制：引入动态调整的奖励函数，综合考虑扰动成本与生成效率，优化了强化学习模型的训练过程。该机制通过自适应调节奖励权重，提高了模型在不同环境下的泛化能力与鲁棒性。
 
-(3) Dynamic Reward Mechanism: A dynamically adjusted reward function was adopted to comprehensively balance disturbance cost and generation efficiency. This mechanism optimizes the training process of the RL model and enhances the model's generalization capability and robustness in different environments through automatic adjustment of reward weights.
+%(3) Dynamic Reward Mechanism: A dynamically adjusted reward function was adopted to comprehensively balance disturbance cost and generation efficiency. This mechanism optimizes the training process of the RL model and enhances the model's generalization capability and robustness in different environments through automatic adjustment of reward weights.
 	
-（4）基于PPO与LSTM的强化学习模型：结合PPO算法与LSTM网络，有效建模扰动操作之间的时序依赖，提升了对抗样本的语义一致性与隐蔽性。实验表明，该模型能成功绕过多种主流恶意软件检测系统，展现出良好的迁移性能。
+%（4）基于PPO与LSTM的强化学习模型：结合PPO算法与LSTM网络，有效建模扰动操作之间的时序依赖，提升了对抗样本的语义一致性与隐蔽性。实验表明，该模型能成功绕过多种主流恶意软件检测系统，展现出良好的迁移性能。
 
-(4) RL Model Based on PPO and LSTM: Integrating the PPO algorithm with an LSTM network effectively models temporal dependencies between disturbance operations and enhances the semantic consistency and concealment of adversarial samples. Experiments exhibit that this model successfully evades multiple prevalent malware detection systems, exhibiting strong transfer performance.
+%(4) RL Model Based on PPO and LSTM: Integrating the PPO algorithm with an LSTM network effectively models temporal dependencies between disturbance operations and enhances the semantic consistency and concealment of adversarial samples. Experiments exhibit that this model successfully evades multiple prevalent malware detection systems, exhibiting strong transfer performance.
 	
-通过在VirusTotal等公共在线恶意软件检测平台以及主流对抗样本生成方案上的实证验证，本文生成的对抗样本在真实检测环境中表现出显著的逃避能力。特别是结构扰动样本，其检测率下降最为稳定，具备良好的实际应用前景。
+%通过在VirusTotal等公共在线恶意软件检测平台以及主流对抗样本生成方案上的实证验证，本文生成的对抗样本在真实检测环境中表现出显著的逃避能力。特别是结构扰动样本，其检测率下降最为稳定，具备良好的实际应用前景。
 
-Through certification on public online malware detection platforms such as VirusTotal and prevalent adversarial sample generation solutions, the adversarial samples generated in this study exhibit significant evasion capability in real detection environments. Especially the structurally perturbed samples show the most stable decline in detection rates, demonstrating practical application prospects.
+%Through certification on public online malware detection platforms such as VirusTotal and prevalent adversarial sample generation solutions, the adversarial samples generated in this study exhibit significant evasion capability in real detection environments. Especially the structurally perturbed samples show the most stable decline in detection rates, demonstrating practical application prospects.
 	
-未来的研究可进一步探索更加复杂和细粒度的对抗样本生成策略，结合先进的智能算法与高效的数据处理技术，以应对日益演化的网络安全威胁。同时，针对具体应用场景，提升生成效率、降低资源开销，将是推动该技术实用化的关键方向。此外，该框架也有潜力应用于其他类型的恶意软件检测与防御研究中，进一步拓展其实用范围与研究深度。
+%未来的研究可进一步探索更加复杂和细粒度的对抗样本生成策略，结合先进的智能算法与高效的数据处理技术，以应对日益演化的网络安全威胁。同时，针对具体应用场景，提升生成效率、降低资源开销，将是推动该技术实用化的关键方向。此外，该框架也有潜力应用于其他类型的恶意软件检测与防御研究中，进一步拓展其实用范围与研究深度。
 
-Future research may explore more complex and fine-grained adversarial sample generation strategies, utilizing advanced intelligent algorithms and efficient data processing techniques to address evolving cybersecurity threats. Concurrently, improving generation efficiency and reducing resource expenditure for specific application scenarios will be the crucial directions for advancing the practical deployment of this technology. This framework holds potential for other malware detection and defense research domains, expanding its applicability and research depth.
+%Future research may explore more complex and fine-grained adversarial sample generation strategies, utilizing advanced intelligent algorithms and efficient data processing techniques to address evolving cybersecurity threats. Concurrently, improving generation efficiency and reducing resource expenditure for specific application scenarios will be the crucial directions for advancing the practical deployment of this technology. This framework holds potential for other malware detection and defense research domains, expanding its applicability and research depth.
+
+\begin{table}[htbp]
+	\centering
+	\caption{本文方法与现有工作的对比分析}
+	\label{tab:5.14}
+	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccc}
+		\toprule
+		工作 & 病毒类型 & 攻击方式 & 评估的检测模型数量 & 平均免杀率 \\
+		\midrule
+		{[22]} & PE 病毒 & 黑盒攻击 & 1 & 60.0\%（MalConv 网络） \\
+		{[68]} & Android 病毒 & 白盒攻击 & 10 & 59.37\%（平均） \\
+		{[69]} & PE 病毒 & 黑盒攻击 & 3 & 70.0\%（商用 AV） \\
+		{[26]} & PE 病毒 & 黑盒攻击 & 5 & 74.4\%（EMBER 模型） \\
+		{[70]} & ELF 病毒 & 黑盒攻击 & 64 & 75.8\%（VirusTotal） \\
+		本文 & ELF 病毒 & 白盒攻击 & 62 & 84.5\%（VirusTotal） \\
+		\bottomrule
+	\end{tabular*}
+\end{table}
+
+实验结果表明，经过扰动处理的对抗样本在 VirusTotal 平台上的总体检测率相比原始样本显著降低，表现出较强的迁移性。其中，结构扰动样本的逃避能力最为稳定，多个依赖静态分析特征的引擎未能识别其恶意特征；指令扰动样本在部分引擎中表现出一定逃避效果，但整体变异幅度相对较小；行为扰动样本在动态检测能力较弱的引擎中效果较好，但在支持沙箱分析的引擎中仍存在部分命中情况，说明其对动态特征的干扰存在一定的平台依赖性。
+
+%Experimental results indicate that adversarial samples processed by perturbation exhibit extremely lower overall detection rates on VirusTotal than original samples, exhibiting strong transferability. Structural perturbations achieved the most stable evasion, with multiple static analysis-dependent engines failing to identify malicious features. Instructional perturbations showed limited evasion across engines, yielding relatively overall smaller variations. Behavioral perturbations effectively evaded engines with weaker dynamic detection capabilities, but there still exist partial detections in engines supporting sandbox analysis. The limitation shows platform-specific dependencies in dynamic feature interference.
+
+此外，不同扰动方式对引擎类型的影响也存在差异。结构扰动主要干扰依赖程序结构解析和静态特征提取的引擎，指令扰动则影响基于指令签名和机器学习模型的检测器，行为扰动更容易绕过基于沙箱执行路径和行为模式的动态检测机制。该实验结果进一步验证了对抗扰动在多引擎、跨平台检测环境下的适应性与实际应用价值。
+
+%Furthermore, different perturbation methods affected engine types distinctly. Structural perturbation primarily disrupted engines relying on static structure parsing and feature extraction. Instructional perturbation impacted detectors based on instructional signatures or machine learning models. Behavioral perturbation more readily evaded dynamic mechanisms based on sandbox execution paths and behavioral patterns. These results further validate the adaptability and practical utility of adversarial perturbations in multi-engine, cross-platform detection environments.
+
+%本文生成的对抗样本不仅能够在本地检测模型中实现有效规避，同时也能在真实检测平台中表现出良好的迁移能力，具备较强的跨平台逃逸效果，为对抗性恶意软件研究和实战应用提供了有力支撑。
+
+%The adversarial samples generated in this research not only achieve effective evasion in local detection models but also demonstrate strong transferability in real detection platforms, exhibiting robust cross-platform escape effects. This provides solid support for adversarial malware research and practical applications.
+
+%\section{结果分析}
+
+为了更系统地分析本文方法与现有研究之间的差异与优势，表\ref{tab:5.14}从多个角度对比了当前典型对抗性恶意样本生成工作与本研究的技术特征和实验效果，涵盖了病毒类型、攻击方式、检测模型数量以及平均免杀率四个关键维度，定性与定量地展示了本文工作的综合性能。
+
+%To systematically analyze the differences and advantages between the proposed method in this experiment and existing research, Table \ref{tab:5.14} compares current typical adversarial malware sample generation works with this research across four key dimensions: virus types, attack methods, number of detection models, and average evasion rate. This table qualitatively and quantitatively describes the comprehensive performance of this work.
+
+在病毒类型方面，已有多数研究主要聚焦于 Windows 平台下的 PE 病毒或移动平台上的 Android 病毒，对 Linux 平台 ELF 格式恶意代码的研究相对稀缺。相比之下，本文专注于 ELF 病毒的对抗样本生成与逃逸效果评估，有效填补了该领域的研究空白。
+
+%In the virus type aspect, most existing studies concentrate primarily on PE viruses in Windows platforms or Android viruses in mobile platforms, with relatively scarce research on in the ELF format malware in Linux platforms. In contrast, this study focuses on adversarial sample generation and escape effect evaluation for ELF virus realm. This research effectively fills this research gap of ELF adversarial malware generation.
+
+在攻击方式方面，本文所提出的方法与文献\cite{rathore2021identification}属于白盒攻击方式，需了解检测模型的特征提取方式和训练数据分布等内部信息。而文献\cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} 类似，均采用黑盒攻击模式，无需依赖检测模型的内部结构，仅通过输入输出结果进行扰动优化。
+
+%Comparing attack methods, the approach issued in this paper belongs to the white-box attack category, like the method in literature \cite{rathore2021identification}. The white-box attack requires knowledge of internal information such as the feature extraction methods and training data distribution of the detection model. Different from this research, some literatures \cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} employs a black-box attack pattern. Unlike white-box attack, black-box attack eliminates dependency on the internal structure of detection models and optimizes disturbances solely through input and output results.
+
+相比之下，另一项基于强化学习的自动生成 ELF 对抗恶意样本的方法\cite{xue2024reinforcement}，结合了多轮特征提取、恶意检测与智能决策的闭环机制，利用 PPO 算法在 Linux x86 平台实现了对 ELF 恶意样本的有效扰动与免杀。
+
+%In Comparison, another method for automatically generating ELF adversarial malware samples based on RL\cite{xue2024reinforcement} incorporates a multi-loop mechanism combining multi-round feature extraction, malware detection, and intelligent decision-making. Utilizing the PPO algorithm, it achieves effective perturbation and evasion of ELF malware samples on the Linux x86 platform.
+
+虽然该方法与本文均采用强化学习框架，但本文更侧重于多维度的大规模评估，覆盖62个检测引擎，强调了方法的广泛适用性和鲁棒性；同时本文在动作空间设计、特征选择及攻击策略上进行了改进，实现了更高的平均免杀率，体现了方法在实际应用中的竞争优势。
+
+%Although both this method and the method issued in research adopts reinforcement learning frameworks, the present work focuses more on multidimensional large-scale evaluation, covering 62 detection engines to emphasize broad applicability and robustness. Simultaneously, improvements in action space design, feature selection, and attack strategies have been updated. This innovation results in a higher average evasion rate and reflects the competitive advantage of the approach in practical applications.
+
+在平均免杀率方面，本文所生成的对抗样本在 VirusTotal 平台中取得了 84.5\% 的免杀率，优于其他研究的平均水平。这表明本文提出的对抗扰动策略在逃逸检测方面具有更强的效果。
+
+%In terms of average evasion rate, the adversarial samples generated in this research achieved 84.5\% evasion rate on the VirusTotal platform, surpassing the average levels reported in other studies. This indicates that the proposed adversarial perturbation strategy demonstrates stronger effectiveness in evading detection.
 \end{conclusion}

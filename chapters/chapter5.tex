@@ -728,23 +728,23 @@ v_t = \frac{D_e}{A_e}
 	\end{tabular*}
 \end{table}
 
-\begin{table}[htbp]
-	\centering
-	\caption{本文方法与现有工作的对比分析}
-	\label{tab:5.14}
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccc}
-		\toprule
-		工作 & 病毒类型 & 攻击方式 & 评估的检测模型数量 & 平均免杀率 \\
-		\midrule
-		{[22]} & PE 病毒 & 黑盒攻击 & 1 & 60.0\%（MalConv 网络） \\
-		{[68]} & Android 病毒 & 白盒攻击 & 10 & 59.37\%（平均） \\
-		{[69]} & PE 病毒 & 黑盒攻击 & 3 & 70.0\%（商用 AV） \\
-		{[26]} & PE 病毒 & 黑盒攻击 & 5 & 74.4\%（EMBER 模型） \\
-		{[70]} & ELF 病毒 & 黑盒攻击 & 64 & 75.8\%（VirusTotal） \\
-		本文 & ELF 病毒 & 白盒攻击 & 62 & 84.5\%（VirusTotal） \\
-		\bottomrule
-	\end{tabular*}
-\end{table}
+%\begin{table}[htbp]
+%	\centering
+%	\caption{本文方法与现有工作的对比分析}
+%	\label{tab:5.14}
+%	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccccc}
+%		\toprule
+%		工作 & 病毒类型 & 攻击方式 & 评估的检测模型数量 & 平均免杀率 \\
+%		\midrule
+%		{[22]} & PE 病毒 & 黑盒攻击 & 1 & 60.0\%（MalConv 网络） \\
+%		{[68]} & Android 病毒 & 白盒攻击 & 10 & 59.37\%（平均） \\
+%		{[69]} & PE 病毒 & 黑盒攻击 & 3 & 70.0\%（商用 AV） \\
+%		{[26]} & PE 病毒 & 黑盒攻击 & 5 & 74.4\%（EMBER 模型） \\
+%		{[70]} & ELF 病毒 & 黑盒攻击 & 64 & 75.8\%（VirusTotal） \\
+%		本文 & ELF 病毒 & 白盒攻击 & 62 & 84.5\%（VirusTotal） \\
+%		\bottomrule
+%	\end{tabular*}
+%\end{table}
 
 实验结果表明，经过扰动处理的对抗样本在 VirusTotal 平台上的总体检测率相比原始样本显著降低，表现出较强的迁移性。其中，结构扰动样本的逃避能力最为稳定，多个依赖静态分析特征的引擎未能识别其恶意特征；指令扰动样本在部分引擎中表现出一定逃避效果，但整体变异幅度相对较小；行为扰动样本在动态检测能力较弱的引擎中效果较好，但在支持沙箱分析的引擎中仍存在部分命中情况，说明其对动态特征的干扰存在一定的平台依赖性。
 
@@ -758,34 +758,34 @@ v_t = \frac{D_e}{A_e}
 
 %The adversarial samples generated in this research not only achieve effective evasion in local detection models but also demonstrate strong transferability in real detection platforms, exhibiting robust cross-platform escape effects. This provides solid support for adversarial malware research and practical applications.
 
-\section{结果分析}
+%\section{结果分析}
 
-为了更系统地分析本文方法与现有研究之间的差异与优势，表\ref{tab:5.14}从多个角度对比了当前典型对抗性恶意样本生成工作与本研究的技术特征和实验效果，涵盖了病毒类型、攻击方式、检测模型数量以及平均免杀率四个关键维度，定性与定量地展示了本文工作的综合性能。
+%为了更系统地分析本文方法与现有研究之间的差异与优势，表\ref{tab:5.14}从多个角度对比了当前典型对抗性恶意样本生成工作与本研究的技术特征和实验效果，涵盖了病毒类型、攻击方式、检测模型数量以及平均免杀率四个关键维度，定性与定量地展示了本文工作的综合性能。
 
-To systematically analyze the differences and advantages between the proposed method in this experiment and existing research, Table \ref{tab:5.14} compares current typical adversarial malware sample generation works with this research across four key dimensions: virus types, attack methods, number of detection models, and average evasion rate. This table qualitatively and quantitatively describes the comprehensive performance of this work.
+%To systematically analyze the differences and advantages between the proposed method in this experiment and existing research, Table \ref{tab:5.14} compares current typical adversarial malware sample generation works with this research across four key dimensions: virus types, attack methods, number of detection models, and average evasion rate. This table qualitatively and quantitatively describes the comprehensive performance of this work.
 
-在病毒类型方面，已有多数研究主要聚焦于 Windows 平台下的 PE 病毒或移动平台上的 Android 病毒，对 Linux 平台 ELF 格式恶意代码的研究相对稀缺。相比之下，本文专注于 ELF 病毒的对抗样本生成与逃逸效果评估，有效填补了该领域的研究空白。
+%在病毒类型方面，已有多数研究主要聚焦于 Windows 平台下的 PE 病毒或移动平台上的 Android 病毒，对 Linux 平台 ELF 格式恶意代码的研究相对稀缺。相比之下，本文专注于 ELF 病毒的对抗样本生成与逃逸效果评估，有效填补了该领域的研究空白。
 
-In the virus type aspect, most existing studies concentrate primarily on PE viruses in Windows platforms or Android viruses in mobile platforms, with relatively scarce research on in the ELF format malware in Linux platforms. In contrast, this study focuses on adversarial sample generation and escape effect evaluation for ELF virus realm. This research effectively fills this research gap of ELF adversarial malware generation.
+%In the virus type aspect, most existing studies concentrate primarily on PE viruses in Windows platforms or Android viruses in mobile platforms, with relatively scarce research on in the ELF format malware in Linux platforms. In contrast, this study focuses on adversarial sample generation and escape effect evaluation for ELF virus realm. This research effectively fills this research gap of ELF adversarial malware generation.
 
-在攻击方式方面，本文所提出的方法与文献\cite{rathore2021identification}属于白盒攻击方式，需了解检测模型的特征提取方式和训练数据分布等内部信息。而文献\cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} 类似，均采用黑盒攻击模式，无需依赖检测模型的内部结构，仅通过输入输出结果进行扰动优化。
+%在攻击方式方面，本文所提出的方法与文献\cite{rathore2021identification}属于白盒攻击方式，需了解检测模型的特征提取方式和训练数据分布等内部信息。而文献\cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} 类似，均采用黑盒攻击模式，无需依赖检测模型的内部结构，仅通过输入输出结果进行扰动优化。
 
-Comparing attack methods, the approach issued in this paper belongs to the white-box attack category, like the method in literature \cite{rathore2021identification}. The white-box attack requires knowledge of internal information such as the feature extraction methods and training data distribution of the detection model. Different from this research, some literatures \cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} employs a black-box attack pattern. Unlike white-box attack, black-box attack eliminates dependency on the internal structure of detection models and optimizes disturbances solely through input and output results.
+%Comparing attack methods, the approach issued in this paper belongs to the white-box attack category, like the method in literature \cite{rathore2021identification}. The white-box attack requires knowledge of internal information such as the feature extraction methods and training data distribution of the detection model. Different from this research, some literatures \cite{kolosnjaji2018adversarial,quertier2022merlin,song2022mab} employs a black-box attack pattern. Unlike white-box attack, black-box attack eliminates dependency on the internal structure of detection models and optimizes disturbances solely through input and output results.
 
-相比之下，另一项基于强化学习的自动生成 ELF 对抗恶意样本的方法\cite{xue2024reinforcement}，结合了多轮特征提取、恶意检测与智能决策的闭环机制，利用 PPO 算法在 Linux x86 平台实现了对 ELF 恶意样本的有效扰动与免杀。
+%相比之下，另一项基于强化学习的自动生成 ELF 对抗恶意样本的方法\cite{xue2024reinforcement}，结合了多轮特征提取、恶意检测与智能决策的闭环机制，利用 PPO 算法在 Linux x86 平台实现了对 ELF 恶意样本的有效扰动与免杀。
 
-In Comparison, another method for automatically generating ELF adversarial malware samples based on RL\cite{xue2024reinforcement} incorporates a multi-loop mechanism combining multi-round feature extraction, malware detection, and intelligent decision-making. Utilizing the PPO algorithm, it achieves effective perturbation and evasion of ELF malware samples on the Linux x86 platform.
+%In Comparison, another method for automatically generating ELF adversarial malware samples based on RL\cite{xue2024reinforcement} incorporates a multi-loop mechanism combining multi-round feature extraction, malware detection, and intelligent decision-making. Utilizing the PPO algorithm, it achieves effective perturbation and evasion of ELF malware samples on the Linux x86 platform.
 
-虽然该方法与本文均采用强化学习框架，但本文更侧重于多维度的大规模评估，覆盖62个检测引擎，强调了方法的广泛适用性和鲁棒性；同时本文在动作空间设计、特征选择及攻击策略上进行了改进，实现了更高的平均免杀率，体现了方法在实际应用中的竞争优势。
+%虽然该方法与本文均采用强化学习框架，但本文更侧重于多维度的大规模评估，覆盖62个检测引擎，强调了方法的广泛适用性和鲁棒性；同时本文在动作空间设计、特征选择及攻击策略上进行了改进，实现了更高的平均免杀率，体现了方法在实际应用中的竞争优势。
 
-Although both this method and the method issued in research adopts reinforcement learning frameworks, the present work focuses more on multidimensional large-scale evaluation, covering 62 detection engines to emphasize broad applicability and robustness. Simultaneously, improvements in action space design, feature selection, and attack strategies have been updated. This innovation results in a higher average evasion rate and reflects the competitive advantage of the approach in practical applications.
+%Although both this method and the method issued in research adopts reinforcement learning frameworks, the present work focuses more on multidimensional large-scale evaluation, covering 62 detection engines to emphasize broad applicability and robustness. Simultaneously, improvements in action space design, feature selection, and attack strategies have been updated. This innovation results in a higher average evasion rate and reflects the competitive advantage of the approach in practical applications.
 
-在平均免杀率方面，本文所生成的对抗样本在 VirusTotal 平台中取得了 84.5\% 的免杀率，优于其他研究的平均水平。这表明本文提出的对抗扰动策略在逃逸检测方面具有更强的效果。
+%在平均免杀率方面，本文所生成的对抗样本在 VirusTotal 平台中取得了 84.5\% 的免杀率，优于其他研究的平均水平。这表明本文提出的对抗扰动策略在逃逸检测方面具有更强的效果。
 
-In terms of average evasion rate, the adversarial samples generated in this research achieved 84.5\% evasion rate on the VirusTotal platform, surpassing the average levels reported in other studies. This indicates that the proposed adversarial perturbation strategy demonstrates stronger effectiveness in evading detection.
+%In terms of average evasion rate, the adversarial samples generated in this research achieved 84.5\% evasion rate on the VirusTotal platform, surpassing the average levels reported in other studies. This indicates that the proposed adversarial perturbation strategy demonstrates stronger effectiveness in evading detection.
 
-\section{本章小结 Chapter Summary}
+%\section{本章小结 Chapter Summary}
 
-本章在统一的软硬件与数据集条件下，先对PPO、ACER及Baseline方法与所提出的多维度策略优化模型（MPLO）在不同LSTM层数与隐藏层规模配置下的逃逸成功率、扰动次数和收敛速度进行了深入对比，继而通过消融实验评估了结构扰动、指令扰动与行为扰动三种策略的独立效果及其组合增益，并结合沙箱执行与控制流完整性检测检验了各类扰动对恶意功能保留的影响；最后，将生成的对抗样本上传至VirusTotal平台，对比了免杀前后检测率及下降幅度，以全面验证模型在跨引擎环境中的迁移逃逸能力。实验结果显示，MPLO 表现出更高的攻击成功率、更低的扰动成本、更快的收敛速度及更强的跨平台迁移性能。
+%本章在统一的软硬件与数据集条件下，先对PPO、ACER及Baseline方法与所提出的多维度策略优化模型（MPLO）在不同LSTM层数与隐藏层规模配置下的逃逸成功率、扰动次数和收敛速度进行了深入对比，继而通过消融实验评估了结构扰动、指令扰动与行为扰动三种策略的独立效果及其组合增益，并结合沙箱执行与控制流完整性检测检验了各类扰动对恶意功能保留的影响；最后，将生成的对抗样本上传至VirusTotal平台，对比了免杀前后检测率及下降幅度，以全面验证模型在跨引擎环境中的迁移逃逸能力。实验结果显示，MPLO 表现出更高的攻击成功率、更低的扰动成本、更快的收敛速度及更强的跨平台迁移性能。
 
-Ensuring unified hardware, software, and dataset conditions, this chapter conducted a comparison of the PPO, ACER, and Baseline methods with the proposed Multidimensional Policy Optimization (MPLO) model. Then this chapter analyzed the evasion success rate, perturbation frequency, and convergence speed in different LSTM layers and hidden layer sizes, then it evaluated the independent effects and combined gains of structural perturbation, instructional perturbation, and behavioral perturbation through ablation experiments. This analysis was combined with sandbox execution and Control Flow Integrity (CFI) testing to examine the influence of each disturbance type on malicious functionality preservation. Finally, the generated adversarial samples were uploaded to the VirusTotal platform to compare detection rates and decline magnitudes before and after evasion to comprehensively assess the model's transfer evasion capability across detection engines. Experimental results demonstrate that MPLO achieves higher attack success rates, lower disturbance costs, faster convergence speed, and stronger cross-platform transfer performance.
+%Ensuring unified hardware, software, and dataset conditions, this chapter conducted a comparison of the PPO, ACER, and Baseline methods with the proposed Multidimensional Policy Optimization (MPLO) model. Then this chapter analyzed the evasion success rate, perturbation frequency, and convergence speed in different LSTM layers and hidden layer sizes, then it evaluated the independent effects and combined gains of structural perturbation, instructional perturbation, and behavioral perturbation through ablation experiments. This analysis was combined with sandbox execution and Control Flow Integrity (CFI) testing to examine the influence of each disturbance type on malicious functionality preservation. Finally, the generated adversarial samples were uploaded to the VirusTotal platform to compare detection rates and decline magnitudes before and after evasion to comprehensively assess the model's transfer evasion capability across detection engines. Experimental results demonstrate that MPLO achieves higher attack success rates, lower disturbance costs, faster convergence speed, and stronger cross-platform transfer performance.
