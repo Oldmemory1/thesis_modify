@@ -151,13 +151,13 @@ Compressing malicious files is another common disturbance technique. Compressing
 \end{enumerate}
 \begin{table}[htbp]
 	\centering
-	\caption{压缩加壳类型}\label{tab:4.4}
+	\caption{Compressing and Packing Type}\label{tab:4.4}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动方法 & 简写 & 效果 \\
+		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
-		upx\_pack & UP & 使用 upx 对 ELF 文件进行压缩 \\
-		upx\_unpack & UUP & 使用 upx -d 解压已压缩的 ELF 文件 \\
+		upx\_pack & UP & using upx to compress ELF files \\
+		upx\_unpack & UUP & using upx -d to decompress ELF files that have been compressed\\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -174,13 +174,13 @@ The target of section header table disturbances is altering the apparent charact
 
 \begin{table}[htbp]
 	\centering
-	\caption{节头表扰动类型}\label{tab:4.5}
+	\caption{Section Header Table Disturbance Type}\label{tab:4.5}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动方法 & 简写 & 效果 \\
+		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
-		Remove Debug & RD & 在二进制文件中删除调试信息（用零填充） \\
-		Break Checksum & BC & 在可选标题中删除校验和值（用零填充） \\
+		Remove Debug & RD & removing debugging information in binary files (filled with zeros) \\
+		Break Checksum & BC & removing the checksum value in the optional header (filled with zeros) \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
