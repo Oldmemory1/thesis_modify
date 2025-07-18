@@ -200,7 +200,7 @@ ELF（Executable and Linkable Format）文件格式是目前类 Unix 操作系�
 
 其中，\( r_{t+k} \) 表示从时刻 \( t \) 开始第 \( k \) 步时获得的奖励；\( \gamma^k \) 表示第 \( k \) 步奖励的折扣因子。
 
-In this formulation,\( r_{t+k} \) is the reward obtained from Step \( k \) starting from time \( t \), and \( \gamma^k \) represents the discount factor of Step \( k \).
+%In this formulation,\( r_{t+k} \) is the reward obtained from Step \( k \) starting from time \( t \), and \( \gamma^k \) represents the discount factor of Step \( k \).
 
 %在强化学习中，策略（Policy）是指导智能体在不同状态下选择动作的规则。策略可以是确定性的，也可以是随机性的。策略优化是强化学习的核心目标之一，常见的方法包括直接优化策略的梯度方法，如策略梯度（Policy Gradient）算法\cite{silver2014deterministic}，以及近些年提出的PPO\cite{yu2022surprising}（Proximal Policy Optimization）、TRPO\cite{schulman2015trust}（Trust Region Policy Optimization）等更稳定、高效的优化方法。策略优化关注的是如何基于交互经验调整智能体的行为，以更好地达成目标。
 
@@ -299,6 +299,7 @@ LSTM的关键是通过这三个门的配合，实现对信息流的精确控制�
 LSTM的这种设计使得它可以在长序列中持续保留有效信息，并忽略无关部分，克服了传统RNN在长距离依赖建模方面的劣势。
 
 %The key to LSTM is that the cooperation of these three gates enables LSTM to control the information flow precisely, retaining useful information for model predictions while discarding irrelevant or redundant data. Its information flow is described as follows: First, the forget gate decides which old information should be discarded based on current input and previous hidden state; Second, the input gate determines how much new input should be written into the memory cell; Third, the memory state updates; Finally, the output gate generates a hidden state from current memory state for passing to the next time step.
+%This design can make LSTM continuously retain valid information in long sequences and ignore irrelevant parts, overcoming the disadvantages of traditional RNN in modeling dependency on long-term.
 
 \begin{figure}[hbt]
 	\centering
