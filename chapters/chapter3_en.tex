@@ -75,15 +75,15 @@ The section disturbance design in this paper is listed in Table \ref{tab:4.1}.
 
 \begin{table}[htbp]
 	\centering
-	\caption{节区扰动类型}\label{tab:4.1}
+	\caption{Section Disturbance Type}\label{tab:4.1}
 	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动 & 简写 & 效果 \\
+		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
-		section\_append & SA & 向随机选择的节中追加随机数据（可能改变节的内容和熵） \\
-		add\_section\_benign\_data & ASBD & 从 benign 文件中提取整个节，并添加到目标 ELF 中 \\
-		add\_section\_strings & ASS & 生成一个新的节，填充 benign 字符串内容 \\
-		section\_rename & SR & 随机重命名一个节，使用常见节名列表中的名称 \\
+		section\_append & SA & appending random data to a randomly selected section (may alter the content and entropy of sections) \\
+		add\_section\_benign\_data & ASBD & extracting an entire section from a benign file and add it to the target ELF \\
+		add\_section\_strings & ASS & generating a new section filled with benign string content \\
+		section\_rename & SR & randomly renaming a section using a name from common section names \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -102,10 +102,10 @@ The imported symbol and library disturbances designed in this paper are listed i
 
 \begin{table}[htbp]
 	\centering
-	\caption{导入符号和库扰动}\label{tab:4.2}
+	\caption{Import Symbols and Library Disturbance}\label{tab:4.2}
 	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动方法 & 简写 & 效果 \\
+		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
 		add\_imports & AI & 从 benign ELF 文件中添加一个动态符号到目标 ELF 中（如函数导入） \\
 		add\_library & AL & 从 benign ELF 文件中添加一个共享库和其导入函数 \\
@@ -195,7 +195,7 @@ In this research, powerful disassembly tools like IDA Pro are adopted to perform
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.1}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{IDA 反汇编 CFG 图}\label{fig:4.1}
+	\caption{IDA Disassembly CFG diagram}\label{fig:4.1}
 \end{figure}
 
 
@@ -257,7 +257,7 @@ Subsequently, this research enumerates legal instruction orders via topological 
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.2}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{指令替换示例图}\label{fig:4.2}
+	\caption{Instruction Replacement Example }\label{fig:4.2}
 \end{figure}
 
 \item Reordering of Register Preservation Code:
@@ -268,21 +268,21 @@ This method is based on the theory that the sequence of push and pop instruction
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.3}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{指令重构排序示例图}\label{fig:4.3}
+	\caption{Instruction Reordering Example}\label{fig:4.3}
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.4}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{重构的指令有序无环图}\label{fig:4.4}
+	\caption{Acyclic Graph of Reordered Instructions}\label{fig:4.4}
 \end{figure}
 
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.5}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{寄存器保护代码重排序示例图}\label{fig:4.5}
+	\caption{Register Preservation Code Reordering Example}\label{fig:4.5}
 \end{figure}
 
 First, this method constructs the CFG for the binary program and performs register liveness analysis on each basic block to determine each instruction's register use and def sets. Second, this method iteratively computes each instruction's active in and out sets to identify live ranges in each register. On the premise that there is no conflict, two register pairs with non-overlapping live ranges are randomly selected, and then their usage positions are swapped in assembly. During instruction modification, modifying via ModR/M bytes (and SIB bytes if necessary) achieve remapping, avoiding special registers like ESP, filtering instructions with implicit register usage. To ensure call consistency, calling convention information is combined to constrain certain registers.
@@ -296,7 +296,7 @@ This technique does not introduce any new instructions or change operand values,
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/4.6}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{寄存器重分配示例图}\label{fig:4.6}
+	\caption{Register Re-allocation Example}\label{fig:4.6}
 \end{figure}
 
 \subsection{Dynamic Behavior Disturbance Methods}
