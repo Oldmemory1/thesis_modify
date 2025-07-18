@@ -64,14 +64,14 @@ Through label verification and timestamp validation, this research constructed t
 
 \begin{table}[htbp]
 	\centering
-	\caption{数据集信息统计}
+	\caption{Dataset Information Statistics}
 	\label{tab:5.2}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		数据集类型 & 样本数量 & 时间跨度 \\
+		Dataset Type & Sample Amount & Time Span \\
 		\midrule
-		恶意样本 & 8456 & 2014.06--2020.04 \\
-		良性样本 & 2054 & 2016.12--2018.08 \\
+		Malicious Sample & 8456 & 2014.06--2020.04 \\
+		Benign Sample & 2054 & 2016.12--2018.08 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -305,7 +305,7 @@ As shown in Table \ref{tab:5.9}, the proposed Multidimensional Policy Optimizati
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/5.1}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{不同强化学习模型性能训练对比图}\label{fig:5.1}
+	\caption{Training Performance Comparison among Different RL Models}\label{fig:5.1}
 \end{figure}
 
 In the modification cost aspect, MPLO are also comparative. Its average perturbation time is 3.8, slightly higher than 3.2 of PPO, extremely lower than 4.1 of ACER, indicating that MPLO can complete the goal with lower operation steps at the premise that different models generate same amount adversarial samples, reducing original file structure disruption, improving the generated samples' concealment and functional retention.
@@ -335,15 +335,15 @@ To evaluate the performance comprehensively, this research conducts quantitative
 
 \begin{table}[htbp]
 	\centering
-	\caption{逃逸主流检测模型性能对比}
+	\caption{Evasion Rate Comparison of Pervalent Detection Models}
 	\label{tab:5.10}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		模型 & 平均逃逸率（\%） & 平均修改步数（次） & 平均生成时间（ms） \\
+		Model & Average Evasion Rate & Average Modification Steps & Average Generating Time \\
 		\midrule
-		Baseline & 48.20 & 5.4 & 212 \\
-		MPLO & 71.25 & 4.7 & 186 \\
-		DP-GAN & 67.70 & -- & -- \\
+		Baseline & 48.20\% & 5.4 & 212ms \\
+		MPLO & 71.25\% & 4.7 & 186ms \\
+		DP-GAN & 67.70\% & -- & -- \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -362,7 +362,7 @@ In this research, DDoS Trojan samples are selected as representatives. The platf
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/5.2}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{免杀前后哈勃检测结果对比}\label{fig:5.2}
+	\caption{Comparison of Habo Detection Results before and after Processing}\label{fig:5.2}
 \end{figure}
 
 Besides, suspicious behaviors (e.g., remote thread injections, suspicious network communications, memory shellcode execution) were significantly reduced or undetected.
@@ -399,16 +399,16 @@ Experimental results are descirbed in Table \ref{tab:5.11}.
 
 \begin{table}[htbp]
 	\centering
-	\caption{消融实验性能对比}
+	\caption{Ablation Experiment Performance Comparison}
 	\label{tab:5.11}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动方式 & 平均逃逸率（\%） & 平均生成时间（ms） \\
+		Perturbation Method & Average Evasion Rate & Average Generating Time \\
 		\midrule
-		结构扰动 & 72.5 & 156 \\
-		指令扰动 & 52.6 & 218 \\
-		行为扰动 & 12.1 & 175 \\
-		MPLO（多策略组合） & 87.2 & 183 \\
+		Structural Perturbation & 72.5\% & 156ms \\
+		Instructional Perturbation & 52.6\% & 218ms \\
+		Behavioral Perturbation & 12.1\% & 175ms \\
+		MPLO & 87.2\% & 183ms \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -486,11 +486,11 @@ Table \ref{tab:5.13} lists the detection rates $v_{t1}$ before evasion, $v_{t2}$
 
 \begin{table}[htbp]
 	\centering
-	\caption{经免杀后VirusToal扫描结果前后对比}
+	\caption{Comparison of VirusTotal Scanning Results before and after Processing}
 	\label{tab:5.13}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		名称 & 免杀前检测率 & 免杀后检测率 & 下降率 \\
+		Name & Detection Rate Before Processing & Detection Rate After Processing & Declining Rate \\
 		\midrule
 		e601de9bb0828bae5eec828547d18e84 & 39/62 & 2/62 & 94.87\% \\
 		e61865927c25a33f57b3385f59d45bf8 & 40/59 & 3/62 & 92.5\% \\
