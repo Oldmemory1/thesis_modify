@@ -85,21 +85,21 @@ This module adopts an object-oriented structure design. Its core idea is designi
 
 \begin{table}[htbp]
 	\centering
-	\caption{静态特征类别及其描述}
+	\caption{Static Feature Types And Description}
 	\label{tab:5.3}
 	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}cc>{\centering\arraybackslash}m{7cm}}
 		\toprule
-		特征类别 & 特征名称/维度 & 特征描述 \\
+		Feature Type & Feature Name/Dimension & Description \\
 		\midrule
-		字节频率直方图 & ByteHistogram（256维） & 统计文件中每种字节值（0$\sim$255）出现的次数，并进行归一化。此特征能反映文件在字节层面的分布特性，如是否压缩、加密等。 \\
+		Byte Frequency Histogram & ByteHistogram(256 dimensions) & This feature counts the occurrence frequency of each byte value (0$\sim$255) in the file and normalizes the counts. This feature indicates the distribution characteristics of the file on the byte level, such as whether it is compressed or encrypted. \\
 		
-		熵-字节二维直方图 & ByteEntropyHistogram（2D） & 将文件分成固定大小窗口，分别计算每个窗口的熵值和各字节的分布，生成二维直方图。用于反映局部内容复杂度和结构变化。 \\
+		Byte-Entropy 2D Histogram & ByteEntropyHistogram(2D) & This feature divides the file into fixed-size windows, calculates the entropy value and the byte distribution of each window, and generates a 2D histogram to reflect local content complexity and structural changes. \\
 		
-		节区统计特征 & SectionInfo（变长） & 提取节区名称、大小、熵值、可执行标志等，统计各节区出现次数、大小分布及权限类型，可分析文件布局规律与异常结构。 \\
+		Section Statistics Features & SectionInfo(Variable) & This feature extracts section information (name, size, entropy, executable flag, etc.), counts occurrences of each section, analyzes size distributions and categorizes permission types, used to analyze file layout patterns and detect anomalous structures. \\
 		
-		导入函数特征 & Imports（变长） & 提取程序使用的所有外部导入函数（如 libc 函数），构建 API 调用集合，可反映样本行为意图。 \\
+		Import Function Features & Imports(Variable) & This feature extracts all externally imported functions used by the program (e.g., libc functions) and constructs an API call set to exhibit the behavioral intentions of the sample. \\
 		
-		ELF头部信息特征 & Header（固定维度） & 提取如文件类型（ET\_EXEC/ET\_DYN）、架构类型（如 x86、ARM）、入口地址、节区偏移、程序头数量等元数据。 \\
+		ELF Header Information Features & Header(fixed dimensions) & This feature extracts metadata such as file type (ET\_EXEC/ET\_DYN), architecture type (e.g., x86, ARM), entry point address, section header offset, number of program headers, etc. \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -490,7 +490,7 @@ Table \ref{tab:5.13} lists the detection rates $v_{t1}$ before evasion, $v_{t2}$
 	\label{tab:5.13}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		Name & Detection Rate Before Processing & Detection Rate After Processing & Declining Rate \\
+		Name & Detection Rate Before Process & Detection Rate After Process & Decline \\
 		\midrule
 		e601de9bb0828bae5eec828547d18e84 & 39/62 & 2/62 & 94.87\% \\
 		e61865927c25a33f57b3385f59d45bf8 & 40/59 & 3/62 & 92.5\% \\
