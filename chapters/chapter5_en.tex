@@ -21,22 +21,22 @@
 
 This chapter evaluates the adversarial malware sample generation method based on RL. First, hardware and software configurations in this experiment and evaluation metrics are introduced. Second, the experimental results are presented, including comparative experiments for each module to verify its reliability. Finally, the proposed model is compared with other models addressing similar tasks in academia.
 
-\section{Experiment Environment c=Configuration}
+\section{Experimental Environment Configuration}
 
 Experiments in this research were conducted on a host configured with a 64-bit Linux operating system. RL environments were used to train malware samples and generate adversarial samples. The experimental platform utilized a custom environment based on gym-malware to simulate real software behavioral characteristics. To enhance training efficiency and flexibility, the ChainerRL and PyTorch frameworks were jointly employed. For model construction, the ACER and PPO algorithm modules from ChainerRL were used to jointly optimize the agent's policy and value networks. Sample interactions in the environment were managed via gym-malware's interface, which encapsulates action spaces and state transition functionality. To increase sample diversity, the training process uses the EpisodicReplayBuffer to store historical interaction trajectories and introduces a time-step reward decay mechanism. Detailed experimental environment specifications are shown in Table \ref{tab:5.1}.  
 
 \begin{table}[htbp]
 	\centering
-	\caption{实验环境配置}
+	\caption{Experimental Environment Configuration}
 	\label{tab:5.1}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cc}
 		\toprule
-		软硬件环境 & 具体配置信息\\
+		Software and Hardware Environment & Concrete Configuration Information\\
 		\midrule
 		CPU & Intel i7-12700 \\
-		内存 & 32GB \\
-		操作系统 & Ubuntu 20.04.3 LTS \\
-		\multirow{4}{*}[0.5em]{开发环境} & Python 3.6 \\
+		Memory & 32GB \\
+		Operation System & Ubuntu 20.04.3 LTS \\
+		\multirow{4}{*}[0.5em]{Development Environment} & Python 3.6 \\
 		& ChainerRL 0.7.0 \\
 		& LIEF 0.12.3 \\
 		& Gym 0.9.2 \\
@@ -145,7 +145,7 @@ Based on these metrics, this research evaluates the performance of RF and SVM de
 	\end{tabular*}
 \end{table}
 
-\section{实验评估指标 Experimental Evaluation Metrics}
+\section{Experimental Evaluation Metrics}
 
 To comprehensively evaluate the effectiveness and practicality of the adversarial sample generation method based on RL, this study employs the following five core metrics: attack success rate, perturbation count, convergence speed, transfer attack success rate, and average generation time. These metrics enable quantitative assessment across multiple dimensions, including attack efficacy, perturbation concealment, training efficiency, policy generalization capability, and resource consumption.
 
@@ -198,19 +198,19 @@ In this experiment, the parameters of RL model were meticulously configured to e
 
 \begin{table}[htbp]
 	\centering
-	\caption{模型超参数}
+	\caption{Hyperparameters of Models}
 	\label{tab:5.5}
     \begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
     \toprule
-		超参数 & 数值 & 说明 \\
+		Hyperparameter & Value & Description \\
     \midrule
-		学习率 & 0.0003 & 控制每次参数更新的步长，值越小，更新越稳定 \\
-		折扣因子 & 0.99 & 奖励的时间折扣因子，值越大代表对未来奖励越看重 \\
-		GAE 参数 & 0.95 & 广义优势估计（GAE）中的参数，用于平衡偏差与方差 \\
-		批大小 & 2048 & 每次从环境中收集的样本数量，用于一次策略更新 \\
-		Epoch 数 & 10 & 每次策略更新所进行的训练轮数，用于提升收敛效果 \\
-		剪切范围 & 0.2 & 用于限制策略更新幅度的剪切参数，防止策略剧烈更新\\
-		优化算法 & Adam & 用于梯度下降的优化器，具有自适应学习率的能力 \\
+		Learning Rate & 0.0003 & Learning Rate restrains the step size for each parameter update. \\
+		Discount Factor & 0.99 & The time discount factor for rewards. \\
+		GAE Parameter & 0.95 & The parameter in Generalized Advantage Estimation (GAE). \\
+		Batch Size & 2048 & The number of samples collected from the environment for one policy update. \\
+		Epochs Amount & 10 & The number of training iterations performed per policy update. \\
+		Clipping Range & 0.2 & The clipping range used to limit the magnitude of policy updates.\\
+		Optimization Algorithm & Adam & The optimizer used for gradient descent. \\
     \bottomrule
 	\end{tabular*}
 \end{table}
@@ -447,22 +447,22 @@ To comprehensively compare functional retention results of three perturbation st
 
 \begin{table}[htb]
 	\centering
-	\caption{功能保留研究结果}
+	\caption{Functional Preservation Research Results}
 	\label{tab:5.12}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动类型 & 成功执行率（\%） & 功能保留率（\%） \\
+		Perturbation Type & Successful Execution Rate（\%） & Functional Preservation Rate（\%） \\
 		\midrule
-		结构扰动 & 99.2 & 92.4 \\
-		指令扰动 & 96.5 & 93.7 \\
-		行为扰动 & 82.7 & 98.0 \\
+		Structural Perturbation & 99.2 & 92.4 \\
+		Instructional Perturbation & 96.5 & 93.7 \\
+		Behavioral Perturbation & 82.7 & 98.0 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
 
 All in all, structural perturbation maintains high functionality retention without disrupting program logic. Instructional perturbation achieves strong consistency under controlled constraints. Behavioral perturbation, despite lower execution success rates due to complex triggering mechanisms, exhibits the highest functionality retention capability.
 
-\section{样本迁移性 Sample Transferability Analysis}
+\section{Sample Transferability Analysis}
 
 This research selects representative samples from adversarial samples modified by structural perturbations, instructional perturbations, and behavioral perturbations, and compares them with original malicious samples without modification. All samples were uploaded to VirusTotal for static and dynamic scanning. Detection results from each engine were recorded. The number of engines detecting each sample (i.e., "hit rate") was collected as the metric for evasion capability.
 
@@ -470,7 +470,7 @@ This research selects representative samples from adversarial samples modified b
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/5.3}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{经对抗性学习后VirusTotal扫描结果}\label{fig:5.3}
+	\caption{VirusTotal Scanning Results After Adversarial Learning}\label{fig:5.3}
 \end{figure}
 
 
