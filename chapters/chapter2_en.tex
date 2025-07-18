@@ -23,13 +23,13 @@
 The ELF file format, the abbreviation for Executable and Linkable Format, is a standard binary format that is widely adopted in Unix-like operating systems such as Linux and FreeBSD for describing executable files, object files, shared libraries, and kernel dump files. Because of its superior extensibility and support among different platforms, the ELF format is defined as a core bridge for executing programs and linking libraries in modern operating systems. A typical ELF file primarily contains the following four critical structures:
 
 \begin{enumerate} [label=\arabic*)] 
-\item ELF 头（ELF Header）
+\item ELF Header
 
-\item 程序头表（Program Header Table）
+\item Program Header Table
 
-\item 节（Section）
+\item Section
 
-\item 节头表（Section Header Table）
+\item Section Header Table
 
 \end{enumerate}
 
@@ -37,7 +37,7 @@ The ELF file format, the abbreviation for Executable and Linkable Format, is a s
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/2.1}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{ELF文件结构 ELF File Structure}\label{fig:2.1}
+	\caption{ELF File Structure}\label{fig:2.1}
 \end{figure}
 
 \section{Malware Detection Technologies}
@@ -93,7 +93,7 @@ Reinforcement Learning (RL) is an artificial intelligence learning method based 
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/2.3}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{马尔可夫决策过程 Markov Decision Process}\label{fig:2.3}
+	\caption{Markov Decision Process}\label{fig:2.3}
 \end{figure}
 
 The target of Reinforcement Learning is to learn an optimal policy $\pi^{*}(a|s)$ that maximizes the expected cumulative reward which is defined as the sum of discounted rewards at each future moment starting from the current moment $t$:
@@ -120,7 +120,7 @@ In RNN, each step's computation passes the previous step's state (hidden layer o
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/2.4}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{RNN神经网络结构}\label{fig:2.4}
+	\caption{RNN Neural Network Structure}\label{fig:2.4}
 \end{figure}
 
 \subsection{Long Short-Term Memory(LSTM)}
@@ -144,7 +144,7 @@ This design can make LSTM continuously retain valid information in long sequence
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/2.5}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{LSTM基本数据单元结构}\label{fig:2.5}
+	\caption{LSTM Basic Data Cell Structure}\label{fig:2.5}
 \end{figure}
 
 Due to malware's behavioral features and disturbance operations having obvious sequential reliance and contextual relation, malware samples generate sequences of API calls, system behaviors, or instruction flows during execution, where contextual information is crucial for identifying malicious actions and implementing effective disturbances. Maintaining long-term dependencies is nearly impossible for traditional fully connected NNs or standard RNNs when processing this sequential data, with frequently forgetting early information in sequences. In contrast, LSTM's gating mechanisms enable gate-controlled mechanisms including Input Gate, Forget Gate, and Output Gate, which can effectively control information retention and forgetting, preserve long-term dependencies and enhance the model's ability to capture disturbance sequence semantics. Generally, while generating disturbance strategies, LSTM can dynamically adjust strategy outputs based on the current sample state and historical disturbance operations, producing samples that are not only more "aggressive" but also modified by highly concealed adversarial disturbances. This memory capability is essential for generating malicious behaviors that exhibit "sequential logic" and can evade detection systems.
@@ -166,6 +166,6 @@ In this equation, \( \boldsymbol{r}_t(\theta) \) is the action probability ratio
 	\centering
 	\includegraphics[width=0.75\textwidth]{figures/2.6}
 	% \caption[这里的文字将会显示在 listoffigure 中]{这里的文字将会显示在正文中}
-	\caption{PPO强化学习模型结构 PPO Refinforcement Learning Model's Structure}\label{fig:2.6}
+	\caption{PPO Refinforcement Learning Model's Structure}\label{fig:2.6}
 \end{figure}
 
