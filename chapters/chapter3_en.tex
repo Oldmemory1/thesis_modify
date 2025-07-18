@@ -60,7 +60,7 @@ These disturbances primarily concentrate on achieving the following purposes by 
 \item Avoiding signature matching: Some malware detection tools rely on known signatures, such as values, section structures from malicious samples. Disturbing structures creates differences between the file and the original malicious sample in these signatures, enabling evasion.
 \end{enumerate}
 
-（1）Section Disturbance
+(1) Section Disturbance
 
 In ELF files, sections are the fundamental units, storing different types of data, such as code, data, symbols. Disturbing section content can modify file behavior or increase its complexity. Common section perturbation methods include:
 \begin{enumerate}
@@ -107,8 +107,8 @@ The imported symbol and library disturbances designed in this paper are listed i
 		\toprule
 		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
-		add\_imports & AI & 从 benign ELF 文件中添加一个动态符号到目标 ELF 中（如函数导入） \\
-		add\_library & AL & 从 benign ELF 文件中添加一个共享库和其导入函数 \\
+		add\_imports & AI & adding a dynamic symbol (e.g., a function import) from a benign ELF file to the target ELF \\
+		add\_library & AL & adding a shared library and imported functions from a benign ELF file \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -127,15 +127,15 @@ Overlay techniques involve appending random data that is commonly harmless or di
 
 \begin{table}[htbp]
 	\centering
-	\caption{随机数据附加类型}\label{tab:4.3}
+	\caption{ Random Data Appending Types}\label{tab:4.3}
 	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ccc}
 		\toprule
-		扰动方法 & 简写 & 效果 \\
+		Disturbance Methods & Abbreviation & Effects \\
 		\midrule
-		overlay\_append & OA & 在二进制文件的末尾附加随机内容 \\
-		append\_benign\_data\_overlay & ABDO & 追加来自 benign ELF 文件 .text 段的内容 \\
-		append\_benign\_binary\_overlay & ABBO & 直接追加整个 benign ELF 文件内容 \\
-		add\_strings\_to\_overlay & ASTO & 追加来自 benign 字符串文件的内容（UTF-8 编码） \\
+		overlay\_append & OA & appending random content to the end of the binary file \\
+		append\_benign\_data\_overlay & ABDO & appending content from the .text section of a benign ELF file \\
+		append\_benign\_binary\_overlay & ABBO &  appending the entire content of a benign ELF file \\
+		add\_strings\_to\_overlay & ASTO & append content from a benign strings file (encoding UTF-8) \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
