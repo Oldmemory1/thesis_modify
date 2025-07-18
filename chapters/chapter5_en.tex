@@ -217,7 +217,7 @@ In this experiment, the parameters of RL model were meticulously configured to e
 
 In the model architecture aspect, the PPO model employed a structure with LSTM layers to handle temporally correlated tasks. The model input consists of state information from the environment, processed through a fully connected layer before entering the LSTM layer. The LSTM layer enables the agent to retain long-term information and outputs a probability distribution pi of actions and the state value estimate v. The hidden layer size of this model is 128, which is equivalent to the output dimension of the LSTM layer.
 
-\subsection{The Influence of Different LSTM Layer Number on Experimental Results}
+\subsection{The Influence of Different LSTM Layer Numbers on Experimental Results}
 
 After confirming the hyperparameters, the number of LSTM layers was set to 1, 2, 3, and 4, respectively. Each configuration was trained for 10 epochs, with the average evasion rate, standard deviation that indicates model stability, and average training steps recorded by the same detector. The experiment utilized 1500 malicious samples as the training set, with the target of generating adversarial samples by minimizing their detection probability. Experimental results are presented in Table \ref{tab:5.6}.  
 
@@ -225,16 +225,16 @@ From the experimental results, it is evident that as the number of LSTM layers i
 
 \begin{table}[htbp]
 	\centering
-	\caption{参数选择：不同LSTM层数的实验结果}
+	\caption{Parameter Selection: Experimental Results in Different LSTM Layer Numbers}
 	\label{tab:5.6}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		LSTM 层数 & 平均逃逸率（\%） & 平均扰动数（次） & 收敛速度（步） \\
+		LSTM Layer Numbers & Average Evasion Rate & Average Perturbation Steps & Convergence Speed(Steps) \\
 		\midrule
-		1 & 85.4 & 3.1 & 5000 \\
-		2 & 88.7 & 3.8 & 4500 \\
-		3 & 89.1 & 4.2 & 4600 \\
-		4 & 87.5 & 4.5 & 5200 \\
+		1 & 85.4\% & 3.1 & 5000 \\
+		2 & 88.7\% & 3.8 & 4500 \\
+		3 & 89.1\% & 4.2 & 4600 \\
+		4 & 87.5\% & 4.5 & 5200 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -249,16 +249,16 @@ In summary, when the hidden layer size is 128, the model achieves optimal balanc
 
 \begin{table}[htbp]
 	\centering
-	\caption{参数选择：不同隐藏层大小的实验结果}
+	\caption{Parameter Selection: Experimental Results in Different Hidden Layer Size}
 	\label{tab:5.7}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		隐藏层大小 & 平均逃逸率（\%） & 平均扰动数（次） & 收敛速度（步数） \\
+		Hidden Layer Size & Average Evasion Rate & Average Perturbation Steps & Convergence Speed(Steps) \\
 		\midrule
-		64  & 85.4 & 2.9 & 5300 \\
-		128 & 88.7 & 3.8 & 4500 \\
-		256 & 89.1 & 4.1 & 4700 \\
-		512 & 87.5 & 4.6 & 5200 \\
+		64  & 85.4\% & 2.9 & 5300 \\
+		128 & 88.7\% & 3.8 & 4500 \\
+		256 & 89.1\% & 4.1 & 4700 \\
+		512 & 87.5\% & 4.6 & 5200 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -270,11 +270,11 @@ To adapt to strategy evolution and environmental changes during the training pro
 \renewcommand{\arraystretch}{1.3}
 \begin{table}[htbp]
 	\centering
-	\caption{参数选择：动态奖励函数不同权重实验结果}
+	\caption{Parameters Selection: Experimental Results in Different Dynamic Reward Function Parameters}
 	\label{tab:5.8}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cccc}
 		\toprule
-		序号 & 奖励权重组合（$\lambda_1$, $\lambda_2$, $\lambda_3$） & 规避率 & 扰动成本 \\
+		Sequence Number & Reward Weighting Combination($\lambda_1$, $\lambda_2$, $\lambda_3$) & Evasion Rate & Disturbance Cost \\
 		\midrule
 		1 & (0.9, 0.05, 0.05) & 93.1\% & 6.8 \\
 		2 & (0.75, 0.2, 0.05) & 92.4\% & 5.2 \\
