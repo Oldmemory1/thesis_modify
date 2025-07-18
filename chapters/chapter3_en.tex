@@ -375,10 +375,10 @@ In this formulation, $R_{\text{evasion}}$ represents that if the sample evade th
 The reinforcement learning model combining PPO and LSTM, proposed in this chapter, consists of four main components: an LSTM temporal feature encoding layer, a policy network (Actor), a value network (Critic), and a PPO optimizer. During the training process, first, the policy network generates an action probability distribution based on the current environment state. Concurrently, the value network evaluates the value of the current state. To effectively model temporal dependencies in action sequences, the LSTM module is introduced, which enables the model to record historical state information and capture long-term dependency features, enhancing policy stability and robustness. Finally, the PPO optimizer iteratively updates the policy, ensuring stable and efficient policy updates throughout the training process.
 
 \begin{algorithm}[htbp]
-	\caption{基于强化学习的 ELF 对抗样本生成算法}
-	\KwIn{原始 ELF 恶意样本集 $S$，最大迭代次数 $I$，预训练模型 $M$（PPO+LSTM），免杀行为表 \texttt{Action\_table}，检测结果记录表 \texttt{Re}}
-	\KwOut{免杀后的样本集 $S$}
-	初始化智能体 agent 与环境 env\;
+	\caption{ELF Adversarial Sample Generation Algorithm Based on RL}
+	\KwIn{Origin ELF Malware Sample $S$,Maximum Iteration Times $I$,Pre-trained Models $M$(PPO+LSTM),Disturbance Action Table \texttt{Action\_table},Detection Result Record Table \texttt{Re}}
+	\KwOut{Sample After Processing $S$}
+	Init agent and environment env\;
 	agent $\leftarrow$ PPO\_LSTM.load($M$)\;
 	$R_d \leftarrow 0$\;
 	\ForEach{$s \in S$}{
@@ -400,11 +400,11 @@ The reinforcement learning model combining PPO and LSTM, proposed in this chapte
 			}
 			tag $\leftarrow$ env.detect($s$)\;
 			
-			计算规避性得分：\texttt{Evasion\_Score} $\leftarrow$ score\_function($s$)\;
+			calculate evasion score:\texttt{Evasion\_Score} $\leftarrow$ score\_function($s$)\;
 			
-			计算行为混淆度：\texttt{Behavior\_Confusion\_Degree} $\leftarrow$ calculate\_confusion\_degree($s$)\;
+			calculate behavioral confusion degree:\texttt{Behavior\_Confusion\_Degree} $\leftarrow$ calculate\_confusion\_degree($s$)\;
 			
-			计算扰动成本：\texttt{Perturbation\_Cost} $\leftarrow$ calculate\_perturbation\_cost($s$, \texttt{Action\_table}[act])\;
+			calculate disturbance cost:\texttt{Perturbation\_Cost} $\leftarrow$ calculate\_perturbation\_cost($s$, \texttt{Action\_table}[act])\;
 			
 			\If{tag == benign}{
 				$R_d \leftarrow 10 \cdot \texttt{coefficient1} + \texttt{Behavior\_Confusion\_Degree} - \texttt{Perturbation\_Cost}$\;
