@@ -31,11 +31,11 @@ Experiments in this research were conducted on a host configured with a 64-bit L
 	\label{tab:5.1}
 	\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}cc}
 		\toprule
-		Software and Hardware Environment & Concrete Configuration Information\\
+		software and hardware environment & Concrete Configuration Information\\
 		\midrule
 		CPU & Intel i7-12700 \\
-		Memory & 32GB \\
-		Operation System & Ubuntu 20.04.3 LTS \\
+		memory & 32GB \\
+		operation system & Ubuntu 20.04.3 LTS \\
 		\multirow{4}{*}[0.5em]{Development Environment} & Python 3.6 \\
 		& ChainerRL 0.7.0 \\
 		& LIEF 0.12.3 \\
@@ -70,8 +70,8 @@ Through label verification and timestamp validation, this research constructed t
 		\toprule
 		Dataset Type & Sample Amount & Time Span \\
 		\midrule
-		Malicious Sample & 8456 & 2014.06--2020.04 \\
-		Benign Sample & 2054 & 2016.12--2018.08 \\
+		malicious sample & 8456 & 2014.06--2020.04 \\
+		benign sample & 2054 & 2016.12--2018.08 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
@@ -204,13 +204,13 @@ In this experiment, the parameters of RL model were meticulously configured to e
     \toprule
 		Hyperparameter & Value & Description \\
     \midrule
-		Learning Rate & 0.0003 & Learning Rate restrains the step size for each parameter update. \\
-		Discount Factor & 0.99 & The time discount factor for rewards. \\
-		GAE Parameter & 0.95 & The parameter in Generalized Advantage Estimation (GAE). \\
-		Batch Size & 2048 & The number of samples collected from the environment for one policy update. \\
-		Epochs Amount & 10 & The number of training iterations performed per policy update. \\
-		Clipping Range & 0.2 & The clipping range used to limit the magnitude of policy updates.\\
-		Optimization Algorithm & Adam & The optimizer used for gradient descent. \\
+		learning rate & 0.0003 & Learning rate restrains the step size for each parameter update. \\
+		discount factor & 0.99 & The time discount factor for rewards. \\
+		GAE parameter & 0.95 & The parameter in Generalized Advantage Estimation (GAE). \\
+		batch size & 2048 & The number of samples collected from the environment for one policy update. \\
+		epochs amount & 10 & The number of training iterations performed per policy update. \\
+		clipping range & 0.2 & The clipping range used to limit the magnitude of policy updates.\\
+		optimization algorithm & Adam & The optimizer used for gradient descent. \\
     \bottomrule
 	\end{tabular*}
 \end{table}
@@ -405,9 +405,9 @@ Experimental results are descirbed in Table \ref{tab:5.11}.
 		\toprule
 		Perturbation Method & Average Evasion Rate & Average Generating Time \\
 		\midrule
-		Structural Perturbation & 72.5\% & 156ms \\
-		Instructional Perturbation & 52.6\% & 218ms \\
-		Behavioral Perturbation & 12.1\% & 175ms \\
+		structural perturbation & 72.5\% & 156ms \\
+		instructional perturbation & 52.6\% & 218ms \\
+		behavioral perturbation & 12.1\% & 175ms \\
 		MPLO & 87.2\% & 183ms \\
 		\bottomrule
 	\end{tabular*}
@@ -453,9 +453,9 @@ To comprehensively compare functional retention results of three perturbation st
 		\toprule
 		Perturbation Type & Successful Execution Rate（\%） & Functional Preservation Rate（\%） \\
 		\midrule
-		Structural Perturbation & 99.2 & 92.4 \\
-		Instructional Perturbation & 96.5 & 93.7 \\
-		Behavioral Perturbation & 82.7 & 98.0 \\
+		structural perturbation & 99.2 & 92.4 \\
+		instructional perturbation & 96.5 & 93.7 \\
+		behavioral perturbation & 82.7 & 98.0 \\
 		\bottomrule
 	\end{tabular*}
 \end{table}
