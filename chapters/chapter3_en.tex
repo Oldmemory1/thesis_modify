@@ -308,9 +308,9 @@ Based on this observation, this research designs a dynamic disturbance method wh
 Specifically, this method inserts system call delay logic at the \_start entry point. It constructs a timespec structure to set the delay duration and invokes the nanosleep system call to induce suspension. During this delay, the sample remains dormant, triggering no system calls, memory reads and writes, network communications, or other suspicious activities. As most sandbox systems forcibly terminate processes after exceeding the execution time limit, the un-triggered malicious behavioral chain remains entirely unobserved. Consequently, even obviously destructive malware may be misclassified as benign due to "absence of malicious behavior."
 
 \begin{algorithm}[htbp]
-	\caption{使用可执行段填充空间进行 ELF 动态插入算法}
-    \KwIn{目标 ELF 二进制文件路径 \texttt{input\_elf}，载荷二进制代码路径 \texttt{code\_bin}，输出 ELF 路径 \texttt{output\_elf}}
-	\KwOut{一个已被感染的 ELF 文件，其中插入了载荷代码}
+	\caption{ELF dynamically inserting algorithm using executable section to fill space}
+    \KwIn{Target ELF Filepath \texttt{input\_elf},Payload Binary Code Path \texttt{code\_bin}, Output ELF Filepath \texttt{output\_elf}}
+	\KwOut{An infected ELF file, inserted payload code}
 	Read the input ELF file \texttt{input\_elf} into memory \texttt{hdr}\;
 	Read the payload binary code \texttt{code\_bin} into memory \texttt{code}\;
 	Validate ELF magic number and ensure it is a 64-bit ELF\;
